@@ -1,0 +1,3 @@
+# api routes are to be kept inside page directory
+
+# https://beta.nextjs.org/docs/upgrade-guide#:~:text=pages/api/*%20currently%20remain%20inside%20the%20pages%20directory.

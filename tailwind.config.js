@@ -3,7 +3,8 @@ const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./**/*.ts', './**/*.tsx'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
+  // mode: 'jit',
   theme: {
     colors: {
       ...colors,
@@ -68,6 +69,19 @@ module.exports = {
     },
   },
 
-  variants: ['responsive', 'group-hover', 'focus-within', 'first', 'last', 'odd', 'even', 'hover', 'focus', 'active', 'visited', 'disabled'],
+  variants: [
+    'responsive',
+    'group-hover',
+    'focus-within',
+    'first',
+    'last',
+    'odd',
+    'even',
+    'hover',
+    'focus',
+    'active',
+    'visited',
+    'disabled',
+  ],
   plugins: [require('@tailwindcss/forms')],
 }
