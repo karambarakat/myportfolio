@@ -1,0 +1,10 @@
+- [ ] make content
+  - [ ] hero section
+  - [ ] about section (maybe inside the hero let's see)
+  - [ ] selected project
+    - [ ] projects section
+  - [ ] skills section
+  - [ ] contact section
+- [ ] decide on some design
+- [ ] deploy
+  - [ ] theb add extra touches if you can
