@@ -1,4 +1,4 @@
-export default function H() {
+export default function Heading() {
   return (
     <>
       <title>Hi, My Name is Kenn</title>

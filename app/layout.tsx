@@ -1,4 +1,4 @@
-import './_tailwind.css'
+import './tailwind.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
 interface Props {
