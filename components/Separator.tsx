@@ -9,7 +9,7 @@ interface Props
   size?: 'auto' | { width?: string; height?: string }
 }
 
-export default function Separator({ size = 'auto', ...rest }: Props) {
+export default function Separator({ size = 'auto' }: Props) {
   return (
     <div
       style={size !== 'auto' ? { alignSelf: 'initial', ...size } : {}}

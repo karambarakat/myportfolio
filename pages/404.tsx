@@ -1,7 +1,7 @@
-import { InnerLayout } from '@/app/layout'
+import InnerLayout from '@/app/InnerLayout'
 import Separator from '@/components/Separator'
 
-export default function () {
+export default function E404() {
   return (
     <>
       <InnerLayout>
