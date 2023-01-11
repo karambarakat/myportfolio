@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     appDir: true,
-    runtime: 'experimental-edge',
+    // runtime: 'experimental-edge',
   },
   redirects: async function () {
     return [

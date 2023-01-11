@@ -1,6 +1,6 @@
 import './tailwind.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-// import pattern from '@/public/img/shades.png'
+import pattern from '@/public/img/shades.png'
 import { ReactNode } from 'react'
 import Separator from '@/components/Separator'
 import Button from '@/components/Button'
@@ -38,7 +38,7 @@ function GradientBlur({ inverted = false }: { inverted?: boolean }) {
       // the boundary of this component
       className="isolate relative"
     >
-      {/* <img
+      <img
         // z-1 in relative to the white background div below
         // in dark mode this tag will blend-difference with the white div below (i.e. invert colors)
         className={`z-1 relative max-w-none w-[1200px] ${
@@ -50,7 +50,7 @@ function GradientBlur({ inverted = false }: { inverted?: boolean }) {
         // pattern.width = 1200px
         // pattern.hight = 800px
         src={pattern.src}
-      /> */}
+      />
       <div className="bg-white absolute top-0 w-full h-full"></div>
     </div>
   )

@@ -1,6 +1,6 @@
 import Separator from '@/components/Separator'
 import Image from 'next/image'
-// import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
+import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
 import Button from '@/components/Button'
 
 export default function Page() {
@@ -35,11 +35,11 @@ export default function Page() {
               <Button>View CV</Button>
             </div>
           </div>
-          {/* <Image
+          <Image
             className="sm-mx:hidden rounded-md shadow-2xl"
             alt="photo of me"
             src={personalImage}
-          /> */}
+          />
         </div>
       </main>
       <Separator />
