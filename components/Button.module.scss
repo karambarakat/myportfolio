@@ -6,16 +6,16 @@
     text-decoration-color: black;
     text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
   }
+
   &:active {
     transform: translateY(1px);
-
   }
   transition: transform;
 }
 
 .size {
   &_big{
-    font-weight: 100;
+    font-weight: 400;
     font-size: 1.5rem /* 24px */;
     line-height: 2rem /* 32px */;
   }

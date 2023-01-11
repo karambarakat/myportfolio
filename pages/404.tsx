@@ -1,29 +1,22 @@
 import InnerLayout from '@/app/InnerLayout'
+import QuickMessage from '@/components/QuickMessage'
 import Separator from '@/components/Separator'
+import Link from 'next/link'
 
 export default function E404() {
   return (
     <>
       <InnerLayout>
-        <div
-          style={{
-            display: 'flex',
-            fontSize: '1.25rem',
-            lineHeight: '1.75rem',
-            gap: '1rem',
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-          }}
-        >
-          <div>404</div>
-          <Separator size={{ height: '48px' }} />
-          <div>This page could not be found.</div>
-        </div>
+        <QuickMessage
+          code="404"
+          message="This page could not be found."
+          action={
+            <Link className="mt-6" href="/">
+              go home
+            </Link>
+          }
+        />
       </InnerLayout>
-      {/* </Layout> */}
     </>
   )
 }

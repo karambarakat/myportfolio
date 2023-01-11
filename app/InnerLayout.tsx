@@ -1,5 +1,5 @@
 import './tailwind.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
+// import '@fortawesome/fontawesome-free/css/all.min.css'
 import pattern from '@/public/img/shades.png'
 import { ReactNode } from 'react'
 import Separator from '@/components/Separator'

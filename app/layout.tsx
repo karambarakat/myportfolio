@@ -9,10 +9,7 @@ export default function Layout({ children }: Props) {
     <html>
       <head />
       <body>
-        <InnerLayout>
-          {children}
-          <div className="flex-1"></div>
-        </InnerLayout>
+        <InnerLayout>{children}</InnerLayout>
       </body>
     </html>
   )

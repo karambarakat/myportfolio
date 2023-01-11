@@ -1,5 +1,9 @@
 'use client'
 
+import Separator from '@/components/Separator'
+
+import QuickMessage from '@/components/QuickMessage'
+
 interface Props {
   error: Error
   reset: () => void
@@ -7,9 +11,13 @@ interface Props {
 
 export default function Error({ error, reset }: Props) {
   return (
-    <div>
-      <p>Something went wrong!</p>
-      <button onClick={() => reset()}>reload</button>
-    </div>
+    <QuickMessage
+      code="500"
+      action={
+        <button className="mt-6" onClick={() => reset()}>
+          reload
+        </button>
+      }
+    />
   )
 }

@@ -54,6 +54,7 @@ export default function Page() {
       <section>
         <h1 className="text-center text-7xl pb-3">Get in contact</h1>
       </section>
+      <div className="flex-1"></div>
     </>
   )
 }
