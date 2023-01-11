@@ -1,9 +1,15 @@
 import './tailwind.css'
 // import '@fortawesome/fontawesome-free/css/all.min.css'
+
+// pattern.width = 1200px
+// pattern.hight = 800px
 import pattern from '@/public/img/shades.png'
-import { ReactNode } from 'react'
+// import selector from '@/public/img/selector.png'
+import selector from '@/public/img/selector-dev.png'
+import React, { lazy, ReactNode } from 'react'
 import Separator from '@/components/Separator'
 import Button from '@/components/Button'
+import HoverEffect from '@/components/HoverEffect'
 
 interface Props {
   children: React.ReactNode
@@ -31,26 +37,21 @@ function Noise() {
 
 function GradientBlur({ inverted = false }: { inverted?: boolean }) {
   return (
-    <div
-      // this isolate is to create a stacking context
-      // so mix-blend-difference of the img tag apply on the div.bg-white
-      // otherwise it will be applied within some stacking context created outside
-      // the boundary of this component
-      className="isolate relative"
-    >
+    <div className="isolate relative">
       <img
-        // z-1 in relative to the white background div below
-        // in dark mode this tag will blend-difference with the white div below (i.e. invert colors)
         className={`z-1 relative max-w-none w-[1200px] ${
           inverted ? 'mix-blend-difference' : ''
         }`}
-        // in addition this image doesn't scale with its container
         alt="background-pattern"
         loading="lazy"
-        // pattern.width = 1200px
-        // pattern.hight = 800px
         src={pattern.src}
       />
+      <g
+        className="z-2 absolute top-0"
+        style={{ mixBlendMode: inverted ? 'overlay' : 'multiply' }}
+      >
+        <HoverEffect inverted={inverted} />
+      </g>
       <div className="bg-white absolute top-0 w-full h-full"></div>
     </div>
   )
