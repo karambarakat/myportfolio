@@ -1,406 +1,59 @@
+import Separator from '@/components/Separator'
 import Image from 'next/image'
-import pattern from '@/public/img/shades.png'
-import { ReactNode } from 'react'
-
-function Noise() {
-  return (
-    <svg width="100%" height="100%">
-      <filter id="pedroduarteisalegend">
-        <feTurbulence
-          type="fractalNoise"
-          baseFrequency="0.80"
-          numOctaves="4"
-          stitchTiles="stitch"
-        ></feTurbulence>
-      </filter>
-      <rect
-        width="100%"
-        height="100%"
-        filter="url(#pedroduarteisalegend)"
-      ></rect>
-    </svg>
-  )
-}
-
-function GradientBlur({ inverted = false }: { inverted?: boolean }) {
-  return (
-    <div
-      // this isolate is to create a stacking context
-      // so mix-blend-difference of the img tag apply on the div.bg-white
-      // otherwise it will be applied within some stacking context created outside
-      // the boundary of this component
-      className="isolate relative"
-    >
-      <img
-        // z-1 in relative to the white background div below
-        // in dark mode this tag will blend-difference with the white div below (i.e. invert colors)
-        className={`z-1 relative max-w-none w-[1200px] ${
-          inverted ? 'mix-blend-difference' : ''
-        }`}
-        // in addition this image doesn't scale with its container
-        alt="background-pattern"
-        loading="lazy"
-        src={pattern.src}
-      />
-      <div className="bg-white absolute top-0 w-full h-full"></div>
-    </div>
-  )
-}
-
-function Background({ children: content }: { children: ReactNode }) {
-  return (
-    <div className="relative w-[800px] m-auto">
-      <div className="absolute top-0 left-0 ml-[-200px] w-[1200px]">
-        {/* <Noise /> */}
-        <GradientBlur />
-      </div>
-      <div className="isolate">{content}</div>
-    </div>
-  )
-}
+import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
+import Button from '@/components/Button'
 
 export default function Page() {
   return (
-    <Background>
-      <main className="grid grid-cols-3 gap-y-8">
-        <h1 className="text-center">Hi, My Name is Kenn</h1>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>{' '}
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>{' '}
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>{' '}
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>{' '}
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>{' '}
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>{' '}
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
-        <p>
-          about me: Deserunt duis aute occaecat amet incididunt aute culpa quis
-          magna ex ullamco. Consequat ad laboris proident sit amet exercitation
-          deserunt deserunt. Ipsum eu eiusmod amet magna elit ad. Magna ullamco
-          aliqua nostrud elit nostrud magna est incididunt. Eiusmod ut cupidatat
-          do cillum commodo. Laborum laboris duis esse nisi dolor voluptate
-          officia quis velit cillum anim.
-        </p>
+    <>
+      <main className="pt-[200px] sm-height:pt-[25px]">
+        <h1 className="text-center text-7xl pb-3">Hi, My Name is Kenn</h1>
+        <h2 className="text-center font-light text-4xl pb-12">
+          I’m Frontend developer based in the bay area
+        </h2>
+        <div className="flex gap-8 items-start">
+          <div className="sm-mx:text-center">
+            <p className="pb-3 text-lg">
+              I love building user-friendly and minimalistic web apps with
+              state-of-the-art technologies.
+            </p>
+            <p className="pb-3 text-lg">
+              I'm a self-taught Javascript front-end developer with general
+              knowledge in backend and DevOps.
+            </p>
+            <p className="pb-3 text-lg">
+              I spent the last year teaching myself, building my portfolio and
+              working on freelancing projects.
+            </p>
+            <p className="pb-3 text-lg">
+              I value hard work and dedication. Although I taught myself skills
+              in backend and devOps, I found myself devoted to mastering and
+              expanding my skill set in front-end development.
+            </p>
+            <div className="flex sm-mx:justify-center gap-8 mt-4">
+              <Button>View Github</Button>
+              <Button>View CV</Button>
+            </div>
+          </div>
+          <Image
+            className="sm-mx:hidden rounded-md shadow-2xl"
+            alt="photo of me"
+            src={personalImage}
+          />
+        </div>
       </main>
-    </Background>
+      <Separator />
+      <section>
+        <h1 className="text-center text-7xl pb-3">Selected Project</h1>
+      </section>
+      <Separator />
+      <section>
+        <h1 className="text-center text-7xl pb-3">More Projects</h1>
+      </section>
+      <Separator />
+      <section>
+        <h1 className="text-center text-7xl pb-3">Get in contact</h1>
+      </section>
+    </>
   )
 }
