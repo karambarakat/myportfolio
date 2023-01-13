@@ -1,15 +1,13 @@
 import './tailwind.css'
 // import '@fortawesome/fontawesome-free/css/all.min.css'
-
 // pattern.width = 1200px
 // pattern.hight = 800px
 import pattern from '@/public/img/shades.png'
-// import selector from '@/public/img/selector.png'
-import selector from '@/public/img/selector-dev.png'
-import React, { lazy, ReactNode } from 'react'
+import React, { lazy, ReactNode, Suspense } from 'react'
 import Separator from '@/components/Separator'
 import Button from '@/components/Button'
 import HoverEffect from '@/components/HoverEffect'
+import Container from '@/components/Container'
 
 interface Props {
   children: React.ReactNode
@@ -26,11 +24,7 @@ function Noise() {
           stitchTiles="stitch"
         ></feTurbulence>
       </filter>
-      <rect
-        width="100%"
-        height="100%"
-        filter="url(#pedroduarteisalegend)"
-      ></rect>
+      <rect width="100%" height="100%" filter="url(#pedroduarteisalegend)"></rect>
     </svg>
   )
 }
@@ -39,17 +33,12 @@ function GradientBlur({ inverted = false }: { inverted?: boolean }) {
   return (
     <div className="isolate relative">
       <img
-        className={`z-1 relative max-w-none w-[1200px] ${
-          inverted ? 'mix-blend-difference' : ''
-        }`}
+        className={`z-1 relative max-w-none w-[1200px] ${inverted ? 'mix-blend-difference' : ''}`}
         alt="background-pattern"
         loading="lazy"
         src={pattern.src}
       />
-      <g
-        className="z-2 absolute top-0"
-        style={{ mixBlendMode: inverted ? 'overlay' : 'multiply' }}
-      >
+      <g className="z-2 absolute top-0" style={{ mixBlendMode: inverted ? 'overlay' : 'multiply' }}>
         <HoverEffect inverted={inverted} />
       </g>
       <div className="bg-white absolute top-0 w-full h-full"></div>
@@ -59,17 +48,21 @@ function GradientBlur({ inverted = false }: { inverted?: boolean }) {
 
 function Background({ children: content }: { children: ReactNode }) {
   return (
-    <div className="relative w-[800px] max-w-[100vw] mx-auto px-[25px] md:px-[50px]">
-      <div className="print:hidden absolute pointer-events-none top-0 left-0 ml-[-200px] w-[1200px]">
-        <GradientBlur />
-      </div>
-      <div className="print:hidden fixed pointer-events-none right-0 left-0 h-screen opacity-40">
-        <Noise />
-      </div>
+    <Container className="relative">
+      <Suspense fallback={<></>}>
+        <div
+          className={`print:hidden absolute pointer-events-none top-0 left-0 ${Container.shift_lg}`}
+        >
+          <GradientBlur />
+        </div>
+        <div className="print:hidden fixed pointer-events-none right-0 left-0 h-screen opacity-40">
+          <Noise />
+        </div>
+      </Suspense>
       <div className="isolate">
         <div className="flex justify-center">{content}</div>
       </div>
-    </div>
+    </Container>
   )
 }
 

@@ -1,5 +1,4 @@
 'use client'
-
 import selector from '@/public/img/selector.png'
 import pattern from '@/public/img/shades.png'
 import s from './HoverEffect.module.scss'

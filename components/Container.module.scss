@@ -1,0 +1,15 @@
+.base {
+  width: 800px;
+  max-width: 100vw;
+  margin: 0 auto;
+  @apply px-[25px] md:px-[50px];
+}
+
+.negative_margin{
+  @apply -mx-[25px] md:-mx-[50px]
+}
+
+.shift-200{
+  margin-left: -200px;
+  width: 800px + 400px
+}

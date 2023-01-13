@@ -14,21 +14,21 @@ export default function Page() {
         <div className="flex gap-8 items-start">
           <div className="sm-mx:text-center">
             <p className="pb-3 text-lg">
-              I love building user-friendly and minimalistic web apps with
-              state-of-the-art technologies.
+              I love building user-friendly and minimalistic web apps with state-of-the-art
+              technologies.
             </p>
             <p className="pb-3 text-lg">
-              I'm a self-taught Javascript front-end developer with general
-              knowledge in backend and DevOps.
+              I'm a self-taught Javascript front-end developer with general knowledge in backend and
+              DevOps.
             </p>
             <p className="pb-3 text-lg">
-              I spent the last year teaching myself, building my portfolio and
-              working on freelancing projects.
+              I spent the last year teaching myself, building my portfolio and working on
+              freelancing projects.
             </p>
             <p className="pb-3 text-lg">
-              I value hard work and dedication. Although I taught myself skills
-              in backend and devOps, I found myself devoted to mastering and
-              expanding my skill set in front-end development.
+              I value a growth mindset and consistent hard-work. I’m always looking on how I can
+              improve or learn new skills. In addition, I’m dedicated to putting in consistent
+              hard-work to reach my full potential in my career in the next 10 years.
             </p>
             <div className="flex sm-mx:justify-center gap-8 mt-4">
               <Button>View Github</Button>

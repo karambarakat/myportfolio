@@ -4,9 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "semi": false,
+    "trailingComma": "none",
+    "singleQuote": true,
+    "printWidth": 100,
+    "tabWidth": 2
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",

@@ -1,7 +1,6 @@
-import InnerLayout from '@/app/InnerLayout'
-import QuickMessage from '@/components/QuickMessage'
-import Separator from '@/components/Separator'
-import Link from 'next/link'
+import InnerLayout from '@/app/InnerLayout';
+import QuickMessage from '@/components/QuickMessage';
+import Link from 'next/link';
 
 export default function E404() {
   return (
@@ -18,5 +17,5 @@ export default function E404() {
         />
       </InnerLayout>
     </>
-  )
+  );
 }
