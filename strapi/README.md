@@ -1,57 +1,40 @@
-# 🚀 Getting started with Strapi
+# 🚀 Strapi as a CMS
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
+This is the root directory for the backend of my portfolio.
 
-### `develop`
+The database is SQLite, this is perfect for the following reasons:
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-develop)
+- I'm not planning to deploy the backend to any cloud, instead I will trigger the updates via a Cloudflare Tunnel.
+- I'm not expecting the project to scale up greatly, so scaling up vertically is not a problem
 
-```
-npm run develop
-# or
-yarn develop
-```
+# Integrating with NextJS
 
-### `start`
+Via webhook, this project is configured upon any change in content to invalidate the desired resource by sending an HTTP request to the Nextjs frontend ull `<fronend>/api/revalidate`. in return the frontend will fetch data from my localhost vial the Cloudflare Tunnel.
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)
+NextJS is enough to build, fetch and serve data without connecting to some backend on every request.
 
-```
-npm run start
-# or
-yarn start
-```
+# Cloudflare Tunnel
 
-### `build`
+to update, create or delete content you have to:
 
-Build your admin panel. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-build)
+1. (only once) set up tunnel via cli by running:
 
 ```
-npm run build
-# or
-yarn build
+npm run cf:init
 ```
 
-## ⚙️ Deployment
+create `cloudflare_tunnel_secret.json` and `cloudflare_tunnel.yaml` from the results of the previuse command
 
-Strapi gives you many possible deployment options for your project. Find the one that suits you on the [deployment section of the documentation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html).
+then setup a dns record:
 
-## 📚 Learn more
+```
+npm run cf:dns
+```
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://docs.strapi.io) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+2. run the app through
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+```
+npm run run
+```
 
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+you can now visit localhost:1337 or $backend_url to log in into your dashboard

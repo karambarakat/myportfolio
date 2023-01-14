@@ -1,25 +1,29 @@
 {
   "dependencies": {
     "@strapi/plugin-graphql": "^4.0.5",
+    "@strapi/plugin-i18n": "4.5.6",
+    "@strapi/plugin-users-permissions": "4.5.6",
+    "@strapi/provider-upload-aws-s3": "^4.5.6",
+    "@strapi/strapi": "4.5.6",
+    "better-sqlite3": "7.4.6",
     "fs-extra": "^10.0.0",
     "lodash.set": "^4.3.2",
-    "mime-types": "^2.1.27",
-    "@strapi/strapi": "4.5.6",
-    "@strapi/plugin-users-permissions": "4.5.6",
-    "@strapi/plugin-i18n": "4.5.6",
-    "better-sqlite3": "7.4.6"
+    "mime-types": "^2.1.27"
   },
   "name": "strapi",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "cf:init": "cloudflared.exe tunnel login && cloudflared.exe tunnel create strapi",
+    "cf:dns": "cloudflared tunnel route dns $tunnel_id $backend_url",
+    "cf:run": "cloudflared tunnel --config ./cloudflare_tunnel/config.yaml run",
+    "run": "concurrently \"npm run cf:run\" \"npm run start\"",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "author": {
     "name": "A Strapi developer"
   },
