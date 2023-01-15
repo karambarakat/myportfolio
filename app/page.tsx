@@ -123,20 +123,15 @@ export default function Page() {
               github: '#'
             }
           ].map((card, i, l) => {
-            const extra = l.length < 2 && <div>more coming</div>
-            const extra2 = l.length > 0 && <div className="col-span-2">vaiw all</div>
-
             return (
-              <>
-                <div>
-                  {/* <Image src={card.img} alt={card.title}></Image> */}
-                  <Typo.Lg>{card.title}</Typo.Lg>
-                </div>
-                {extra}
-                {extra2}
-              </>
+              <div key={i}>
+                {/* <Image src={card.img} alt={card.title}></Image> */}
+                <Typo.Lg>{card.title}</Typo.Lg>
+              </div>
             )
           })}
+          {(() => 1)() == 1 && <div key="extra1">more coming</div>}
+          {(() => 1)() >= 0 && <div className="col-span-2">vaiw all</div>}
         </div>
       </section>
       <Separator />
