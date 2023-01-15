@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "strapi": "npm run production --prefix strapi",
+    "strapi:dev": "npm run develop --prefix strapi"
   },
   "prettier": {
     "arrowParens": "avoid",
@@ -38,6 +40,8 @@
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
+    "env-cmd": "^10.1.0",
     "postcss": "^8.4.20",
     "sass": "^1.57.1",
     "tailwindcss": "^3.2.4",

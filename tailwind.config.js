@@ -6,7 +6,7 @@ module.exports = {
   content: [
     './app/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
-    './pages/**/*.{js,jsx,ts,tsx}',
+    './pages/**/*.{js,jsx,ts,tsx}'
     // './components/**/*.{js,jsx,ts,tsx}',
   ],
   mode: 'jit',
@@ -47,32 +47,33 @@ module.exports = {
       // "xx-on": { min: "" , max: "630px"},
 
       'sm-height': { raw: '(max-height: 700px)' },
-      print: { raw: 'print' },
+      print: { raw: 'print' }
     },
     colors: {
-      ...colors,
+      ...colors
     },
     extend: {
       fontSize: {
-        55: '55rem',
+        55: '55rem'
       },
       opacity: {
-        80: '.8',
+        80: '.8'
       },
       zIndex: {
         1: 1,
         2: 2,
-        3: 3,
+        3: 3
       },
       minWidth: {
-        48: '12rem',
+        48: '12rem'
       },
       backgroundSize: {
-        full: '100%',
-      },
-    },
+        full: '100%'
+      }
+    }
   },
 
+  darkMode: 'media',
   variants: [
     'responsive',
     'group-hover',
@@ -85,7 +86,20 @@ module.exports = {
     'focus',
     'active',
     'visited',
-    'disabled',
+    'disabled'
   ],
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    // require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    // require('@tailwindcss/line-clamp'),
+    // require('@tailwindcss/aspect-ratio'),
+    function (
+      /** @type {import('tailwindcss/types/config').PluginAPI} */
+      { addVariant }
+    ) {
+      addVariant('child', '&>*')
+      addVariant('last-child', '&>*:last-child')
+      addVariant('first-child', '&>*:first-child')
+    }
+  ]
 }

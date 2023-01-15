@@ -1,11 +1,9 @@
 import __ from 'classnames'
 import s from './Button.module.scss'
+import typo from './Typo.module.scss'
 
 interface Props
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   size?: 'big' | 'normal'
 }
 
@@ -16,8 +14,8 @@ export default function Button({ size = 'big', className, ...rest }: Props) {
       className={__(
         s.base,
         {
-          big: s.size_big,
-          normal: s.size_normal,
+          big: typo.lg,
+          normal: ''
         }[size],
         className
       )}

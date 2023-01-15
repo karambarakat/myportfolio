@@ -8,6 +8,7 @@ import Separator from '@/components/Separator'
 import Button from '@/components/Button'
 import HoverEffect from '@/components/HoverEffect'
 import Container from '@/components/Container'
+import Typo from '@/components/Typo'
 
 interface Props {
   children: React.ReactNode
@@ -73,10 +74,10 @@ export default function InnerLayout({ children }: Props) {
         <div className="flex flex-col gap-8 min-h-screen">
           {children}
           <Separator />
-          <p className="text-center text-lg pb-8">
-            Built with Typescript, NextJS and Tailwind | view the source on{' '}
+          <Typo className="text-center pb-8">
+            Built with Typescript, NextJS, Tailwind and Strapi | view the source on{' '}
             <Button size="normal">Github</Button>
-          </p>
+          </Typo>
         </div>
       </Background>
     </div>

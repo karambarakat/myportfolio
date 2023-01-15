@@ -1,0 +1,16 @@
+.base {
+  @apply text-lg pb-2 text-gray-600;
+}
+
+.lg {
+  @apply text-2xl font-normal pb-2;
+}
+
+.h1{
+  @apply text-7xl pb-3;
+}
+
+.h2{
+  @apply font-light text-4xl pb-3;
+}
+

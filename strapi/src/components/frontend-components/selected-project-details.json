@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_frontend_components_selected_project_details",
+  "info": {
+    "displayName": "selected-project-details"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "callOfActions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.button"
+    },
+    "subComponent": {
+      "type": "enumeration",
+      "enum": [
+        "MERN Stack",
+        "User Experience in mind",
+        "Modern UI",
+        "Good Code Quality",
+        "Storybooks",
+        "Robust DevOps"
+      ],
+      "required": true
+    }
+  }
+}

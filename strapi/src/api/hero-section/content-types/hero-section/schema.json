@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "globals",
+  "collectionName": "hero_sections",
   "info": {
-    "singularName": "global",
-    "pluralName": "globals",
-    "displayName": "global"
+    "singularName": "hero-section",
+    "pluralName": "hero-sections",
+    "displayName": "heroSection"
   },
   "options": {
     "draftAndPublish": false
@@ -15,7 +15,7 @@
     }
   },
   "attributes": {
-    "siteName": {
+    "h1": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -24,7 +24,36 @@
       "type": "string",
       "required": true
     },
-    "favicon": {
+    "h2": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "aboutMe": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext",
+      "required": true
+    },
+    "callToAction": {
+      "displayName": "button",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.button"
+    },
+    "picture": {
       "allowedTypes": [
         "images"
       ],
@@ -34,26 +63,8 @@
         "i18n": {
           "localized": true
         }
-      }
-    },
-    "siteAbout": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
       },
-      "type": "richtext",
       "required": true
-    },
-    "defaultSeo": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "shared.seo"
     }
   }
 }

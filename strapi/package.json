@@ -18,7 +18,7 @@
     "cf:init": "cloudflared.exe tunnel login && cloudflared.exe tunnel create strapi",
     "cf:dns": "cloudflared tunnel route dns $tunnel_id $backend_url",
     "cf:run": "cloudflared tunnel --config ./cloudflare_tunnel/config.yaml run",
-    "run": "concurrently \"npm run cf:run\" \"npm run start\"",
+    "production": "concurrently \"npm run cf:run\" \"npm run build && npm run start\"",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
