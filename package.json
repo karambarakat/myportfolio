@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "strapi": "npm run production --prefix strapi",
-    "strapi:dev": "npm run develop --prefix strapi"
+    "strapi:dev": "npm run develop --prefix strapi",
+    "codegen": "graphql-codegen --config graphql/codegen.ts"
   },
   "prettier": {
     "arrowParens": "avoid",
@@ -30,21 +31,27 @@
     "client-only": "^0.0.1",
     "eslint": "8.30.0",
     "eslint-config-next": "^13.1.1",
+    "graphql-request": "^5.1.0",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.16.4",
+    "@graphql-codegen/typescript": "^2.8.7",
+    "@graphql-codegen/typescript-operations": "^2.5.12",
     "@types/classnames": "^2.3.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
     "env-cmd": "^10.1.0",
+    "graphql": "^16.6.0",
     "postcss": "^8.4.20",
     "sass": "^1.57.1",
     "tailwindcss": "^3.2.4",
-    "typescript": "4.9.4"
+    "typescript": "4.9.4",
+    "webpack-graphql-loader": "^1.0.2"
   }
 }

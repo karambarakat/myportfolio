@@ -56,8 +56,6 @@ interface Req extends NextApiRequest {
 }
 
 export default async function handler(req: Req, res: Res) {
-  // Check for secret to confirm this is a valid request
-
   const token = req.headers.authorization.split(' ')[1]
   if (token !== process.env.REVALIDATION_TOKEN)
     return res.status(401).json({ message: 'Invalid token' })

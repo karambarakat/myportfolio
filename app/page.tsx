@@ -4,34 +4,47 @@ import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
 import Button from '@/components/Button'
 import Typo from '@/components/Typo'
 
+// only server side imports
+import query from './query.graphql'
+import fetchQuery from '@/utils/fetchQuery'
+import type { IndexPageQuery } from '@/graphql/schema'
+
 function ComponentOne() {
   return <div className="bg-black h-64">d</div>
 }
 
-export default function Page() {
+//
+export default async function Page() {
+  const { data }: { data: IndexPageQuery } = await fetchQuery(query)
+
+  if (!data?.global?.data?.attributes) throw new Error('not enough data')
+
   return (
     <>
       <main className="pt-[200px] sm-height:pt-[25px]">
         <Typo.H1 className="text-center">Hi, My Name is Kenn</Typo.H1>
-        <Typo.H2 className="text-center mb-8">I’m Frontend developer based in the bay area</Typo.H2>
+        <Typo.H2 className="text-center mb-8">
+          I’m Frontend developer based in the bay area
+        </Typo.H2>
         <div className="flex gap-8 items-start">
           <div className="sm-mx:text-center">
             <Typo>
-              I love building user-friendly and minimalistic web apps with state-of-the-art
-              technologies.
+              I love building user-friendly and minimalistic web apps with
+              state-of-the-art technologies.
             </Typo>
             <Typo>
-              I'm a self-taught Javascript front-end developer with general knowledge in backend and
-              DevOps.
+              I'm a self-taught Javascript front-end developer with general
+              knowledge in backend and DevOps.
             </Typo>
             <Typo>
-              I spent the last year teaching myself, building my portfolio and working on
-              freelancing projects.
+              I spent the last year teaching myself, building my portfolio and
+              working on freelancing projects.
             </Typo>
             <Typo>
-              I value a growth mindset and consistent hard-work. I&rsquo;m always looking on how I
-              can improve or learn new skills. In addition, I&rsquo;m dedicated to putting in
-              consistent hard-work to reach my full potential in my career in the next 10 years.
+              I value a growth mindset and consistent hard-work. I&rsquo;m
+              always looking on how I can improve or learn new skills. In
+              addition, I&rsquo;m dedicated to putting in consistent hard-work
+              to reach my full potential in my career in the next 10 years.
             </Typo>
             <div className="flex sm-mx:justify-center gap-8 mt-4">
               <Button>View Github</Button>
@@ -54,8 +67,8 @@ export default function Page() {
             <div>
               <Typo.Lg>MERN Stack</Typo.Lg>
               <Typo>
-                Fully functional React, Express, MongoDB and NodeJS web application. This is a
-                simple-to-use CRUD application.
+                Fully functional React, Express, MongoDB and NodeJS web
+                application. This is a simple-to-use CRUD application.
               </Typo>
             </div>
           </div>
@@ -63,8 +76,8 @@ export default function Page() {
             <div>
               <Typo.Lg>User Experience in mind</Typo.Lg>
               <Typo>
-                Achieved a good google Lighthouse report, build with all web vitals and UX basics in
-                mind.
+                Achieved a good google Lighthouse report, build with all web
+                vitals and UX basics in mind.
               </Typo>
             </div>
             <ComponentOne></ComponentOne>
@@ -74,8 +87,8 @@ export default function Page() {
             <div>
               <Typo.Lg>Modern UI</Typo.Lg>
               <Typo>
-                Built using TailwindCSS for flexible styling + CSSModule and PostCSS to build
-                different complex components.
+                Built using TailwindCSS for flexible styling + CSSModule and
+                PostCSS to build different complex components.
               </Typo>
             </div>
           </div>
@@ -83,9 +96,10 @@ export default function Page() {
             <div>
               <Typo.Lg>Good Code Quality</Typo.Lg>
               <Typo>
-                I used Typescript to ensure robust code and common backend/frontend interfaces, with
-                test-driven development using JestJS to unit test my application. TSDoc for API
-                reference and code readability.
+                I used Typescript to ensure robust code and common
+                backend/frontend interfaces, with test-driven development using
+                JestJS to unit test my application. TSDoc for API reference and
+                code readability.
               </Typo>
             </div>
 
@@ -96,7 +110,8 @@ export default function Page() {
             <div>
               <Typo.Lg>Storybooks</Typo.Lg>
               <Typo>
-                Beside TSDoc for documenting my code I provided storybooks for visualizing my app.
+                Beside TSDoc for documenting my code I provided storybooks for
+                visualizing my app.
               </Typo>
             </div>
           </div>
@@ -104,8 +119,9 @@ export default function Page() {
             <div>
               <Typo.Lg>Robust DevOps</Typo.Lg>
               <Typo>
-                Dockerized application, used Terraform to manage different cloud infrastructure, and
-                Github Actions to automate workflows on pushes.
+                Dockerized application, used Terraform to manage different cloud
+                infrastructure, and Github Actions to automate workflows on
+                pushes.
               </Typo>
             </div>
             <ComponentOne />

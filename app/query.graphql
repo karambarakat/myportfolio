@@ -1,0 +1,36 @@
+query IndexPage {
+  heroSection {
+    data {
+      attributes {
+        aboutMe
+      }
+    }
+  }
+  global {
+    data {
+      attributes {
+        siteName
+        siteAbout
+        favicon {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        defaultSeo {
+          id
+          metaDescription
+          metaTitle
+          shareImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
