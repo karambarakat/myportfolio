@@ -9,9 +9,15 @@ import Button from '@/components/Button'
 import HoverEffect from '@/components/HoverEffect'
 import Container from '@/components/Container'
 import Typo from '@/components/Typo'
+import { GlobalQuery } from '#gql-queries'
+import toCustomMd from '@/utils/toCustomeMd'
 
 interface Props {
   children: React.ReactNode
+  global: // |
+  NonNullable<
+    NonNullable<NonNullable<GlobalQuery['global']>['data']>['attributes']
+  >
 }
 
 function Noise() {
@@ -25,7 +31,11 @@ function Noise() {
           stitchTiles="stitch"
         ></feTurbulence>
       </filter>
-      <rect width="100%" height="100%" filter="url(#pedroduarteisalegend)"></rect>
+      <rect
+        width="100%"
+        height="100%"
+        filter="url(#pedroduarteisalegend)"
+      ></rect>
     </svg>
   )
 }
@@ -34,12 +44,17 @@ function GradientBlur({ inverted = false }: { inverted?: boolean }) {
   return (
     <div className="isolate relative">
       <img
-        className={`z-1 relative max-w-none w-[1200px] ${inverted ? 'mix-blend-difference' : ''}`}
+        className={`z-1 relative max-w-none w-[1200px] ${
+          inverted ? 'mix-blend-difference' : ''
+        }`}
         alt="background-pattern"
         loading="lazy"
         src={pattern.src}
       />
-      <g className="z-2 absolute top-0" style={{ mixBlendMode: inverted ? 'overlay' : 'multiply' }}>
+      <g
+        className="z-2 absolute top-0"
+        style={{ mixBlendMode: inverted ? 'overlay' : 'multiply' }}
+      >
         <HoverEffect inverted={inverted} />
       </g>
       <div className="bg-white absolute top-0 w-full h-full"></div>
@@ -67,17 +82,21 @@ function Background({ children: content }: { children: ReactNode }) {
   )
 }
 
-export default function InnerLayout({ children }: Props) {
+export default function InnerLayout({ global, children }: Props) {
   return (
     <div className="overflow-x-hidden min-h-screen flex flex-col justify-between">
       <Background>
         <div className="flex flex-col gap-8 min-h-screen">
           {children}
           <Separator />
-          <Typo className="text-center pb-8">
-            Built with Typescript, NextJS, Tailwind and Strapi | view the source on{' '}
-            <Button size="normal">Github</Button>
-          </Typo>
+          <Typo
+            dangerouslySetInnerHTML={{ __html: toCustomMd(global.siteAbout) }}
+            className="text-center !pb-8"
+          />
+          {/*
+            Built with Typescript, NextJS, Tailwind and Strapi | view the source
+            on <Button size="normal">Github</Button> 
+          */}
         </div>
       </Background>
     </div>

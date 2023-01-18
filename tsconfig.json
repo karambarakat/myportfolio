@@ -2,6 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "#gql-queries": [
+        "graphql/query.tsx"
+      ],
+      "#gql-schema": [
+        "graphql/schema.tsx"
+      ],
       "@/*": [
         "./*"
       ]

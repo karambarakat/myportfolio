@@ -1,35 +1,123 @@
+fragment componentA on ComponentFrontendComponentsSelectedProjectDetails {
+  id
+  heading
+  body
+  callOfActions {
+    id
+    text
+    href
+    external
+  }
+  subComponent
+}
+
+fragment FileAllAttributes on UploadFile {
+  caption
+  createdAt
+  ext
+  formats
+  hash
+  height
+  width
+  mime
+  name
+  previewUrl
+  provider
+  provider_metadata
+  related {
+    __typename
+  }
+  size
+  updatedAt
+  url
+  alternativeText
+}
+
 query IndexPage {
   heroSection {
     data {
       attributes {
+        h1
+        h2
         aboutMe
+        callToAction {
+          id
+          text
+          href
+          external
+        }
+        picture {
+          data {
+            attributes {
+              ...FileAllAttributes
+            }
+          }
+        }
       }
     }
   }
-  global {
+
+  mypocketDisplay {
     data {
       attributes {
-        siteName
-        siteAbout
-        favicon {
+        content {
+          __typename
+          ...componentA
+        }
+      }
+    }
+  }
+
+  getInContact {
+    data {
+      attributes {
+        message
+        links {
+          id
+          href
+          text
+          external
+        }
+      }
+    }
+  }
+
+  projects(publicationState: LIVE, pagination: { limit: 2 }) {
+    data {
+      id
+      attributes {
+        title
+        displayPicture {
           data {
             attributes {
-              url
+              ...FileAllAttributes
             }
           }
         }
-        defaultSeo {
-          id
-          metaDescription
-          metaTitle
-          shareImage {
-            data {
-              attributes {
-                url
-              }
+        summary
+        github {
+          text
+          href
+        }
+        live {
+          text
+          href
+        }
+        skills {
+          data {
+            attributes {
+              name
             }
           }
         }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageCount
+        pageSize
+        total
       }
     }
   }

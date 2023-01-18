@@ -3,12 +3,15 @@ import s from './Container.module.scss'
 import _c from 'classnames'
 
 interface Props
-  extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
   children: React.ReactNode
   className?: string
 }
 
-function Container({ children, className, ...rest }: Props) {
+function Container({ children, className }: Props) {
   return <div className={_c(s.base, className)}>{children}</div>
 }
 
@@ -19,7 +22,13 @@ Container.shiftStyle = (shift: number) => {
   return { marginLeft: -shift, width: 800 + -2 * shift }
 }
 
-Container.Shift = function ({ children, shift }: { children: React.ReactNode; shift: number }) {
+Container.Shift = function Shift({
+  children,
+  shift
+}: {
+  children: React.ReactNode
+  shift: number
+}) {
   return <div style={Container.shiftStyle(shift)}>{children}</div>
 }
 

@@ -1,12 +1,13 @@
 import __ from 'classnames'
 import s from './Typo.module.scss'
+import type { ComponentPropsWithoutRef as elem } from 'react'
 
-interface Props<E> extends React.DetailedHTMLProps<React.HTMLAttributes<E>, E> {
+interface Props {
   children?: React.ReactNode
   className?: string
 }
 
-function Typo({ children, className, ...rest }: Props<HTMLParagraphElement>) {
+function Typo({ children, className, ...rest }: Props & elem<'p'>) {
   return (
     <p {...rest} className={__(s.base, className)}>
       {children}
@@ -14,7 +15,7 @@ function Typo({ children, className, ...rest }: Props<HTMLParagraphElement>) {
   )
 }
 
-Typo.H1 = function ({ children, className, ...rest }: Props<HTMLParagraphElement>) {
+Typo.H1 = function H1({ children, className, ...rest }: Props & elem<'h1'>) {
   return (
     <h1 {...rest} className={__(s.h1, className)}>
       {children}
@@ -22,7 +23,7 @@ Typo.H1 = function ({ children, className, ...rest }: Props<HTMLParagraphElement
   )
 }
 
-Typo.H2 = function ({ children, className, ...rest }: Props<HTMLParagraphElement>) {
+Typo.H2 = function H2({ children, className, ...rest }: Props & elem<'h2'>) {
   return (
     <h2 {...rest} className={__(s.h2, className)}>
       {children}
@@ -30,7 +31,7 @@ Typo.H2 = function ({ children, className, ...rest }: Props<HTMLParagraphElement
   )
 }
 
-Typo.Lg = function ({ children, className, ...rest }: Props<HTMLParagraphElement>) {
+Typo.Lg = function Lg({ children, className, ...rest }: Props & elem<'p'>) {
   return (
     <p {...rest} className={__(s.lg, className)}>
       {children}

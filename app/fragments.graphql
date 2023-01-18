@@ -1,0 +1,21 @@
+fragment FileAllAttributes on UploadFile {
+  caption
+  createdAt
+  ext
+  formats
+  hash
+  height
+  width
+  mime
+  name
+  previewUrl
+  provider
+  provider_metadata
+  related {
+    __typename
+  }
+  size
+  updatedAt
+  url
+  alternativeText
+}

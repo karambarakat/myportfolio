@@ -4,6 +4,12 @@
 
 @tailwind utilities;
 
+@layer utilities {
+  .place-center {
+    @apply grid place-content-center place-items-center;
+  }
+}
+
 @layer components {
   .container {
     @apply w-[100%];

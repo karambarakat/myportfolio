@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "next": "next",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "strapi": "npm run production --prefix strapi",
-    "strapi:dev": "npm run develop --prefix strapi",
-    "codegen": "graphql-codegen --config graphql/codegen.ts"
+    "strapi:production": "npm run production --prefix strapi",
+    "strapi": "npm run develop --prefix strapi",
+    "codegen": "graphql-codegen"
   },
   "prettier": {
     "arrowParens": "avoid",
@@ -32,16 +33,21 @@
     "eslint": "8.30.0",
     "eslint-config-next": "^13.1.1",
     "graphql-request": "^5.1.0",
+    "lucide-react": "^0.105.0",
+    "markdown-it": "^13.0.1",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@graphql-codegen/add": "^3.2.3",
     "@graphql-codegen/cli": "2.16.4",
     "@graphql-codegen/typescript": "^2.8.7",
     "@graphql-codegen/typescript-operations": "^2.5.12",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/classnames": "^2.3.1",
+    "@types/markdown-it": "^12.2.3",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "autoprefixer": "^10.4.13",

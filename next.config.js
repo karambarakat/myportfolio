@@ -12,7 +12,18 @@ const nextConfig = {
     })
     return config
   },
-
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'stapi-portfolio-bucket-only-owner.s3.us-west-1.amazonaws.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com'
+      }
+    ]
+  },
   redirects: async function () {
     return [
       {
