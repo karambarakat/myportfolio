@@ -20,8 +20,8 @@
       "esnext"
     ],
     "allowJs": false,
-    "skipLibCheck": false,
-    "strict": true,
+    "skipLibCheck": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
@@ -37,7 +37,8 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "strapi"
   ],
   "include": [
     "next-env.d.ts",

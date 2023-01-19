@@ -13,8 +13,6 @@ import query from './query.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import { IndexPageQuery } from '#gql-queries'
 
-const obj: IndexPageQuery = {}
-
 export default async function Page() {
   const gqlData: IndexPageQuery = await fetchQuery({ query })
 
