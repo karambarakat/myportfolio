@@ -8,6 +8,7 @@ import react from '@/public/section1/react.png'
 import mongo from '@/public/section1/mongo.png'
 import node from '@/public/section1/node.png'
 import express from '@/public/section1/express.png'
+import noPreview from '@/public/section1/noPreview.svg'
 import website from '@/public/section1/website.webp'
 import Link from 'next/link'
 import _c from 'classnames'
@@ -47,10 +48,17 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
 
             return (
               <div
-                className="grid grid-cols-2 gap-5 mb-5 items-center"
+                className={_c(
+                  'grid sm-mx:text-center gap-5 mb-5',
+                  'items-center justify-items-center',
+                  index % 2
+                    ? 'sm:grid-areas-[right_left]'
+                    : 'sm:grid-areas-[left_right]',
+                  'sm:grid-cols-2 child:grid-in-[auto]'
+                )}
                 key={each.id}
               >
-                <div className={index % 2 ? 'order-1' : ''}>
+                <div className="sm:!grid-in-[left]">
                   <Typo.Lg>{each.heading}</Typo.Lg>
                   <Typo>{each.body}</Typo>
                   {each.callOfActions &&
@@ -67,16 +75,14 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
                       )
                     })}
                 </div>
-                <div className="pointer-events-none selection:bg-transparent select-none">
+                <div className="sm:!grid-in-[right] pointer-events-none selection:bg-transparent select-none max-w-[340px]">
                   <SubComponentOne type={each.subComponent}></SubComponentOne>
                 </div>
               </div>
             )
           })}
       </div>
-      <Typo.H2 className="text-center my-6 mt-12">
-        &#x21DF;&#x21DF; More Projects &#x21DF;&#x21DF;
-      </Typo.H2>
+      <Typo.H2 className="text-center my-8 mt-32">˅ More Projects ˅</Typo.H2>
       <div className="grid md:grid-cols-2 gap-5 min-h-[100px]">
         {projects.data.map(project => {
           if (!project || !project.attributes) return
@@ -98,9 +104,9 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
                     />
                   ) : (
                     <img
-                      className="!w-full !h-full !object-cover"
+                      className="!w-full !h-full p-8 bg-[#f1fafd] object-contain"
                       alt="no picture"
-                      src="https://assets.website-files.com/5c6e6f46bf98b2013cf621c5/5cdbececded4a0184e7de84b_portfolio%203%20-%20wide.svg"
+                      src={noPreview.src}
                     />
                   )}
                 </Link>
@@ -110,26 +116,27 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
               </Link>
               <Typo>{project.attributes.summary}</Typo>
               <div className="flex gap-2" id="coa">
-                <span>
-                  {project.attributes.github && (
+                {project.attributes.github && (
+                  <span>
                     <Button
                       size="normal"
                       href={project.attributes.github.href || '#'}
                     >
                       view source
                     </Button>
-                  )}
-                </span>
-                <span>
-                  {project.attributes.live && (
+                  </span>
+                )}
+
+                {project.attributes.live && (
+                  <span>
                     <Button
                       size="normal"
                       href={project.attributes.live.href || '#'}
                     >
                       view live
                     </Button>
-                  )}
-                </span>
+                  </span>
+                )}
               </div>
             </div>
           )
@@ -167,7 +174,7 @@ function SubComponentOne({
         switch (type) {
           case 'MERN_Stack':
             return (
-              <div className="mb-12 text-white font-semibold grid grid-rows-2 gap-2 grid-flow-col child:rounded-md">
+              <div className="mb-12 text-white font-semibold grid grid-rows-2 gap-2 grid-flow-col child:rounded-md  w-[340px]">
                 <div className="!aspect-w-5 aspect-h-4 shadow-md bg-[#63d9f7]">
                   <div className="place-center gap-2">
                     <img
@@ -213,28 +220,74 @@ function SubComponentOne({
           case 'User_Experience_in_mind':
             return (
               <Image
-                className="object-cover rounded-xl shadow-md"
-                style={{ height: website.height * 1.3 }}
-                src={website.src}
-                width={website.width}
-                height={website.height}
+                className="object-cover"
+                src={ux.src}
+                width={ux.width}
+                height={ux.height}
                 alt="user-experience-illustration"
               ></Image>
             )
-          case 'Good_Code_Quality':
-            return <div>{type}</div>
-          case 'Modern_UI':
-            return <div>{type}</div>
-          case 'Robust_DevOps':
-            return <div>{type}</div>
           case 'Storybooks':
-            return <div>{type}</div>
+            return (
+              <Image
+                className="object-cover"
+                src={storyBook.src}
+                width={storyBook.width}
+                height={storyBook.height}
+                alt="Storybooks"
+              ></Image>
+            )
+          case 'Good_Code_Quality':
+            return (
+              <Image
+                className="object-cover"
+                src={code.src}
+                width={code.width}
+                height={code.height}
+                alt="Good_Code_Quality"
+              ></Image>
+            )
+          case 'Modern_UI':
+            return (
+              <Image
+                className="object-cover"
+                src={ui.src}
+                width={ui.width}
+                height={ui.height}
+                alt="Modern_UI"
+              ></Image>
+            )
+          case 'Robust_DevOps':
+            return (
+              <Image
+                className="object-cover"
+                src={devOps.src}
+                width={devOps.width}
+                height={devOps.height}
+                alt="Robust_DevOps"
+              ></Image>
+            )
           default:
-            return <div>{type}</div>
+            return (
+              <Image
+                className="object-cover"
+                src={def.src}
+                width={def.width}
+                height={def.height}
+                alt="Robust_DevOps"
+              ></Image>
+            )
         }
       })()}
     </div>
   )
 }
+
+import storyBook from '@/public/section1/undraw6Storybooks.svg'
+import code from '@/public/section1/undraw3Code.svg'
+import ui from '@/public/section1/undraw4UI.svg'
+import ux from '@/public/section1/undraw2UX.svg'
+import devOps from '@/public/section1/undraw5devops.svg'
+import def from '@/public/section1/undraw_default.svg'
 
 export default Selected

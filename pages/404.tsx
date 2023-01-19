@@ -4,7 +4,6 @@ import QuickMessage from '@/components/QuickMessage'
 import fetchQuery from '@/utils/fetchQuery'
 import globalQuery from '@/app/query-global.graphql'
 import Link from 'next/link'
-import toCustomMd from '@/utils/toCustomeMd'
 
 interface Props {
   global: NonNullable<

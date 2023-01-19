@@ -93,6 +93,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     // require('@tailwindcss/line-clamp'),
     require('@tailwindcss/aspect-ratio'),
+    require('@savvywombat/tailwindcss-grid-areas'),
     function (
       /** @type {import('tailwindcss/types/config').PluginAPI} */
       { addVariant }
