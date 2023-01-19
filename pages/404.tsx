@@ -5,7 +5,6 @@ import fetchQuery from '@/utils/fetchQuery'
 import globalQuery from '@/app/query-global.graphql'
 import Link from 'next/link'
 import toCustomMd from '@/utils/toCustomeMd'
-import { gql } from 'graphql-request'
 
 interface Props {
   global: NonNullable<
@@ -14,22 +13,9 @@ interface Props {
 }
 
 export async function getStaticProps(): Promise<{ props: Props }> {
-  const res = await fetch(`${process.env.API}/graphql`, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.STRAPI_TOKEN}`
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      query: gql([globalQuery.trim()] as unknown as TemplateStringsArray)
-    })
+  const data: GlobalQuery = await fetchQuery({
+    query: globalQuery
   })
-
-  if (!res.ok) throw new Error(await res.text())
-
-  const data = (await res.json()).data
-
-  if (!data) throw new Error('no data returned')
 
   if (!data.global?.data?.attributes) throw new Error('not enough data')
 

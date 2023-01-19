@@ -36,6 +36,7 @@
     "lucide-react": "^0.105.0",
     "markdown-it": "^13.0.1",
     "next": "^13.1.1",
+    "node-fetch": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "server-only": "^0.0.1"
