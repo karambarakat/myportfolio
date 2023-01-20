@@ -19,18 +19,6 @@ function Hero({ data }: { data: Data }) {
       <Typo.H1 className="text-center">{data.h1}</Typo.H1>
       <Typo.H2 className="text-center mb-8">{data.h2}</Typo.H2>
       <div className="flex gap-8 items-start">
-        <div className="sm-mx:text-center flex-1">
-          {data.aboutMe.split('\n').map((each, i) => (
-            <Typo key={i}>{each}</Typo>
-          ))}
-          {data.callToAction && (
-            <div className="flex sm-mx:justify-center gap-8 mt-4">
-              {data.callToAction?.map(each => {
-                return each && <Button key={each.id}>{each.text}</Button>
-              })}
-            </div>
-          )}
-        </div>
         <Image
           className="sm-mx:hidden rounded-md shadow-2xl"
           alt="photo of me"
@@ -40,6 +28,24 @@ function Hero({ data }: { data: Data }) {
             data.picture?.data?.attributes?.height || personalImage.height
           }
         />
+        <div className="sm-mx:text-center flex-1">
+          {data.aboutMe.split('\n').map((each, i) => (
+            <Typo key={i}>{each}</Typo>
+          ))}
+          {data.callToAction && (
+            <div className="flex sm-mx:justify-center gap-8 mt-4">
+              {data.callToAction?.map(each => {
+                return (
+                  each && (
+                    <Button key={each.id} href={each.href || '#'}>
+                      {each.text}
+                    </Button>
+                  )
+                )
+              })}
+            </div>
+          )}
+        </div>
       </div>
     </main>
   )

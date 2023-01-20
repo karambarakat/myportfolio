@@ -27,7 +27,11 @@ const paths: Paths = [
     ]
   },
   {
-    path: '/project',
+    path: '/projects',
+    model: ['project']
+  },
+  {
+    path: '/projects/[pid]',
     model: ['project'],
     exact: entry => '/project/' + (entry as any as { id: string }).id
   },
