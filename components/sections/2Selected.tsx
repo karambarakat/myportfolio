@@ -285,7 +285,7 @@ function SubComponentOne({
 import storyBook from '@/public/section1/undraw6Storybooks.svg'
 import code from '@/public/section1/undraw3Code.svg'
 import ui from '@/public/section1/undraw4UI.svg'
-import ux from '@/public/section1/undraw2UX.svg'
+import ux from '@/public/section1/undraw_ux.svg'
 import devOps from '@/public/section1/undraw5devops.svg'
 import def from '@/public/section1/undraw_default.svg'
 
