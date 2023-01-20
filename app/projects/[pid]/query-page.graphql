@@ -1,0 +1,61 @@
+fragment FileAllAttributes on UploadFile {
+  caption
+  createdAt
+  ext
+  formats
+  hash
+  height
+  width
+  mime
+  name
+  previewUrl
+  provider
+  provider_metadata
+  related {
+    __typename
+  }
+  size
+  updatedAt
+  url
+  alternativeText
+}
+
+query ProjectPage($pid: ID) {
+  project(id: $pid) {
+    data {
+      attributes {
+        title
+        content
+        createdAt
+        updatedAt
+        displayPicture {
+          data {
+            attributes {
+              ...FileAllAttributes
+            }
+          }
+        }
+        github {
+          external
+          href
+          id
+          text
+        }
+        live {
+          external
+          href
+          id
+          text
+        }
+        publishedAt
+        skills {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

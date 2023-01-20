@@ -1,0 +1,63 @@
+fragment FileAllAttributes on UploadFile {
+  caption
+  createdAt
+  ext
+  formats
+  hash
+  height
+  width
+  mime
+  name
+  previewUrl
+  provider
+  provider_metadata
+  related {
+    __typename
+  }
+  size
+  updatedAt
+  url
+  alternativeText
+}
+
+query ProjectsPage($page: Int = 1) {
+  projects(publicationState: LIVE, pagination: { pageSize: 10, page: $page }) {
+    data {
+      id
+      attributes {
+        title
+        displayPicture {
+          data {
+            attributes {
+              ...FileAllAttributes
+            }
+          }
+        }
+        summary
+        github {
+          text
+          href
+        }
+        live {
+          text
+          href
+        }
+        skills {
+          data {
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageCount
+        pageSize
+        total
+      }
+    }
+  }
+}

@@ -1,7 +1,10 @@
 import { gql } from 'graphql-request'
 
 export default async function fetchQuery(
-  { query, variables }: { query: string; variables?: Record<string, any> },
+  arg: {
+    query: string
+    var?: unknown
+  },
   init?: Omit<RequestInit, 'method' | 'body'>
 ) {
   const res = await fetch(`${process.env.API}/graphql`, {
@@ -14,8 +17,8 @@ export default async function fetchQuery(
     },
     method: 'POST',
     body: JSON.stringify({
-      query: gql([query.trim()] as unknown as TemplateStringsArray),
-      variables
+      query: gql([arg.query.trim()] as unknown as TemplateStringsArray),
+      variables: arg.var
     })
   })
 

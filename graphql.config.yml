@@ -2,7 +2,7 @@ schema:
   - ./graphql/schema.graphql
   - ./app/fragments.graphql
 documents:
-  - ./app/*.graphql
+  - ./app/**/*.graphql
 extensions:
   codegen:
     generates:

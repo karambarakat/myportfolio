@@ -1,27 +1,22 @@
 import Separator from '@/components/Separator'
-import Image from 'next/image'
-import Button from '@/components/Button'
-import Typo from '@/components/Typo'
-import _c from 'classnames'
-import Link from 'next/link'
 import Hero from '@/components/sections/Hero'
 import Selected from '@/components/sections/2Selected'
 import GetInContact from '@/components/sections/3GetInContact'
 
 // only server side imports
-import query from './query.graphql'
+import query from './query-page.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import { IndexPageQuery } from '#gql-queries'
 
 export default async function Page() {
-  const gqlData: IndexPageQuery = await fetchQuery({ query })
+  const res: IndexPageQuery = await fetchQuery({ query })
 
   if (
-    !gqlData?.heroSection?.data?.attributes ||
-    !gqlData?.mypocketDisplay?.data?.attributes ||
-    !gqlData?.getInContact?.data?.attributes ||
-    !gqlData?.projects?.data ||
-    !gqlData?.projects?.meta?.pagination
+    !res?.heroSection?.data?.attributes ||
+    !res?.mypocketDisplay?.data?.attributes ||
+    !res?.getInContact?.data?.attributes ||
+    !res?.projects?.data ||
+    !res?.projects?.meta?.pagination
   )
     throw new Error(`
       not enough data, 
@@ -42,7 +37,7 @@ export default async function Page() {
       data: projects,
       meta: { pagination: projectsPagination }
     }
-  } = gqlData
+  } = res
 
   return (
     <>

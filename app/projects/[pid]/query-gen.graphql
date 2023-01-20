@@ -1,0 +1,10 @@
+query genProjects {
+  projects {
+    data {
+      id
+      attributes {
+        title
+      }
+    }
+  }
+}

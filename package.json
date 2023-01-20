@@ -31,6 +31,7 @@
     "chart.js": "^4.1.1",
     "classnames": "^2.3.2",
     "client-only": "^0.0.1",
+    "dayjs": "^1.11.7",
     "eslint": "8.30.0",
     "eslint-config-next": "^13.1.1",
     "graphql-request": "^5.1.0",

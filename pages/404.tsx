@@ -2,7 +2,7 @@ import { GlobalQuery } from '#gql-queries'
 import InnerLayout from '@/app/InnerLayout'
 import QuickMessage from '@/components/QuickMessage'
 import fetchQuery from '@/utils/fetchQuery'
-import globalQuery from '@/app/query-global.graphql'
+import globalQuery from '@/app/query-layout.graphql'
 import Link from 'next/link'
 
 interface Props {
@@ -12,14 +12,14 @@ interface Props {
 }
 
 export async function getStaticProps(): Promise<{ props: Props }> {
-  const data: GlobalQuery = await fetchQuery({
+  const res: GlobalQuery = await fetchQuery({
     query: globalQuery
   })
 
-  if (!data.global?.data?.attributes) throw new Error('not enough data')
+  if (!res.global?.data?.attributes) throw new Error('not enough data')
 
   return {
-    props: { global: data.global.data.attributes } // will be passed to the page component as props
+    props: { global: res.global.data.attributes } // will be passed to the page component as props
   }
 }
 

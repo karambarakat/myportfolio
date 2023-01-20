@@ -1,5 +1,5 @@
 import InnerLayout from './InnerLayout'
-import globalQuery from './query-global.graphql'
+import globalQuery from './query-layout.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import { GlobalQuery } from '#gql-queries'
 import toCustomMd from '@/utils/toCustomeMd'
@@ -9,17 +9,17 @@ interface Props {
 }
 
 export default async function Layout({ children }: Props) {
-  const data: GlobalQuery = await fetchQuery({
+  const res: GlobalQuery = await fetchQuery({
     query: globalQuery
   })
 
-  if (!data.global?.data?.attributes) throw new Error('not enough data')
+  if (!res.global?.data?.attributes) throw new Error('not enough data')
 
   return (
     <html>
       <head />
       <body>
-        <InnerLayout global={data.global.data.attributes}>
+        <InnerLayout global={res.global.data.attributes}>
           {children}
         </InnerLayout>
       </body>
