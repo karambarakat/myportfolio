@@ -48,7 +48,7 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
             return (
               <div
                 className={_c(
-                  'grid sm-mx:text-center gap-5 mb-5',
+                  'grid sm-mx:text-center gap-5 mb-5 child:sm-mx:mb-8 last:sm-mx:mb-0',
                   'items-center justify-items-center',
                   index % 2
                     ? 'sm:grid-areas-[right_left]'
@@ -60,19 +60,22 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
                 <div className="sm:!grid-in-[left]">
                   <Typo.Lg>{each.heading}</Typo.Lg>
                   <Typo>{each.body}</Typo>
-                  {each.callOfActions &&
-                    each.callOfActions.map(coa => {
-                      if (!coa) return
-                      return (
-                        <Button
-                          key={coa.id || ''}
-                          size="normal"
-                          href={coa.href || '#'}
-                        >
-                          {coa.text || ''}
-                        </Button>
-                      )
-                    })}
+                  {each.callOfActions && (
+                    <div className="flex sm-mx:justify-center gap-2">
+                      {each.callOfActions.map(coa => {
+                        if (!coa) return
+                        return (
+                          <Button
+                            key={coa.id || ''}
+                            size="normal"
+                            href={coa.href || '#'}
+                          >
+                            {coa.text || ''}
+                          </Button>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
                 <div className="sm:!grid-in-[right] pointer-events-none selection:bg-transparent select-none max-w-[340px]">
                   <SubComponentOne type={each.subComponent}></SubComponentOne>
@@ -82,82 +85,20 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
           })}
       </div>
       <Typo.H2 className="text-center my-8 mt-32">˅ More Projects ˅</Typo.H2>
-      <div className="grid md:grid-cols-2 gap-5 min-h-[100px]">
+      <ProjectsDisplay>
         {projects.data.map(project => {
-          if (!project || !project.attributes) return
-
-          const img = project?.attributes?.displayPicture?.data?.attributes
-
+          if (!project?.attributes || !project.id) return
           return (
-            <div key={project.id}>
-              <div className="aspect-w-4 aspect-h-3 shadow-xl  rounded-xl overflow-hidden cursor-pointer">
-                <Link href={'/projects/' + project.id}>
-                  {img ? (
-                    <Image
-                      className="!w-full !h-full !object-cover"
-                      alt={img.alternativeText || project.attributes.title}
-                      width={img.width || 12}
-                      height={img.height || 12}
-                      src={img.url}
-                      style={{}}
-                    />
-                  ) : (
-                    <img
-                      className="!w-full !h-full p-8 bg-[#f1fafd] object-contain"
-                      alt="no picture"
-                      src={noPreview.src}
-                    />
-                  )}
-                </Link>
-              </div>
-              <Link href={'/projects/' + project.id}>
-                <Typo.Lg className="mt-5">{project.attributes.title}</Typo.Lg>
-              </Link>
-              <Typo>{project.attributes.summary}</Typo>
-              <div className="flex gap-2" id="coa">
-                {project.attributes.github && (
-                  <span>
-                    <Button
-                      size="normal"
-                      href={project.attributes.github.href || '#'}
-                    >
-                      view source
-                    </Button>
-                  </span>
-                )}
-
-                {project.attributes.live && (
-                  <span>
-                    <Button
-                      size="normal"
-                      href={project.attributes.live.href || '#'}
-                    >
-                      view live
-                    </Button>
-                  </span>
-                )}
-              </div>
-            </div>
+            <ProjectSummary
+              key={project.id}
+              href={'/projects/' + project.id}
+              data={project.attributes}
+            />
           )
         })}
-        {projects.data.length < 2 && (
-          <div
-            className={_c(
-              projects.data.length === 0 && 'col-span-2',
-              'place-self-center justify-self-center'
-            )}
-          >
-            More Projects Coming
-          </div>
-        )}
-        {projects.pagination.pageCount > 1 && (
-          <div className="col-span-2 my-5 place-content-center grid">
-            <Button Elem={Link} href="/projects">
-              view more
-            </Button>
-          </div>
-        )}
-      </div>
+        <ProjectsDisplay.IfMore length={projects.data.length} />
+        <ProjectsDisplay.ViewAll pageCount={projects.pagination.pageCount} />
+      </ProjectsDisplay>
     </section>
   )
 }
@@ -288,5 +229,7 @@ import ui from '@/public/section1/undraw4UI.svg'
 import ux from '@/public/section1/undraw_ux.svg'
 import devOps from '@/public/section1/undraw5devops.svg'
 import def from '@/public/section1/undraw_default.svg'
+import ProjectSummary from '../content/ProjectSummary'
+import ProjectsDisplay from '../content/ProjectsDisplay'
 
 export default Selected

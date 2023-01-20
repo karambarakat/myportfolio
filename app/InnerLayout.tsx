@@ -64,21 +64,23 @@ function GradientBlur({ inverted = false }: { inverted?: boolean }) {
 
 function Background({ children: content }: { children: ReactNode }) {
   return (
-    <Container className="relative">
-      <Suspense fallback={<></>}>
-        <div
-          className={`print:hidden absolute pointer-events-none top-0 left-0 ${Container.shift_lg}`}
-        >
-          <GradientBlur />
+    <div className="max-h-screen overflow-visible">
+      <Container className="relative">
+        <Suspense fallback={<></>}>
+          <div
+            className={`print:hidden absolute pointer-events-none top-0 left-0 ${Container.shift_lg}`}
+          >
+            <GradientBlur />
+          </div>
+          <div className="print:hidden fixed pointer-events-none right-0 left-0 h-screen opacity-40">
+            <Noise />
+          </div>
+        </Suspense>
+        <div className="isolate">
+          <div className="">{content}</div>
         </div>
-        <div className="print:hidden fixed pointer-events-none right-0 left-0 h-screen opacity-40">
-          <Noise />
-        </div>
-      </Suspense>
-      <div className="isolate">
-        <div className="flex justify-center">{content}</div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   )
 }
 

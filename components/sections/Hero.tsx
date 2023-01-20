@@ -4,6 +4,7 @@ import React from 'react'
 import Button from '../Button'
 import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
 import Typo from '../Typo'
+import Markdown from '../Markdonw'
 
 type Data = NonNullable<
   NonNullable<
@@ -29,9 +30,8 @@ function Hero({ data }: { data: Data }) {
           }
         />
         <div className="sm-mx:text-center flex-1">
-          {data.aboutMe.split('\n').map((each, i) => (
-            <Typo key={i}>{each}</Typo>
-          ))}
+          <Markdown>{data.aboutMe}</Markdown>
+
           {data.callToAction && (
             <div className="flex sm-mx:justify-center gap-8 mt-4">
               {data.callToAction?.map(each => {

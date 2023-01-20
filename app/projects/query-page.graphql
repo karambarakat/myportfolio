@@ -1,23 +1,31 @@
-fragment FileAllAttributes on UploadFile {
-  caption
-  createdAt
-  ext
-  formats
-  hash
-  height
-  width
-  mime
-  name
-  previewUrl
-  provider
-  provider_metadata
-  related {
-    __typename
+fragment ProjectForSummary on Project {
+  title
+  displayPicture {
+    data {
+      attributes {
+        url
+        alternativeText
+        width
+        height
+      }
+    }
   }
-  size
-  updatedAt
-  url
-  alternativeText
+  summary
+  github {
+    text
+    href
+  }
+  live {
+    text
+    href
+  }
+  skills {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
 }
 
 query ProjectsPage($page: Int = 1) {
@@ -25,30 +33,7 @@ query ProjectsPage($page: Int = 1) {
     data {
       id
       attributes {
-        title
-        displayPicture {
-          data {
-            attributes {
-              ...FileAllAttributes
-            }
-          }
-        }
-        summary
-        github {
-          text
-          href
-        }
-        live {
-          text
-          href
-        }
-        skills {
-          data {
-            attributes {
-              name
-            }
-          }
-        }
+        ...ProjectForSummary
       }
     }
     meta {

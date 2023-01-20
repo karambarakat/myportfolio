@@ -21,16 +21,40 @@ fragment FileAllAttributes on UploadFile {
   width
   mime
   name
-  previewUrl
-  provider
-  provider_metadata
-  related {
-    __typename
-  }
   size
   updatedAt
   url
   alternativeText
+}
+
+fragment ProjectForSummary on Project {
+  title
+  displayPicture {
+    data {
+      attributes {
+        url
+        alternativeText
+        width
+        height
+      }
+    }
+  }
+  summary
+  github {
+    text
+    href
+  }
+  live {
+    text
+    href
+  }
+  skills {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
 }
 
 query IndexPage {
@@ -86,30 +110,7 @@ query IndexPage {
     data {
       id
       attributes {
-        title
-        displayPicture {
-          data {
-            attributes {
-              ...FileAllAttributes
-            }
-          }
-        }
-        summary
-        github {
-          text
-          href
-        }
-        live {
-          text
-          href
-        }
-        skills {
-          data {
-            attributes {
-              name
-            }
-          }
-        }
+        ...ProjectForSummary
       }
     }
     meta {
