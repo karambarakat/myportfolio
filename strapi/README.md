@@ -38,3 +38,12 @@ npm run run
 ```
 
 you can now visit localhost:1337 or $backend_url to log in into your dashboard
+
+# Dockerize
+
+I have dockerize this strapi app for the following reasons:
+
+1. this project depends on better-sqlite, and for some reason there is environment requirement to build it like installing node-gyp, python and C/C++ compiler etc see [here](https://github.com/WiseLibs/better-sqlite3/blob/master/docs/troubleshooting.md)
+2. I can have better integration with cloudflare tunnels.
+3. I can update the schema freely during development, because docker take care of the production process and helps with versioning schema
+4. versioning schema is safer and possible by simple image tag, at any time I can run old image version of my app.

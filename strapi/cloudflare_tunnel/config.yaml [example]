@@ -1,3 +1,0 @@
-url: http://localhost:1337
-tunnel: xxxxxxxx-xxxxxxxxx-xxxxx-xxxxxxxx-xxxxxxxx
-credentials-file: ./cloudflare_tunnel_secret.json

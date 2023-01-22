@@ -1,0 +1,54 @@
+FROM node:18-alpine
+ARG STRAPI_VERSION
+
+# ______ solving problems encoutered with better-sqlite3
+# @see https://github.com/WiseLibs/better-sqlite3/blob/master/docs/troubleshooting.md
+# @see https://github.com/nodejs/node-gyp#installation
+# 1.install python @see https://stackoverflow.com/questions/62554991/how-do-i-install-python-on-alpine-linux
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python; \
+  python3 -m ensurepip; \
+  pip3 install --no-cache --upgrade pip setuptools
+
+# 2.install make, GCC
+RUN apk add --update make; \
+  apk add build-base
+
+RUN npm install -g node-gyp
+
+# ______ solving problems encoutered with better-sqlite3
+
+# ______ typical node app set up
+WORKDIR /usr/src/app
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+ENV NODE_ENV=production
+
+RUN npm run build
+RUN npm i -g concurrently
+# ______ typical node app set up
+
+# ______ set up cloud flare tunnel and listnen to port 1337
+ARG backend_url
+ARG tunnel_id
+RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 ; \
+  chmod 744 cloudflared-linux-amd64 ; \
+  chown 1000:1000 cloudflared-linux-amd64 ; \
+  mkdir ~/.cloudflared ; \
+  mv cloudflare/cert.pem ~/.cloudflared/cert.pem ; \
+  ./cloudflared-linux-amd64 tunnel route dns ${tunnel_id} ${backend_url} ; \
+  npx json -I -f package.json -e "this.scripts.cl=\"./cloudflared-linux-amd64 tunnel run --url http://localhost:1337 --credentials-file ./cloudflare/secret.json ${tunnel_id}\""
+# ______ set up cloud flare tunnel and listnen to port 1337
+
+VOLUME [ "/usr/src/app/.tmp" ]
+
+RUN mkdir .tmp
+RUN chown 1000:1000 -R .tmp
+USER node
+
+CMD [ "npx", "concurrently" , "\"npm run start\"", "\"npm run cl\"" ]
