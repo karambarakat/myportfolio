@@ -34,15 +34,12 @@ RUN npm i -g concurrently
 # ______ typical node app set up
 
 # ______ set up cloud flare tunnel and listnen to port 1337
-ARG backend_url
+VOLUME [ "/home/node/.cloudflared" ]
 ARG tunnel_id
 RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 ; \
   chmod 744 cloudflared-linux-amd64 ; \
   chown 1000:1000 cloudflared-linux-amd64 ; \
-  mkdir ~/.cloudflared ; \
-  mv cloudflare/cert.pem ~/.cloudflared/cert.pem ; \
-  ./cloudflared-linux-amd64 tunnel route dns ${tunnel_id} ${backend_url} ; \
-  npx json -I -f package.json -e "this.scripts.cl=\"./cloudflared-linux-amd64 tunnel run --url http://localhost:1337 --credentials-file ./cloudflare/secret.json ${tunnel_id}\""
+  npx json -I -f package.json -e "this.scripts.cl=\"./cloudflared-linux-amd64 tunnel run --url http://localhost:1337 --credentials-file ~/.cloudflared/${tunnel_id}.json ${tunnel_id}\""
 # ______ set up cloud flare tunnel and listnen to port 1337
 
 VOLUME [ "/usr/src/app/.tmp" ]
@@ -52,3 +49,4 @@ RUN chown 1000:1000 -R .tmp
 USER node
 
 CMD [ "npx", "concurrently" , "\"npm run start\"", "\"npm run cl\"" ]
+# CMD [ "npm", "run", "cl" ]

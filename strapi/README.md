@@ -17,27 +17,24 @@ NextJS is enough to build, fetch and serve data without connecting to some backe
 
 to update, create or delete content you have to:
 
-1. (only once) set up tunnel via cli by running:
+1. (only once) set up tunnel and dns via cli by running:
 
 ```
-npm run cf:init
+cloudflared.exe tunnel login
+cloudflared.exe tunnel create <name> ||
+cloudflared.exe tunnel token ${tunnel_id}
+cloudflared.exe tunnel tunnel route dns ${tunnel_id} ${domain}
 ```
 
-create `cloudflare_tunnel_secret.json` and `cloudflare_tunnel.yaml` from the results of the previuse command
-
-then setup a dns record:
-
-```
-npm run cf:dns
-```
+these will make two files `cert.pem` and `<tunnelid>.json` files inside ~/cloudflare folder, you have provide a mount point pointing to `/home/node/.cloudflared` inside the container.
 
 2. run the app through
 
 ```
-npm run run
+npm run production
 ```
 
-you can now visit localhost:1337 or $backend_url to log in into your dashboard
+you can now visit $backend_url to log in into your dashboard
 
 # Dockerize
 
