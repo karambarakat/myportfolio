@@ -15,26 +15,20 @@ NextJS is enough to build, fetch and serve data without connecting to some backe
 
 # Cloudflare Tunnel
 
-to update, create or delete content you have to:
+this app can be accessed online through Cloudflare tunnel.
 
-1. (only once) set up tunnel and dns via cli by running:
-
-```
-cloudflared.exe tunnel login
-cloudflared.exe tunnel create <name> ||
-cloudflared.exe tunnel token ${tunnel_id}
-cloudflared.exe tunnel tunnel route dns ${tunnel_id} ${domain}
-```
-
-these will make two files `cert.pem` and `<tunnelid>.json` files inside ~/cloudflare folder, you have provide a mount point pointing to `/home/node/.cloudflared` inside the container.
-
-2. run the app through
+you only have to provide two enviroment variables
 
 ```
-npm run production
+tunnel_token=eyJhxxxxxxxxxxxxxxxx
+tunnel_id=xxxxxxx-xxxx-xxxx-xxxx-xxxx
 ```
 
-you can now visit $backend_url to log in into your dashboard
+you can obtain tunnel_token via running
+
+```
+cloudflared tunnel token $token_id
+```
 
 # Dockerize
 
@@ -44,3 +38,18 @@ I have dockerize this strapi app for the following reasons:
 2. I can have better integration with cloudflare tunnels.
 3. I can update the schema freely during development, because docker take care of the production process and helps with versioning schema
 4. versioning schema is safer and possible by simple image tag, at any time I can run old image version of my app.
+
+to build run:
+
+```
+docker build -t strapi-portfolio:$version .
+```
+
+then tun via:
+
+```
+docker run \
+  -v $volume:/usr/src/app/.tmp \
+  --env-file .env \
+  strapi-portfolio:$version
+```

@@ -15,8 +15,8 @@
   "version": "1.0.0",
   "description": "A Strapi application",
   "scripts": {
-    "docker:build": "docker compose build",
-    "production": "docker compose up",
+    "docker:build": "docker build -t strapi-portfolio:vx .",
+    "production": "docker run -v pdb:/usr/src/app/.tmp --env-file .env strapi-portfolio:vx",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",

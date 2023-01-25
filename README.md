@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Strapi as a CMS
 
-## Getting Started
+This is the root directory for the backend of my portfolio.
 
-First, run the development server:
+The database is SQLite, this is perfect for the following reasons:
 
-```bash
-npm run dev
-# or
-yarn dev
+- I'm not planning to deploy the backend to any cloud, instead I will trigger the updates via a Cloudflare Tunnel.
+- I'm not expecting the project to scale up greatly, so scaling up vertically is not a problem
+
+# Integrating with NextJS
+
+Via webhook, this project is configured upon any change in content to invalidate the desired resource by sending an HTTP request to the Nextjs frontend ull `<fronend>/api/revalidate`. in return the frontend will fetch data from my localhost vial the Cloudflare Tunnel.
+
+NextJS is enough to build, fetch and serve data without connecting to some backend on every request.
+
+# Cloudflare Tunnel
+
+this app can be accessed online through Cloudflare tunnel.
+
+you only have to provide two environment variables
+
+```
+tunnel_token=eyJhxxxxxxxxxxxxxxxx
+tunnel_id=xxxxxxx-xxxx-xxxx-xxxx-xxxx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+you can obtain tunnel_token via running
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+cloudflared tunnel token $token_id
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+# Dockerize
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+I have dockerize this strapi app for the following reasons:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. this project depends on better-sqlite, and for some reason there is environment requirement to build it like installing node-gyp, python and C/C++ compiler etc see [here](https://github.com/WiseLibs/better-sqlite3/blob/master/docs/troubleshooting.md)
+2. I can have better integration with cloudflare tunnels.
+3. I can update the schema freely during development, because docker take care of the production process and helps with versioning schema
+4. versioning schema is safer and possible by simple image tag, at any time I can run old image version of my app.
 
-## Learn More
+to build run:
 
-To learn more about Next.js, take a look at the following resources:
+```
+docker build -t strapi-portfolio:$version .
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+then tun via:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+docker run \
+  -v $volume:/usr/src/app/.tmp \
+  --env-file .env \
+  strapi-portfolio:$version
+```

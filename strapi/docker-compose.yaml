@@ -4,10 +4,7 @@ services:
   strapi:
     build:
       context: .
-      args: 
-        - tunnel_id=e813e6cf-4051-448b-a837-6216ccd103d2
     volumes:
       - ./.tmp.production:/usr/src/app/.tmp
-      - ./cloudflare:/home/node/.cloudflared
     env_file:
       - .env
