@@ -10,8 +10,8 @@
 }
 
 .noauto {
-  display: grid,
-  place-content: center,
-  place-items: center,
-  align-self: center,
+  display: grid;
+  place-content: center;
+  place-items: center;
+  align-self: center;
 }
