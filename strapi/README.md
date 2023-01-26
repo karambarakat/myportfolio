@@ -48,8 +48,5 @@ docker build -t strapi-portfolio:$version .
 then tun via:
 
 ```
-docker run \
-  -v $volume:/usr/src/app/.tmp \
-  --env-file .env \
-  strapi-portfolio:$version
+docker run -v pdb:/usr/src/app/.tmp --env-file .env.prod strapi-portfolio:v1
 ```

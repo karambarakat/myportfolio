@@ -3,7 +3,7 @@ name: Strapi Docker Image
 on:
   push:
     tags:
-      - v\d+
+      - v\d+.\d+
 
 env:
   image: stapi-portfolio
