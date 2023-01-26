@@ -1,5 +1,5 @@
 import __ from 'classnames'
-import sytles from './Separator.module.css'
+import styles from './Separator.module.css'
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -12,18 +12,8 @@ interface Props
 export default function Separator({ size = 'auto' }: Props) {
   return (
     <div
-      style={
-        size === 'auto'
-          ? { alignSelf: 'stretch' }
-          : {
-              display: 'grid',
-              placeContent: 'center',
-              placeItems: 'center',
-              alignSelf: 'center',
-              ...size
-            }
-      }
-      className={__(sytles.base)}
+      style={size !== 'auto' ? size : {}}
+      className={__(styles.base, size === 'auto' ? styles.auto : styles.noauto)}
     />
   )
 }

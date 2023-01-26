@@ -13,27 +13,29 @@ RUN apk add --update make; \
   apk add build-base; \
   npm install -g node-gyp
 
-WORKDIR /usr/src/app
-
 ### 2. install cloudflare cli
+WORKDIR /usr/bin
 RUN wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 ; \
   chmod 550 cloudflared-linux-amd64 ; \
-  chown 1000:1000 cloudflared-linux-amd64
+  chown 1000:1000 cloudflared-linux-amd64; \
+  npm i -g concurrently
 
 ### 3.normal node setup
+WORKDIR /usr/src/app
 COPY ./package*.json .
 RUN npm install
 COPY . .
 ENV NODE_ENV=production
 RUN npm run build
 
-RUN  npx json -I -f package.json -e "this.scripts.cloudflare=\"./cloudflared-linux-amd64 tunnel run --url localhost:1337 --credentials-contents \$(node docker-script.js) \$tunnel_id\""
+RUN  npx json -I -f package.json \
+  -e "this.scripts.cloudflare=\"cloudflared-linux-amd64 tunnel run --url localhost:1337 --credentials-contents \$(node docker-script.js) \$tunnel_id\""
 
 # 4. make volume for the database files
 VOLUME [ "/usr/src/app/.tmp" ]
-RUN mkdir .tmp
-RUN chown 1000:1000 -R .tmp
+RUN mkdir .tmp ; \
+  chown 1000:1000 -R .tmp
 
 # 5. run process as node user
 USER node
-CMD [ "npx", "concurrently" , "\"npm run start\"", "\"npm run cloudflare\"" ]
+ENTRYPOINT [ "concurrently" , "\"npm run start\"", "\"npm run cloudflare\"" ]

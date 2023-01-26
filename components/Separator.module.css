@@ -4,3 +4,14 @@
   align-self: stretch;
   background-color: black;
 }
+
+.auto {
+  align-self: stretch;
+}
+
+.noauto {
+  display: grid,
+  place-content: center,
+  place-items: center,
+  align-self: center,
+}
