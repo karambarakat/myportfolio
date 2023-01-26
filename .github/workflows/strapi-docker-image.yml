@@ -1,13 +1,16 @@
 name: Strapi Docker Image
 
 on:
-  push:
-    branches: ['main']
-    tags:
-      - v\d+
-
-env:
-  image: portfolio-strapi-tunnel
+  workflow_dispatch:
+    inputs:
+      version:
+        description: version to be added to the image tag
+        required: ture
+        type: string
+      image:
+        description: the name of the image
+        default: portfolio-strapi-tunnel
+        required: true
 
 jobs:
   build:
@@ -26,4 +29,4 @@ jobs:
         with:
           context: ./strapi
           push: true
-          tags: ${{ env.image }}:${{ github.ref }}
+          tags: ${{ inputs.image }}:${{ inputs.version }}
