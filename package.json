@@ -5,7 +5,7 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "pkgs/*"
   ],
   "scripts": {
     "start": "turbo run start",
