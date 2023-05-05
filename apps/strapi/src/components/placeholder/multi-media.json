@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_placeholder_multi_medias",
+  "info": {
+    "displayName": "multiMedia"
+  },
+  "options": {},
+  "attributes": {
+    "media": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_kenn_page_selected_project_details",
+  "info": {
+    "displayName": "selectedProjectDetails"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "callOfAction": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ui.button"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "MERN Stack",
+        "User Experience in mind",
+        "Modern UI",
+        "Good Code Quality",
+        "Storybooks",
+        "Robust DevOps"
+      ],
+      "required": true
+    }
+  }
+}
