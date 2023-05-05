@@ -1,0 +1,45 @@
+fragment FileAllAttributes on UploadFile {
+  caption
+  createdAt
+  ext
+  formats
+  hash
+  height
+  width
+  mime
+  name
+  size
+  updatedAt
+  url
+  alternativeText
+}
+
+query Global {
+  global {
+    data {
+      attributes {
+        siteName
+        siteAbout
+        defaultSeo {
+          id
+          metaDescription
+          metaTitle
+          shareImage {
+            data {
+              attributes {
+                ...FileAllAttributes
+              }
+            }
+          }
+        }
+        favicon {
+          data {
+            attributes {
+              ...FileAllAttributes
+            }
+          }
+        }
+      }
+    }
+  }
+}
