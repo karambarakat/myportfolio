@@ -1,0 +1,125 @@
+fragment componentA on ComponentFrontendComponentsSelectedProjectDetails {
+  id
+  heading
+  body
+  callOfActions {
+    id
+    text
+    href
+    external
+  }
+  subComponent
+}
+
+fragment FileAllAttributes on UploadFile {
+  caption
+  createdAt
+  ext
+  formats
+  hash
+  height
+  width
+  mime
+  name
+  size
+  updatedAt
+  url
+  alternativeText
+}
+
+fragment ProjectForSummary on Project {
+  title
+  displayPicture {
+    data {
+      attributes {
+        url
+        alternativeText
+        width
+        height
+      }
+    }
+  }
+  summary
+  github {
+    text
+    href
+  }
+  live {
+    text
+    href
+  }
+  skills {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
+}
+
+query IndexPage {
+  heroSection {
+    data {
+      attributes {
+        h1
+        h2
+        aboutMe
+        callToAction {
+          id
+          text
+          href
+          external
+        }
+        picture {
+          data {
+            attributes {
+              ...FileAllAttributes
+            }
+          }
+        }
+      }
+    }
+  }
+
+  mypocketDisplay {
+    data {
+      attributes {
+        content {
+          __typename
+          ...componentA
+        }
+      }
+    }
+  }
+
+  getInContact {
+    data {
+      attributes {
+        message
+        links {
+          id
+          href
+          text
+          external
+        }
+      }
+    }
+  }
+
+  projects(publicationState: LIVE, pagination: { limit: 2 }) {
+    data {
+      id
+      attributes {
+        ...ProjectForSummary
+      }
+    }
+    meta {
+      pagination {
+        page
+        pageCount
+        pageSize
+        total
+      }
+    }
+  }
+}
