@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: ./Dockerfile
+    networks:
+      - default
+    # command: npm run start -w strapi
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/postgres
+    ports:
+      - '8080:1337'
+    depends_on:
+      - db
+
+  db:
+    image: postgres #:15-alpine #:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge

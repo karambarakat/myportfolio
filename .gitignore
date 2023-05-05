@@ -1,2 +1,8 @@
 node_modules
-_node_modules
+
+
+# execlude all manual.md from all subdirectories
+manual.md
+/**/manual.md
+./**/manual.md
+
