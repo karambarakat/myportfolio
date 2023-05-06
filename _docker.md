@@ -1,8 +1,6 @@
 this is just a blueprint for nodejs monorepos with docker
-docker is not allowing code reusablitiy in dockerfiles and it is it will demage readability
+docker is not allowing code reusablitiy in dockerfiles and it is--it will effect readability
 this file should be used as a reference for the dockerfile in the root of every package
-
-two arguments are required $package and $path
 
 ```dockerfile
 FROM node:16-alpine AS base
@@ -54,10 +52,7 @@ services:
   app:
     build:
       context: ../../
-      dockerfile: ./apps/pkg/Dockerfile
-      args:
-        package: app
-        path: ./apps
+      dockerfile: ./apps/pkg/Dockerfile # relative to context & the content of this file is relative to context and should be alway at the root of the monorepo
     ports:
       - 6969:6969
     command: ['npm', 'run', 'start', '--prefix', 'dist'] # or "-w", "app"
