@@ -1,12 +1,20 @@
 {
   "name": "schema",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "graphql, typescript schema source of truth",
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "graphql-codegen"
   },
   "author": "Karam Barakat",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@graphql-codegen/add": "^4.0.1",
+    "@graphql-codegen/cli": "^3.3.1",
+    "@graphql-codegen/typescript": "^3.0.4",
+    "@graphql-codegen/typescript-operations": "^3.0.4",
+    "graphql-request": "^6.0.0"
+  }
 }

@@ -1,8 +1,6 @@
 node_modules
+out
 
-
-# execlude all manual.md from all subdirectories
 manual.md
-/**/manual.md
-./**/manual.md
-
+dev_source/
+.turbo/

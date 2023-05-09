@@ -1,0 +1,17 @@
+node_modules
+out
+
+# execlude all manual.md from all subdirectories
+manual.md
+/**/manual.md
+./**/manual.md
+
+dev_source
+/**/dev_source
+./**/dev_source
+
+Dockerfile
+.prettierrc
+.gitignore
+.eslintrc.js
+README.md

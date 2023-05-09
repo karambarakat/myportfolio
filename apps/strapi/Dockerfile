@@ -2,7 +2,7 @@
 FROM node:18-alpine AS base
 
 FROM base AS base_gyp
-RUN npm i -g turbo
+RUN npm i -g turbo pnpm
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python; \
   python3 -m ensurepip; \
@@ -17,19 +17,20 @@ RUN apk add --update make; \
 FROM base_gyp AS prune
 WORKDIR /app
 COPY . .
-RUN npx turbo prune --scope strapi --docker
+RUN pnpm exec turbo prune --scope strapi --docker
 
 # the install layer
 FROM base_gyp AS install_build
 WORKDIR /app
 COPY --from=prune /app/out/json/ .
-COPY --from=prune /app/out/package-lock.json ./package-lock.json
-RUN npm install
+COPY --from=prune /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+
+RUN pnpm install
 COPY --from=prune /app/out/full/ .
-RUN npm run build -w strapi
+RUN pnpm run --filter strapi build
 
 
 # the run layer
 ENV PORT=8080
 EXPOSE 8080
-CMD ["npm", "run", "start", "-w", "strapi"]
+CMD ["pnpm", "run", "-filter", "strapi", "start"]

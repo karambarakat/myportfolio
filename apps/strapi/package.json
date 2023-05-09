@@ -1,11 +1,12 @@
 {
   "name": "strapi",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Strapi application",
   "scripts": {
     "dev": "strapi develop",
     "db": "docker compose -f postgress-compose.yaml up -d",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
@@ -24,8 +25,7 @@
     "uuid": "ad7fccc8-cc25-43b9-97ae-ebf147ed8ae5"
   },
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
-    "npm": ">=6.0.0"
+    "node": ">=14.19.1 <=18.x.x"
   },
   "license": "MIT"
 }

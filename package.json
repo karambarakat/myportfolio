@@ -1,6 +1,6 @@
 {
   "name": "my-portfolio",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Mono repo for my portfolio",
   "private": true,
   "workspaces": [
@@ -11,7 +11,8 @@
     "start": "turbo run start",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "lock": "npm install --package-lock-only --workspaces"
   },
   "devDependencies": {
     "turbo": "latest"

@@ -1,0 +1,40 @@
+name: starfish-app
+services:
+  - name: strapi
+    dockerfile_path: apps/strapi/Dockerfile
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: karambarakat/myportfolio
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: professional-xs
+    source_dir: /
+
+
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+databases:
+  - cluster_name: app-a799da80-a556-4b15-969c-495df33ccb23
+    db_name: db
+    db_user: db
+    engine: PG
+    name: app-a799da80-a556-4b15-969c-495d
+    production: true
+    version: "12"
+domains:
+  - domain: cms.kenn.page
+    type: PRIMARY
+envs:
+  - key: NODE_TLS_REJECT_UNAUTHORIZED
+    scope: RUN_AND_BUILD_TIME
+    value: "0"
+ingress:
+  rules:
+    - component:
+        name: strapi
+      match:
+        path:
+          prefix: /
+region: sfo
