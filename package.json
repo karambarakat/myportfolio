@@ -4,8 +4,8 @@
   "description": "Mono repo for my portfolio",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "pkgs/*"
+    "apps/**",
+    "pkgs/**"
   ],
   "scripts": {
     "start": "turbo run start",
@@ -33,5 +33,5 @@
     "url": "https://github.com/karambarakat/myportfolio/issues"
   },
   "homepage": "https://github.com/karambarakat/myportfolio#readme",
-  "packageManager": "npm@9.5.1"
+  "packageManager": "pnpm@7.28.0"
 }

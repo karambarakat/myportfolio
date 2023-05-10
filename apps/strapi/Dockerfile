@@ -15,22 +15,23 @@ RUN apk add --update make; \
 
 # the prune layer
 FROM base_gyp AS prune
-WORKDIR /app
+WORKDIR /monorepo
 COPY . .
 RUN pnpm exec turbo prune --scope strapi --docker
 
 # the install layer
 FROM base_gyp AS install_build
-WORKDIR /app
-COPY --from=prune /app/out/json/ .
-COPY --from=prune /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+WORKDIR /monorepo
+COPY --from=prune /monorepo/out/json .
+COPY --from=prune /monorepo/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=prune /monorepo/pnpm-lock.yaml ./pnpm-lock.yaml
 
 RUN pnpm install
-COPY --from=prune /app/out/full/ .
-RUN pnpm run --filter strapi build
+COPY --from=prune /monorepo/out/full .
+RUN pnpm --filter strapi run build
 
 
 # the run layer
-ENV PORT=8080
 EXPOSE 8080
 CMD ["pnpm", "run", "-filter", "strapi", "start"]
+# CMD ["sleep", "infinity"]

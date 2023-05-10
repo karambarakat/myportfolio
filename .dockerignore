@@ -1,17 +1,24 @@
 node_modules
+*/*/node_modules
 out
 
-# execlude all manual.md from all subdirectories
-manual.md
-/**/manual.md
-./**/manual.md
+# workspace
+*/*/manual.md
+*/*/dev_source
 
-dev_source
-/**/dev_source
-./**/dev_source
+# cache
+*/*/.cache
+*/*/.tmp
+*/*/.temp
+
+# build
+dist
 
 Dockerfile
+*/*/Dockerfile
 .prettierrc
 .gitignore
+.dockerignore
 .eslintrc.js
 README.md
+*/*/README.md
