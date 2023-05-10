@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1
 FROM node:18-alpine AS base
+RUN npm i -g pnpm@7.28.0
 
 FROM base AS base_gyp
-RUN npm i -g turbo pnpm
+RUN npm i -g turbo
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python; \
   python3 -m ensurepip; \
@@ -26,12 +27,18 @@ COPY --from=prune /monorepo/out/json .
 COPY --from=prune /monorepo/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=prune /monorepo/pnpm-lock.yaml ./pnpm-lock.yaml
 
-RUN pnpm install
+ENV CI=true
+RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store\
+ pnpm install --frozen-lockfile
 COPY --from=prune /monorepo/out/full .
 RUN pnpm --filter strapi run build
 
 
 # the run layer
+FROM base AS run
+WORKDIR /monorepo
+COPY --from=install_build /monorepo .
+USER node
 EXPOSE 8080
-CMD ["pnpm", "run", "-filter", "strapi", "start"]
+CMD ["pnpm", "run", "--filter", "strapi", "start"]
 # CMD ["sleep", "infinity"]

@@ -1,6 +1,6 @@
 name: starfish-app
 services:
-  - name: strapi
+  - name: strapi_doctl
     dockerfile_path: apps/strapi/Dockerfile
     github:
       branch: main

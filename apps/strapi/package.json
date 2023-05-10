@@ -16,9 +16,11 @@
     "@strapi/plugin-users-permissions": "4.10.2",
     "@strapi/strapi": "^4.10.2",
     "@strapi/typescript-utils": "^4.10.2",
-    "better-sqlite3": "8.0.1",
     "lodash": "^4.17.21",
     "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "better-sqlite3": "8.0.1"
   },
   "author": {
     "name": "A Strapi developer"
