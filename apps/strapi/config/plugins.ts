@@ -1,24 +1,24 @@
-module.exports = ({ env }) => ({});
-
-/**
-({ env }) => ({
+module.exports = ({ env }) => ({
+  graphql: {
+    endpoint: "/graphql",
+    shadowCRUD: true,
+  },
   upload: {
     config: {
-      provider: 'aws-s3',
+      provider: "aws-s3",
       providerOptions: {
-        accessKeyId: env('AWS_ACCESS_KEY_ID'),
-        secretAccessKey: env('AWS_ACCESS_SECRET'),
-        region: env('AWS_REGION'),
+        accessKeyId: env("DO_SPACE_ACCESS_KEY"),
+        secretAccessKey: env("DO_SPACE_SECRET_KEY"),
+        endpoint: env("DO_SPACE_ENDPOINT"),
         params: {
-          Bucket: env('AWS_BUCKET')
-        }
+          Bucket: env("DO_SPACE_BUCKET"),
+        },
       },
       actionOptions: {
         upload: {},
         uploadStream: {},
-        delete: {}
-      }
-    }
-  }
-})
-*/
+        delete: {},
+      },
+    },
+  },
+});

@@ -1,7 +1,7 @@
 {
-  "name": "schema",
+  "name": "types",
   "version": "1.0.0",
-  "description": "graphql, typescript schema source of truth",
+  "description": "graphql schema, typescript types, openapi spec; the single source of truth",
   "private": true,
   "main": "index.ts",
   "scripts": {

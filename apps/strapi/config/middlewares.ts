@@ -1,5 +1,5 @@
 export default ({ env }) => {
-  const saveUrls = env("SAVE_URLS");
+  const saveUrls = env("SAVE_URLs");
 
   if (!saveUrls || typeof saveUrls !== "string") {
     throw new Error("SAVE_URLS is not defined or is not a string: " + saveUrls);
@@ -15,7 +15,7 @@ export default ({ env }) => {
         contentSecurityPolicy: {
           useDefaults: true,
           directives: {
-            "connect-src": ["'self'", "https:", ...saveUrlsArray],
+            "connect-src": ["'self'", "https:"],
             "img-src": [
               "'self'",
               "data:",
@@ -35,7 +35,6 @@ export default ({ env }) => {
         },
       },
     },
-    "strapi::security",
     "strapi::cors",
     "strapi::poweredBy",
     "strapi::logger",
@@ -44,5 +43,6 @@ export default ({ env }) => {
     "strapi::session",
     "strapi::favicon",
     "strapi::public",
+    "global::custom",
   ];
 };

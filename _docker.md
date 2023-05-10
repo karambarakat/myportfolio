@@ -1,5 +1,5 @@
 this is just a blueprint for nodejs monorepos with docker
-docker is not allowing code reusablitiy in dockerfiles and it is--it will effect readability
+docker is not allowing code reusablitiy in dockerfiles and if it is--it will effect readability
 this file should be used as a reference for the dockerfile in the root of every package
 
 ```dockerfile
@@ -97,7 +97,7 @@ RUN apk add --update make; \
   npm install -g node-gyp
 ```
 
-just for reference I made a container that runs a cloudflare tunnel that sometime can be helpfull
+just for reference I made a container that runs a cloudflare tunnel that sometime can be helpful
 
 ```dockerfile
 WORKDIR /usr/bin
