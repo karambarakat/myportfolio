@@ -38,6 +38,7 @@ RUN pnpm --filter strapi run build
 FROM base AS run
 WORKDIR /monorepo
 COPY --from=install_build /monorepo .
+RUN chown node apps/strapi/database
 USER node
 EXPOSE 8080
 CMD ["pnpm", "run", "--filter", "strapi", "start"]

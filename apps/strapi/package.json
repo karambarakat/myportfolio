@@ -5,7 +5,8 @@
   "description": "A Strapi application",
   "scripts": {
     "dev": "strapi develop",
-    "db": "docker compose -f postgress-compose.yaml up -d",
+    "db": "docker compose -f docker-compose-postgres.yaml up -d",
+    "compose": "docker compose -f docker-compose-strapi.yaml up -d",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "strapi start",
     "build": "strapi build",
