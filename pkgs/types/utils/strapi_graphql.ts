@@ -1,4 +1,7 @@
-import { gql } from 'graphql-request'
+// this is part of `build:strapi` command in `package.json`; see `manual.md` for more info
+
+import { request, gql } from 'graphql-request'
+import { writeFileSync } from 'fs'
 
 const IntrospectionQuery = gql`
   #graphql
@@ -84,3 +87,16 @@ const IntrospectionQuery = gql`
     }
   }
 `
+
+export default async function fetch_strapi_schema_into_json_file() {
+  const schema = await request(
+    'http://0.0.0.0:1337/graphql',
+    IntrospectionQuery
+  )
+
+  const schema_str = JSON.stringify(schema, null, 2)
+
+  writeFileSync('./src/graphql/schemas/strapi.json', schema_str)
+}
+
+fetch_strapi_schema_into_json_file()
