@@ -1,4 +1,8 @@
-import { ComponentSharedButton, Project, UploadFile } from '#gql-schema'
+import {
+  ComponentUiButton,
+  Project,
+  UploadFile
+} from '@ws/types/dist/graphql/schema'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -10,8 +14,8 @@ interface Props {
   data: {
     title: Project['title']
     summary?: Project['summary']
-    live?: { href?: ComponentSharedButton['href'] } | null
-    github?: { href?: ComponentSharedButton['href'] } | null
+    live?: { href?: ComponentUiButton['href'] } | null
+    github?: { href?: ComponentUiButton['href'] } | null
     displayPicture?: {
       data?: {
         attributes?: Partial<

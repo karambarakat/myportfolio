@@ -1,14 +1,14 @@
-fragment componentA on ComponentFrontendComponentsSelectedProjectDetails {
+fragment componentA on ComponentKennPageSelectedProjectDetails {
   id
   heading
   body
-  callOfActions {
+  callOfAction {
     id
     text
     href
     external
   }
-  subComponent
+  type
 }
 
 fragment FileAllAttributes on UploadFile {

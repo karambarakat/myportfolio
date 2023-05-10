@@ -1,0 +1,25 @@
+# todo: not compolete
+version: '3'
+services:
+  strapi:
+    build:
+      context: ../../
+      dockerfile: ./apps/strapi/Dockerfile
+    networks:
+      - defalut
+  task:
+    build:
+      context: ../../
+      dockerfile: ./pkgs/type/utils/fetch-strapi-schema/Dockerfile
+    command: ts-node utils/strapi_graphql.ts && graphql-json-to-sdl ./src/graphql/schemas/strapi.json ./src/graphql/schemas/strapi.graphql
+    volumes:
+      - ./pkgs/type/utils/fetch-strapi-schema:/app/dist
+    networks:
+      - defalut
+    depends_on:
+      - strapi
+
+
+networks:
+  default:
+    driver: bridge

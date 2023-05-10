@@ -4,7 +4,6 @@ services:
     dockerfile_path: apps/strapi/Dockerfile
     github:
       branch: main
-      deploy_on_push: true
       repo: karambarakat/myportfolio
     http_port: 8080
     instance_count: 1

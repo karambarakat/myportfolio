@@ -4,9 +4,9 @@ import Selected from '@/components/sections/2Selected'
 import GetInContact from '@/components/sections/3GetInContact'
 
 // only server side imports
-import query from './query-page.graphql'
+import query from '@ws/types/src/graphql/queries/app/query-page.graphql'
 import fetchQuery from '@/utils/fetchQuery'
-import { IndexPageQuery } from '#gql-queries'
+import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 
 export default async function Page() {
   const res: IndexPageQuery = await fetchQuery({ query })

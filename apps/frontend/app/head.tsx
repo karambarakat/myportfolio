@@ -1,6 +1,6 @@
-import globalQuery from './query-layout.graphql'
+import globalQuery from '@ws/types/src/graphql/queries/app/query-layout.graphql'
 import fetchQuery from '@/utils/fetchQuery'
-import { GlobalQuery } from '#gql-queries'
+import { GlobalQuery } from '@ws/types/dist/graphql/query'
 
 export default async function Heading() {
   const res: GlobalQuery = await fetchQuery({ query: globalQuery })
@@ -19,7 +19,7 @@ export default async function Heading() {
       />
       <meta
         property="og:title"
-        content={attr.defaultSeo?.metaTitle || 'Hi, My Name is Kenn'}
+        content={attr.defaultSeo?.title || 'Hi, My Name is Kenn'}
       />
       <meta
         property="og:description"

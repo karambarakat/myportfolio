@@ -5,9 +5,9 @@ import {
   GenProjectsQuery,
   ProjectPageQuery,
   ProjectPageQueryVariables
-} from '#gql-queries'
-import genProjectsSDL from './query-gen.graphql'
-import projectSDL from './query-page.graphql'
+} from '@ws/types/dist/graphql/query'
+import genProjectsSDL from '@ws/types/src/graphql/queries/app/projects/[pid]/query-gen.graphql'
+import projectSDL from '@ws/types/src/graphql/queries/app/projects/[pid]/query-page.graphql'
 import { notFound } from 'next/navigation'
 import noPreview from '@/public/section1/noPreview.svg'
 import dayjs from 'dayjs'

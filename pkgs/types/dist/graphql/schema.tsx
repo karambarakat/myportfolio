@@ -11,10 +11,18 @@ export type Scalars = {
   Int: number;
   Float: number;
   AboutBlocksDynamicZoneInput: any;
+  /**
+   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+   * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+   * 8601 standard for representation of dates and times using the Gregorian calendar.
+   */
   DateTime: any;
+  /** A string used to identify an i18n locale */
   I18NLocaleCode: any;
+  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
   MypocketDisplayContentDynamicZoneInput: any;
+  /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
 
@@ -34,7 +42,7 @@ export type AboutLocalizationsArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
-export type AboutBlocksDynamicZone = ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSlider | Error;
+export type AboutBlocksDynamicZone = ComponentPlaceholderMultiMedia | ComponentPlaceholderRichText | ComponentUiQuote | ComponentUiSlider | Error;
 
 export type AboutEntity = {
   __typename?: 'AboutEntity';
@@ -82,88 +90,95 @@ export type BooleanFilterInput = {
   startsWith?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type ComponentFrontendComponentsSelectedProjectDetails = {
-  __typename?: 'ComponentFrontendComponentsSelectedProjectDetails';
+export type ComponentKennPageSelectedProjectDetails = {
+  __typename?: 'ComponentKennPageSelectedProjectDetails';
   body: Scalars['String'];
-  callOfActions?: Maybe<Array<Maybe<ComponentSharedButton>>>;
+  callOfAction?: Maybe<Array<Maybe<ComponentUiButton>>>;
   heading: Scalars['String'];
   id: Scalars['ID'];
-  subComponent: Enum_Componentfrontendcomponentsselectedprojectdetails_Subcomponent;
+  type: Enum_Componentkennpageselectedprojectdetails_Type;
 };
 
 
-export type ComponentFrontendComponentsSelectedProjectDetailsCallOfActionsArgs = {
-  filters?: InputMaybe<ComponentSharedButtonFiltersInput>;
+export type ComponentKennPageSelectedProjectDetailsCallOfActionArgs = {
+  filters?: InputMaybe<ComponentUiButtonFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ComponentSharedButton = {
-  __typename?: 'ComponentSharedButton';
+export type ComponentPlaceholderMultiMedia = {
+  __typename?: 'ComponentPlaceholderMultiMedia';
+  id: Scalars['ID'];
+  media?: Maybe<UploadFileRelationResponseCollection>;
+};
+
+
+export type ComponentPlaceholderMultiMediaMediaArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type ComponentPlaceholderRichText = {
+  __typename?: 'ComponentPlaceholderRichText';
+  id: Scalars['ID'];
+  richText?: Maybe<Scalars['String']>;
+};
+
+export type ComponentSharedSeo = {
+  __typename?: 'ComponentSharedSeo';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  image?: Maybe<UploadFileEntityResponse>;
+  title: Scalars['String'];
+};
+
+export type ComponentSharedSeoInput = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  image?: InputMaybe<Scalars['ID']>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type ComponentUiButton = {
+  __typename?: 'ComponentUiButton';
   external: Scalars['Boolean'];
   href?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   text?: Maybe<Scalars['String']>;
 };
 
-export type ComponentSharedButtonFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<ComponentSharedButtonFiltersInput>>>;
+export type ComponentUiButtonFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentUiButtonFiltersInput>>>;
   external?: InputMaybe<BooleanFilterInput>;
   href?: InputMaybe<StringFilterInput>;
-  not?: InputMaybe<ComponentSharedButtonFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<ComponentSharedButtonFiltersInput>>>;
+  not?: InputMaybe<ComponentUiButtonFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentUiButtonFiltersInput>>>;
   text?: InputMaybe<StringFilterInput>;
 };
 
-export type ComponentSharedButtonInput = {
+export type ComponentUiButtonInput = {
   external?: InputMaybe<Scalars['Boolean']>;
   href?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   text?: InputMaybe<Scalars['String']>;
 };
 
-export type ComponentSharedMedia = {
-  __typename?: 'ComponentSharedMedia';
-  file?: Maybe<UploadFileEntityResponse>;
-  id: Scalars['ID'];
-};
-
-export type ComponentSharedQuote = {
-  __typename?: 'ComponentSharedQuote';
+export type ComponentUiQuote = {
+  __typename?: 'ComponentUiQuote';
   body?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   title?: Maybe<Scalars['String']>;
 };
 
-export type ComponentSharedRichText = {
-  __typename?: 'ComponentSharedRichText';
-  body?: Maybe<Scalars['String']>;
+export type ComponentUiSlider = {
+  __typename?: 'ComponentUiSlider';
   id: Scalars['ID'];
-};
-
-export type ComponentSharedSeo = {
-  __typename?: 'ComponentSharedSeo';
-  id: Scalars['ID'];
-  metaDescription: Scalars['String'];
-  metaTitle: Scalars['String'];
-  shareImage?: Maybe<UploadFileEntityResponse>;
-};
-
-export type ComponentSharedSeoInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  metaDescription?: InputMaybe<Scalars['String']>;
-  metaTitle?: InputMaybe<Scalars['String']>;
-  shareImage?: InputMaybe<Scalars['ID']>;
-};
-
-export type ComponentSharedSlider = {
-  __typename?: 'ComponentSharedSlider';
-  files?: Maybe<UploadFileRelationResponseCollection>;
-  id: Scalars['ID'];
+  images?: Maybe<UploadFileRelationResponseCollection>;
 };
 
 
-export type ComponentSharedSliderFilesArgs = {
+export type ComponentUiSliderImagesArgs = {
   filters?: InputMaybe<UploadFileFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -193,7 +208,7 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']>;
 };
 
-export enum Enum_Componentfrontendcomponentsselectedprojectdetails_Subcomponent {
+export enum Enum_Componentkennpageselectedprojectdetails_Type {
   GoodCodeQuality = 'Good_Code_Quality',
   MernStack = 'MERN_Stack',
   ModernUi = 'Modern_UI',
@@ -247,14 +262,14 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = About | ComponentFrontendComponentsSelectedProjectDetails | ComponentSharedButton | ComponentSharedMedia | ComponentSharedQuote | ComponentSharedRichText | ComponentSharedSeo | ComponentSharedSlider | GetInContact | Global | HeroSection | I18NLocale | MypocketDisplay | Project | Skill | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = About | ComponentKennPageSelectedProjectDetails | ComponentPlaceholderMultiMedia | ComponentPlaceholderRichText | ComponentSharedSeo | ComponentUiButton | ComponentUiQuote | ComponentUiSlider | GetInContact | Global | HeroSection | I18NLocale | MypocketDisplay | Project | Skill | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type GetInContact = {
   __typename?: 'GetInContact';
   createdAt?: Maybe<Scalars['DateTime']>;
   frontendDisplay: Enum_Getincontact_Frontenddisplay;
   frontendDisplayPicture?: Maybe<UploadFileEntityResponse>;
-  links?: Maybe<Array<Maybe<ComponentSharedButton>>>;
+  links?: Maybe<Array<Maybe<ComponentUiButton>>>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<GetInContactRelationResponseCollection>;
   message: Scalars['String'];
@@ -264,7 +279,7 @@ export type GetInContact = {
 
 
 export type GetInContactLinksArgs = {
-  filters?: InputMaybe<ComponentSharedButtonFiltersInput>;
+  filters?: InputMaybe<ComponentUiButtonFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -288,7 +303,7 @@ export type GetInContactEntityResponse = {
 export type GetInContactInput = {
   frontendDisplay?: InputMaybe<Enum_Getincontact_Frontenddisplay>;
   frontendDisplayPicture?: InputMaybe<Scalars['ID']>;
-  links?: InputMaybe<Array<InputMaybe<ComponentSharedButtonInput>>>;
+  links?: InputMaybe<Array<InputMaybe<ComponentUiButtonInput>>>;
   message?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -336,7 +351,7 @@ export type GlobalRelationResponseCollection = {
 export type HeroSection = {
   __typename?: 'HeroSection';
   aboutMe: Scalars['String'];
-  callToAction?: Maybe<Array<Maybe<ComponentSharedButton>>>;
+  callToAction?: Maybe<Array<Maybe<ComponentUiButton>>>;
   createdAt?: Maybe<Scalars['DateTime']>;
   h1: Scalars['String'];
   h2: Scalars['String'];
@@ -348,7 +363,7 @@ export type HeroSection = {
 
 
 export type HeroSectionCallToActionArgs = {
-  filters?: InputMaybe<ComponentSharedButtonFiltersInput>;
+  filters?: InputMaybe<ComponentUiButtonFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -366,7 +381,7 @@ export type HeroSectionEntityResponse = {
 
 export type HeroSectionInput = {
   aboutMe?: InputMaybe<Scalars['String']>;
-  callToAction?: InputMaybe<Array<InputMaybe<ComponentSharedButtonInput>>>;
+  callToAction?: InputMaybe<Array<InputMaybe<ComponentUiButtonInput>>>;
   h1?: InputMaybe<Scalars['String']>;
   h2?: InputMaybe<Scalars['String']>;
   picture?: InputMaybe<Scalars['ID']>;
@@ -487,6 +502,7 @@ export type JsonFilterInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createAboutLocalization?: Maybe<AboutEntityResponse>;
   createGetInContactLocalization?: Maybe<GetInContactEntityResponse>;
@@ -498,7 +514,9 @@ export type Mutation = {
   createSkill?: Maybe<SkillEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
+  /** Create a new role */
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
+  /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteAbout?: Maybe<AboutEntityResponse>;
   deleteGetInContact?: Maybe<GetInContactEntityResponse>;
@@ -509,14 +527,20 @@ export type Mutation = {
   deleteSkill?: Maybe<SkillEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
+  /** Delete an existing role */
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
+  /** Delete an existing user */
   deleteUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  /** Confirm an email users email address */
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
+  /** Request a reset password token */
   forgotPassword?: Maybe<UsersPermissionsPasswordPayload>;
   login: UsersPermissionsLoginPayload;
   multipleUpload: Array<Maybe<UploadFileEntityResponse>>;
+  /** Register a user */
   register: UsersPermissionsLoginPayload;
   removeFile?: Maybe<UploadFileEntityResponse>;
+  /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateAbout?: Maybe<AboutEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
@@ -528,7 +552,9 @@ export type Mutation = {
   updateSkill?: Maybe<SkillEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
+  /** Update an existing role */
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
+  /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   upload: UploadFileEntityResponse;
 };
@@ -806,7 +832,7 @@ export type MypocketDisplayLocalizationsArgs = {
   publicationState?: InputMaybe<PublicationState>;
 };
 
-export type MypocketDisplayContentDynamicZone = ComponentFrontendComponentsSelectedProjectDetails | Error;
+export type MypocketDisplayContentDynamicZone = ComponentKennPageSelectedProjectDetails | Error;
 
 export type MypocketDisplayEntity = {
   __typename?: 'MypocketDisplayEntity';
@@ -849,8 +875,8 @@ export type Project = {
   content: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   displayPicture?: Maybe<UploadFileEntityResponse>;
-  github?: Maybe<ComponentSharedButton>;
-  live?: Maybe<ComponentSharedButton>;
+  github?: Maybe<ComponentUiButton>;
+  live?: Maybe<ComponentUiButton>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<ProjectRelationResponseCollection>;
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -896,9 +922,9 @@ export type ProjectFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<ProjectFiltersInput>>>;
   content?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
-  github?: InputMaybe<ComponentSharedButtonFiltersInput>;
+  github?: InputMaybe<ComponentUiButtonFiltersInput>;
   id?: InputMaybe<IdFilterInput>;
-  live?: InputMaybe<ComponentSharedButtonFiltersInput>;
+  live?: InputMaybe<ComponentUiButtonFiltersInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<ProjectFiltersInput>;
   not?: InputMaybe<ProjectFiltersInput>;
@@ -913,8 +939,8 @@ export type ProjectFiltersInput = {
 export type ProjectInput = {
   content?: InputMaybe<Scalars['String']>;
   displayPicture?: InputMaybe<Scalars['ID']>;
-  github?: InputMaybe<ComponentSharedButtonInput>;
-  live?: InputMaybe<ComponentSharedButtonInput>;
+  github?: InputMaybe<ComponentUiButtonInput>;
+  live?: InputMaybe<ComponentUiButtonInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   skills?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   summary?: InputMaybe<Scalars['String']>;

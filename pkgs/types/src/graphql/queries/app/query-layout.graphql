@@ -22,9 +22,9 @@ query Global {
         siteAbout
         defaultSeo {
           id
-          metaDescription
-          metaTitle
-          shareImage {
+          description
+          title
+          image {
             data {
               attributes {
                 ...FileAllAttributes

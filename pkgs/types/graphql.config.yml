@@ -1,18 +1,18 @@
 schema:
-  - ./graphql/schema.graphql
-  - ./app/fragments.graphql
+  - ./src/graphql/schemas/strapi.graphql
+  - ./src/graphql/fragments/app.graphql
 documents:
-  - ./app/**/*.graphql
+  - ./src/graphql/queries/**/*.graphql
 extensions:
   codegen:
     generates:
-      ./graphql/query.tsx:
+      ./dist/graphql/query.tsx:
         plugins:
           - add:
               content: '// @ts-nocheck'
           - add:
               content: 'import { ComponentFrontendComponentsSelectedProjectDetails, Exact } from "./schema"'
           - typescript-operations
-      ./graphql/schema.tsx:
+      ./dist/graphql/schema.tsx:
         plugins:
           - typescript

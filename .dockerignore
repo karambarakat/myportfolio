@@ -10,6 +10,7 @@ out
 */*/.cache
 */*/.tmp
 */*/.temp
+*/*/.next
 
 # build
 dist

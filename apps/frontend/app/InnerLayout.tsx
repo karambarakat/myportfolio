@@ -9,7 +9,7 @@ import Button from '@/components/Button'
 import HoverEffect from '@/components/HoverEffect'
 import Container from '@/components/Container'
 import Typo from '@/components/Typo'
-import { GlobalQuery } from '#gql-queries'
+import { GlobalQuery } from '@ws/types/dist/graphql/query'
 import toCustomMd from '@/utils/toCustomeMd'
 
 interface Props {

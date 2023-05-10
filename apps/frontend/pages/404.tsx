@@ -1,8 +1,8 @@
-import { GlobalQuery } from '#gql-queries'
+import { GlobalQuery } from '@ws/types/dist/graphql/query'
 import InnerLayout from '@/app/InnerLayout'
 import QuickMessage from '@/components/QuickMessage'
 import fetchQuery from '@/utils/fetchQuery'
-import globalQuery from '@/app/query-layout.graphql'
+import globalQuery from '@ws/types/src/graphql/queries/app/query-layout.graphql'
 import Link from 'next/link'
 
 interface Props {

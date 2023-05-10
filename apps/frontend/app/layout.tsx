@@ -1,7 +1,7 @@
 import InnerLayout from './InnerLayout'
-import globalQuery from './query-layout.graphql'
+import globalQuery from '@ws/types/src/graphql/queries/app/query-layout.graphql'
 import fetchQuery from '@/utils/fetchQuery'
-import { GlobalQuery } from '#gql-queries'
+import { GlobalQuery } from '@ws/types/dist/graphql/query'
 import toCustomMd from '@/utils/toCustomeMd'
 
 interface Props {

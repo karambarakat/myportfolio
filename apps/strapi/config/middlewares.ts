@@ -1,11 +1,7 @@
 export default ({ env }) => {
   const saveUrls = env("SAVE_URLs");
 
-  if (!saveUrls || typeof saveUrls !== "string") {
-    throw new Error("SAVE_URLS is not defined or is not a string: " + saveUrls);
-  }
-
-  const saveUrlsArray = saveUrls.split(",");
+  const saveUrlsArray = typeof saveUrls !== "string" ? [] : saveUrls.split(",");
 
   return [
     "strapi::errors",

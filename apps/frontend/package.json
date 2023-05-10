@@ -41,7 +41,8 @@
     "node-fetch": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "@ws/types": "workspace:types@*"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^3.2.3",

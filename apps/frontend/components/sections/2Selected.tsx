@@ -1,4 +1,4 @@
-import { IndexPageQuery } from '#gql-queries'
+import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 import Image from 'next/image'
 import React from 'react'
 import Button from '../Button'
@@ -8,10 +8,8 @@ import react from '@/public/section1/react.png'
 import mongo from '@/public/section1/mongo.png'
 import node from '@/public/section1/node.png'
 import express from '@/public/section1/express.png'
-import noPreview from '@/public/section1/noPreview.svg'
-import Link from 'next/link'
 import _c from 'classnames'
-import { Enum_Componentfrontendcomponentsselectedprojectdetails_Subcomponent } from '#gql-schema'
+import { Enum_Componentkennpageselectedprojectdetails_Type } from '@ws/types/dist/graphql/schema'
 
 type Data = NonNullable<
   NonNullable<
@@ -60,9 +58,9 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
                 <div className="sm:!grid-in-[left]">
                   <Typo.Lg>{each.heading}</Typo.Lg>
                   <Typo>{each.body}</Typo>
-                  {each.callOfActions && (
+                  {each.callOfAction && (
                     <div className="flex sm-mx:justify-center gap-2">
-                      {each.callOfActions.map(coa => {
+                      {each.callOfAction.map(coa => {
                         if (!coa) return
                         return (
                           <Button
@@ -78,7 +76,7 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
                   )}
                 </div>
                 <div className="sm:!grid-in-[right] pointer-events-none selection:bg-transparent select-none max-w-[340px]">
-                  <SubComponentOne type={each.subComponent}></SubComponentOne>
+                  <SubComponentOne type={each.type}></SubComponentOne>
                 </div>
               </div>
             )
@@ -106,7 +104,7 @@ function Selected({ data, projects }: { data: Data; projects: Projects }) {
 function SubComponentOne({
   type
 }: {
-  type: Enum_Componentfrontendcomponentsselectedprojectdetails_Subcomponent
+  type: Enum_Componentkennpageselectedprojectdetails_Type
 }) {
   return (
     <div className="!!border !!border-red-600">
