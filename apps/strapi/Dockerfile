@@ -28,7 +28,7 @@ COPY --from=prune /monorepo/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=prune /monorepo/pnpm-lock.yaml ./pnpm-lock.yaml
 
 ENV CI=true
-RUN --mount=type=cache,id=pnpm-store,target=/root/.pnpm-store\
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store/v3\
   pnpm install --frozen-lockfile
 COPY --from=prune /monorepo/out/full .
 RUN pnpm --filter strapi run build
@@ -38,8 +38,10 @@ RUN pnpm --filter strapi run build
 FROM base AS run
 WORKDIR /monorepo
 COPY --from=install_build /monorepo .
-RUN chown node apps/strapi/database
-RUN chown node apps/strapi/migrations
+RUN mkdir -p apps/strapi/database \
+  chown node apps/strapi/database \
+  mkdir -p apps/strapi/database \
+  chown node apps/strapi/migrations
 USER node
 EXPOSE 8080
 CMD ["pnpm", "run", "--filter", "strapi", "start"]
