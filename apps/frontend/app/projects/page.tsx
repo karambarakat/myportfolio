@@ -1,10 +1,10 @@
 import React from 'react'
-import Typo from '@/components/Typo'
+import Typo from '@ws/ui/components/Typo'
 import { ProjectsPageQuery } from '@ws/types/dist/graphql/query'
 import ProjectPage from '@ws/types/src/graphql/queries/app/projects/query-page.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import Link from 'next/link'
-import Button from '@/components/Button'
+import Button from '@ws/ui/components/Button'
 import ProjectSummary from '@/components/content/ProjectSummary'
 import _c from 'classnames'
 

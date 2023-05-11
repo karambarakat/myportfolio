@@ -24,7 +24,7 @@ export default function Button({
         s.base,
         {
           big: typo.lg,
-          normal: ''
+          normal: '',
         }[size],
         className
       )}

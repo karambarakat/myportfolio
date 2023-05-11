@@ -1,4 +1,4 @@
-import Separator from '@/components/Separator'
+// import Separator from './Separator'
 
 export default function QuickMessage({
   code = 'Ops!',
@@ -13,7 +13,7 @@ export default function QuickMessage({
     <div className="flex-1 text-lg grid place-content-center place-items-center">
       <div className="flex gap-4 justify-center items-center">
         <div>{code}</div>
-        <Separator size={{ height: '48px' }} />
+        {/* <Separator size={{ height: '48px' }} /> */}
         <div>{message}</div>
       </div>
       {action}

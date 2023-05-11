@@ -19,9 +19,9 @@ import live from '@/public/live.svg'
 import ProjectsDisplay from '@/components/content/ProjectsDisplay'
 import ProjectSummary from '@/components/content/ProjectSummary'
 
-import Typo from '@/components/Typo'
+import Typo from '@ws/ui/components/Typo'
 import Image from 'next/image'
-import Button from '@/components/Button'
+import Button from '@ws/ui/components/Button'
 import Markdown from '@/components/Markdonw'
 
 export async function generateStaticParams() {

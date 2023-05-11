@@ -1,0 +1,45 @@
+{
+  "name": "ui",
+  "version": "0.1.0",
+  "description": "ui components / storybook display of the repo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@types/react-dom": "18.0.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "7.0.10",
+    "@storybook/addon-interactions": "7.0.10",
+    "@storybook/addon-links": "7.0.10",
+    "@storybook/blocks": "7.0.10",
+    "@storybook/nextjs": "7.0.10",
+    "@storybook/react": "7.0.10",
+    "@storybook/testing-library": "0.0.14-next.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.9",
+    "@types/react": "18.0.26",
+    "eslint": "8.30.0",
+    "eslint-plugin-storybook": "^0.6.12",
+    "postcss": "^8.4.20",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "storybook": "7.0.10",
+    "tailwindcss": "^3.2.4",
+    "typescript": "4.9.4",
+    "webpack": "^5.82.1"
+  },
+  "keywords": [
+    "stroybook",
+    "ui",
+    "react"
+  ],
+  "author": "Karam Barakat",
+  "license": "MIT"
+}

@@ -2,7 +2,7 @@
  * if used inside server component "a feature of nextjs 13" the `markdown-it` module will not be shipped to the frontend
  */
 import MarkdownIt from 'markdown-it'
-import s from '@/components/Button.module.scss'
+import s from '@ws/ui/components/Button.module.scss'
 
 const mdi = new MarkdownIt().use(md => {
   md.renderer.rules.link_open = function (tokens, idx, options, env, slf) {

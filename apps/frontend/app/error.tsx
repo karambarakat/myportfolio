@@ -1,23 +1,22 @@
-'use client'
-
-import Separator from '@/components/Separator'
-
-import QuickMessage from '@/components/QuickMessage'
+'use client' // error component must be client component
+// import QuickMessage from '@ws/ui/components/QuickMessage'
+import Test from '@ws/ui/components/Test'
 
 interface Props {
   error: Error
   reset: () => void
 }
 
-export default function Error({ error, reset }: Props) {
+export default function Error() {
   return (
-    <QuickMessage
-      code="500"
-      action={
-        <button className="mt-6" onClick={() => reset()}>
-          reload
-        </button>
-      }
-    />
+    <Test />
+    // <QuickMessage
+    //   code="500"
+    //   action={
+    //     <button className="mt-6" onClick={() => reset()}>
+    //       reload
+    //     </button>
+    //   }
+    // />
   )
 }

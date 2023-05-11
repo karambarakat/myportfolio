@@ -1,6 +1,5 @@
-import QuickMessage from '@/components/QuickMessage'
+import QuickMessage from '@ws/ui/components/QuickMessage'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 // not working, only works for [slug] paths when `notFound` function being called
 // go to pages/404.tsx
 export default function NotFound() {

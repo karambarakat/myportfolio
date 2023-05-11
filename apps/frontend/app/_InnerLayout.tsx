@@ -3,12 +3,11 @@ import './tailwind.css'
 // pattern.width = 1200px
 // pattern.hight = 800px
 import pattern from '@/public/img/shades.png'
-import React, { lazy, ReactNode, Suspense } from 'react'
-import Separator from '@/components/Separator'
-import Button from '@/components/Button'
-import HoverEffect from '@/components/HoverEffect'
-import Container from '@/components/Container'
-import Typo from '@/components/Typo'
+import React, { ReactNode, Suspense } from 'react'
+import Separator from '@ws/ui/components/Separator'
+import HoverEffect from '../components/Hover1'
+import Container from '@ws/ui/components/Container'
+import Typo from '@ws/ui/components/Typo'
 import { GlobalQuery } from '@ws/types/dist/graphql/query'
 import toCustomMd from '@/utils/toCustomeMd'
 

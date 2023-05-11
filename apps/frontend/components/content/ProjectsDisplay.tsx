@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReactNode } from 'react'
 import Link from 'next/link'
-import Button from '../Button'
+import Button from '@ws/ui/components/Button'
 import _c from 'classnames'
 
 function ProjectsDisplay({ children }: { children: ReactNode }) {

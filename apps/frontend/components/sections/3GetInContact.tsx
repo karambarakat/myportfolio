@@ -1,14 +1,14 @@
 import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 import Image from 'next/image'
 import React from 'react'
-import Separator from '../Separator'
+import Separator from '@ws/ui/components/Separator'
 import github from '@/public/section2/github.svg'
 import freelancer from '@/public/section2/freelancer.svg'
 import linkedin from '@/public/section2/linkedin.svg'
 
 import phone from '@/public/section2/phone.svg'
 import mail from '@/public/section2/mail.svg'
-import Typo from '../Typo'
+import Typo from '@ws/ui/components/Typo'
 
 type Data = NonNullable<
   NonNullable<NonNullable<IndexPageQuery['getInContact']>['data']>['attributes']

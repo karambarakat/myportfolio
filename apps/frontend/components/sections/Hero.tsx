@@ -1,9 +1,9 @@
 import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 import Image from 'next/image'
 import React from 'react'
-import Button from '../Button'
+import Button from '@ws/ui/components/Button'
 import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
-import Typo from '../Typo'
+import Typo from '@ws/ui/components/Typo'
 import Markdown from '../Markdonw'
 
 type Data = NonNullable<

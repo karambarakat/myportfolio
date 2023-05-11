@@ -1,4 +1,4 @@
-import Separator from '@/components/Separator'
+import Separator from '@ws/ui/components/Separator'
 import Hero from '@/components/sections/Hero'
 import Selected from '@/components/sections/2Selected'
 import GetInContact from '@/components/sections/3GetInContact'
@@ -10,7 +10,7 @@ import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 
 export default async function Page() {
   const res: IndexPageQuery = await fetchQuery({ query })
-
+  throw new Error('')
   if (
     !res?.heroSection?.data?.attributes ||
     !res?.mypocketDisplay?.data?.attributes ||

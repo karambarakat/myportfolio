@@ -1,8 +1,8 @@
 import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 import Image from 'next/image'
 import React from 'react'
-import Button from '../Button'
-import Typo from '../Typo'
+import Button from '@ws/ui/components/Button'
+import Typo from '@ws/ui/components/Typo'
 
 import react from '@/public/section1/react.png'
 import mongo from '@/public/section1/mongo.png'

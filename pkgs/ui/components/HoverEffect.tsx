@@ -1,10 +1,16 @@
 'use client'
-import selector from '@/public/img/selector.png'
-import pattern from '@/public/img/shades.png'
 import s from './HoverEffect.module.scss'
 import { useEffect, useRef, useState } from 'react'
 
-export default function Compt({ inverted = false }: { inverted?: boolean }) {
+export default function Compt({
+  inverted = false,
+  bg,
+  selector,
+}: {
+  inverted?: boolean
+  bg: string
+  selector: string
+}) {
   // const { x, y, ref } = useMouse()
   const [{ x, y }, setCoor] = useState({ x: 0, y: 0 })
   const ref = useRef<HTMLImageElement | undefined>()
@@ -32,12 +38,12 @@ export default function Compt({ inverted = false }: { inverted?: boolean }) {
       ref={ref}
       style={{
         // @ts-ignore
-        ['--src']: `url(${selector.src})`,
+        ['--src']: `url(${selector})`,
         ['--x']: `${x - 517}px`,
-        ['--y']: `${y - 517}px`
+        ['--y']: `${y - 517}px`,
       }}
       className={`${inverted ? 'mix-blend-overlay' : ''} ${s.base}`}
-      src={pattern.src}
+      src={bg}
     />
   )
 }

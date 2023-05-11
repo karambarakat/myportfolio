@@ -6,8 +6,8 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import Button from '../Button'
-import Typo from '../Typo'
+import Button from '@ws/ui/components/Button'
+import Typo from '@ws/ui/components/Typo'
 import noPreview from '@/public/section1/noPreview.svg'
 
 interface Props {

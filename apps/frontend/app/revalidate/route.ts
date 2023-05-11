@@ -26,10 +26,33 @@ const paths: Paths = [
   {
     path: '/projects/[pid]',
     model: ['project'],
-    exact: entry => '/project/' + (entry as any as { id: string }).id
+    exact: (entry: { id: string }) => '/project/' + entry.id
   },
   { path: '/about', model: ['about'] }
-]
+] satisfies (Record<any, unknown> & { model: availableModels[] })[]
+
+function _<P>(fn: (args: P) => string) {
+  return ((args: P) => {
+    if (typeof args !== 'object' || args === null)
+      throw new Error('args must be an object')
+
+    return fn(args)
+  }) as (args: unknown) => string
+}
+
+// suggested syntax
+// type models = 'project' | 'about' | 'global'
+// const path_models = new PathModelMap([
+//   { path: '/', models: ['project', 'global'] },
+//   { path: '/projects', models: ['project'] },
+//   {
+//     path: '/projects/[pid]',
+//     models: ['project'],
+//     exact: (entry : { id: number }) => '/project/' + entry.id
+//   },
+//   { path: '/about', models: ['about'] }
+// ] satisfies Record<'models', models[]>[])
+// path_models.getPaths({ models: 'project', entry: { id: '123' }}) // ['/projects', '/projects/123', '/']
 
 export default async function handler(
   req: NextApiRequest,
