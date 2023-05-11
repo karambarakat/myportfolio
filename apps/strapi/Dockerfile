@@ -38,9 +38,9 @@ RUN pnpm --filter strapi run build
 FROM base AS run
 WORKDIR /monorepo
 COPY --from=install_build /monorepo .
-RUN mkdir -p apps/strapi/database \
-  chown node apps/strapi/database \
-  mkdir -p apps/strapi/database \
+RUN mkdir -p apps/strapi/database/migrations \
+  chown node apps/strapi/database/migrations \
+  mkdir -p apps/strapi/migrations \
   chown node apps/strapi/migrations
 USER node
 EXPOSE 8080

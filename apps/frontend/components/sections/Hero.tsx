@@ -15,6 +15,7 @@ type Data = NonNullable<
 >
 
 function Hero({ data }: { data: Data }) {
+  console.log('depug', 'hero section', data.picture.data?.attributes?.url)
   return (
     <main className="pt-[200px] sm-height:pt-[25px]">
       <Typo.H1 className="text-center">{data.h1}</Typo.H1>
