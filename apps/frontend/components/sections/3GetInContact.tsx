@@ -1,4 +1,4 @@
-import { IndexPageQuery } from '#gql-queries'
+import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 import Image from 'next/image'
 import React from 'react'
 import Separator from '../Separator'
