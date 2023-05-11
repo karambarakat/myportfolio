@@ -23,3 +23,5 @@ Dockerfile
 .eslintrc.js
 README.md
 */*/README.md
+
+do_app_spec_prod.yaml

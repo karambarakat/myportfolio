@@ -1,19 +1,12 @@
 // GET https://<your-site.com>/api/revalidate
 // authorization = "token; no bearer"
 // body: { pathToValidate: string }
-import type { NextApiRequest, NextApiResponse as Res } from 'next'
-
-// this is just the API ID
-// you can get a list by running `npm run strapi -- content-types:list | grep api::`
-export type availableModels =
-  | 'project'
-  | 'skill'
-  | 'user'
-  | 'about'
-  | 'get-in-contact'
-  | 'global'
-  | 'hero-section'
-  | 'mypocket-display'
+import {
+  StrapiEventBodyEntry as _StrapiEventBodyEntry,
+  StrapiEventBodyMedia,
+  StrapiEventBodyTest
+} from '@/utils/strapi_missing_types'
+import type { NextApiRequest as _NextApiRequest, NextApiResponse } from 'next'
 
 const paths: Paths = [
   {
@@ -38,29 +31,15 @@ const paths: Paths = [
   { path: '/about', model: ['about'] }
 ]
 
-type StrapiEventBodyTest = { event: 'trigger-test'; createdAt: string }
-type StrapiEventBodyMedia = {
-  event: string // starts with media.
-  createdAt: string
-  media: unknown
-}
-type StrapiEventBodyEntry = {
-  event: string // starts with entry.
-  createdAt: string
-  model: availableModels
-  entry: unknown
-}
-type Paths = {
-  path: string
-  model: availableModels[]
-  exact?: (entry: StrapiEventBodyEntry['entry']) => string
-}[]
-interface Req extends NextApiRequest {
-  body: StrapiEventBodyTest | StrapiEventBodyMedia | StrapiEventBodyEntry
-}
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const auth = req.headers.authorization
+  if (!auth || !String(auth).startsWith('Bearer '))
+    throw new Error('header authorization must strat with Bearer')
+  const token = auth?.split(' ')[1]
 
-export default async function handler(req: Req, res: Res) {
-  const token = req.headers.authorization?.split(' ')[1]
   if (token !== process.env.REVALIDATION_TOKEN)
     return res.status(401).json({ message: 'Invalid token' })
 
@@ -83,3 +62,34 @@ export default async function handler(req: Req, res: Res) {
 
   if (req.body.event.startsWith('media.')) return res.send('media')
 }
+
+//
+//
+//
+//
+// helpers
+interface NextApiRequest extends _NextApiRequest {
+  body: StrapiEventBodyTest | StrapiEventBodyMedia | StrapiEventBodyEntry
+}
+
+// this is just the API ID
+// you can get a list by running `npm run strapi -- content-types:list | grep api::`
+export type availableModels =
+  | 'project'
+  | 'skill'
+  | 'user'
+  | 'about'
+  | 'get-in-contact'
+  | 'global'
+  | 'hero-section'
+  | 'mypocket-display'
+
+type StrapiEventBodyEntry = Omit<_StrapiEventBodyEntry, 'model'> & {
+  model: availableModels
+}
+
+type Paths = {
+  path: string
+  model: availableModels[]
+  exact?: (entry: StrapiEventBodyEntry['entry']) => string
+}[]

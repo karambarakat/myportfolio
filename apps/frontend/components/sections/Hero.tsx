@@ -24,7 +24,10 @@ function Hero({ data }: { data: Data }) {
         <Image
           className="sm-mx:hidden rounded-md shadow-2xl"
           alt="photo of me"
-          src={data.picture?.data?.attributes?.url || personalImage}
+          src={
+            (process.env.API as string) + data.picture?.data?.attributes?.url ||
+            personalImage
+          }
           width={data.picture?.data?.attributes?.width || personalImage.width}
           height={
             data.picture?.data?.attributes?.height || personalImage.height

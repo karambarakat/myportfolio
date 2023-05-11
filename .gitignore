@@ -4,3 +4,6 @@ out
 manual.md
 dev_source/
 .turbo/
+
+
+do_app_spec_prod.yaml
