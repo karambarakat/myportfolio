@@ -1,0 +1,25 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer utilities {
+  .place-center {
+    @apply grid place-content-center place-items-center;
+  }
+  .grid-area {
+    grid-area: name;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-[100%];
+    @apply sm:max-w-[640px];
+    @apply md:max-w-[768px];
+    @apply lg:max-w-[1024px];
+    @apply xl:max-w-[1280px];
+    /* @apply tablet:max-w-[1280px]; */
+  }
+}

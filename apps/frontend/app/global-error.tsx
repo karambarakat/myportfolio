@@ -1,5 +1,7 @@
 'use client'
 
+import QuickMessage from '@ws/ui/components/QuickMessage'
+
 export default function GlobalError({
   error,
   reset
@@ -10,8 +12,14 @@ export default function GlobalError({
   return (
     <html>
       <body>
-        <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <QuickMessage
+          code="500"
+          action={
+            <button className="mt-6" onClick={() => reset()}>
+              reload
+            </button>
+          }
+        />
       </body>
     </html>
   )

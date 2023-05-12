@@ -1,4 +1,3 @@
-// const plugin = require('tailwindcss/plugin')
 const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
@@ -6,7 +5,7 @@ module.exports = {
   content: [
     './app/**/*.{js,jsx,ts,tsx}',
     './components/**/*.{js,jsx,ts,tsx}',
-    './pages/**/*.{js,jsx,ts,tsx}'
+    './pages/**/*.{js,jsx,ts,tsx}',
     // './components/**/*.{js,jsx,ts,tsx}',
   ],
   mode: 'jit',
@@ -47,30 +46,30 @@ module.exports = {
       // "xx-on": { min: "" , max: "630px"},
 
       'sm-height': { raw: '(max-height: 700px)' },
-      print: { raw: 'print' }
+      print: { raw: 'print' },
     },
     colors: {
-      ...colors
+      ...colors,
     },
     extend: {
       fontSize: {
-        55: '55rem'
+        55: '55rem',
       },
       opacity: {
-        80: '.8'
+        80: '.8',
       },
       zIndex: {
         1: 1,
         2: 2,
-        3: 3
+        3: 3,
       },
       minWidth: {
-        48: '12rem'
+        48: '12rem',
       },
       backgroundSize: {
-        full: '100%'
-      }
-    }
+        full: '100%',
+      },
+    },
   },
 
   darkMode: 'media',
@@ -86,7 +85,7 @@ module.exports = {
     'focus',
     'active',
     'visited',
-    'disabled'
+    'disabled',
   ],
   plugins: [
     require('@tailwindcss/typography'),
@@ -101,6 +100,6 @@ module.exports = {
       addVariant('child', '&>*')
       addVariant('last-child', '&>*:last-child')
       addVariant('first-child', '&>*:first-child')
-    }
-  ]
+    },
+  ],
 }

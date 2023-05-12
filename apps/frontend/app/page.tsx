@@ -10,7 +10,7 @@ import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 
 export default async function Page() {
   const res: IndexPageQuery = await fetchQuery({ query })
-  throw new Error('')
+
   if (
     !res?.heroSection?.data?.attributes ||
     !res?.mypocketDisplay?.data?.attributes ||

@@ -1,7 +1,4 @@
 import './tailwind.css'
-// import '@fortawesome/fontawesome-free/css/all.min.css'
-// pattern.width = 1200px
-// pattern.hight = 800px
 import pattern from '@/public/img/shades.png'
 import React, { ReactNode, Suspense } from 'react'
 import Separator from '@ws/ui/components/Separator'
