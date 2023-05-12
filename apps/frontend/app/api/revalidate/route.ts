@@ -60,11 +60,13 @@ export default async function GET(req: NextApiRequest) {
   if (req.body.event.startsWith('media.'))
     return NextResponse.json({ media: true })
 
-  if (!req.body.event.startsWith('entry.')) throw new Error('no implemented')
+  if (!req.body.event.startsWith('entry.')) {
+    return NextResponse.json({ notImplemented: true })
+  }
 
   const body = req.body as StrapiEventBodyEntry
 
-  await Promise.all(
+  const paths = await Promise.all(
     map.getPaths(body.model as models).map(path => {
       console.log('to be revalidated:', path)
       return path
@@ -72,6 +74,8 @@ export default async function GET(req: NextApiRequest) {
   )
   // .map(path => res.revalidate(path))
   // ).catch(() => res.status(500).send('not all path has been revalidated'))
+
+  return NextResponse.json({ paths })
 }
 
 //
