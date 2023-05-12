@@ -98,6 +98,6 @@ export async function GET(req: NextRequest) {
 //     throw new Error('header authorization must strat with Bearer')
 //   const token = auth?.split(' ')[1]
 
-//   if (token !== process.env.REVALIDATION_TOKEN)
+//   if (token !== process.env.Strapi_Next_Webhook_Token)
 //     throw new Error('token is invalid')
 // }
