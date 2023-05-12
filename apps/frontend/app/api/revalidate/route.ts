@@ -45,8 +45,8 @@ const map = new PathModelMap([
   { path: '/about', models: ['about'] satisfies models[] }
 ])
 
-export async function Get(req: NextRequest) {
-  return NextResponse.json({ done: true })
+export async function GET(req: NextRequest) {
+  return NextResponse.json({ toBeImplemented: true })
 }
 
 // export async function GET(req: NextRequest) {
@@ -88,16 +88,16 @@ export async function Get(req: NextRequest) {
 //
 //
 // helpers
-interface NextApiRequest extends NextRequest {
-  body: StrapiEventBodyTest | StrapiEventBodyMedia | StrapiEventBodyEntry
-}
+// interface NextApiRequest extends NextRequest {
+//   body: StrapiEventBodyTest | StrapiEventBodyMedia | StrapiEventBodyEntry
+// }
 
-async function getBearer(req: NextRequest) {
-  const auth = req.headers.get('authorization')
-  if (!auth || !String(auth).startsWith('Bearer '))
-    throw new Error('header authorization must strat with Bearer')
-  const token = auth?.split(' ')[1]
+// async function getBearer(req: NextRequest) {
+//   const auth = req.headers.get('authorization')
+//   if (!auth || !String(auth).startsWith('Bearer '))
+//     throw new Error('header authorization must strat with Bearer')
+//   const token = auth?.split(' ')[1]
 
-  if (token !== process.env.REVALIDATION_TOKEN)
-    throw new Error('token is invalid')
-}
+//   if (token !== process.env.REVALIDATION_TOKEN)
+//     throw new Error('token is invalid')
+// }
