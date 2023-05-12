@@ -6,7 +6,7 @@ import {
   ProjectPageQuery,
   ProjectPageQueryVariables
 } from '@ws/types/dist/graphql/query'
-import genProjectsSDL from '@ws/types/src/graphql/queries/app/projects/[pid]/query-gen.graphql'
+import genProjectsGen from '@ws/types/src/graphql/queries/app/projects/[pid]/query-gen.graphql'
 import projectSDL from '@ws/types/src/graphql/queries/app/projects/[pid]/query-page.graphql'
 import { notFound } from 'next/navigation'
 import noPreview from '@/public/section1/noPreview.svg'
@@ -26,7 +26,8 @@ import Markdown from '@/components/Markdonw'
 
 export async function generateStaticParams() {
   const res: GenProjectsQuery = await fetchQuery({
-    query: genProjectsSDL
+    query: genProjectsGen,
+    models: ['project']
   })
 
   if (!res?.projects?.data || res?.projects?.data.some(e => !e.id))
@@ -49,6 +50,7 @@ export default async function Page({ params, searchParams }: any) {
 
   const res: ProjectPageQuery = await fetchQuery({
     query: projectSDL,
+    models: ['project'],
     var: { pid }
   })
 

@@ -10,7 +10,8 @@ interface Props {
 
 export default async function Layout({ children }: Props) {
   const res: GlobalQuery = await fetchQuery({
-    query: globalQuery
+    query: globalQuery,
+    models: ['global']
   })
 
   if (!res.global?.data?.attributes) throw new Error('not enough data')

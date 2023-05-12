@@ -1,0 +1,78 @@
+# no fully implemeted yet
+# cat do_app_spec_prod.yaml | doctl app update $project --spec -
+
+name: starfish-app
+services:
+  - name: strapi
+    dockerfile_path: apps/strapi/Dockerfile
+    github:
+      branch: main
+      deploy_on_push: false
+      repo: karambarakat/myportfolio
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: professional-xs
+    source_dir: /
+    envs:
+      - key: NODE_ENV
+        scope: RUN_AND_BUILD_TIME
+        value: production
+      # # upload plugin
+      - key: AWS_REGION
+        scope: RUN_TIME
+        type: GENERAL
+        value: us-west-1
+      - key: AWS_BUCKET
+        scope: RUN_TIME
+        type: GENERAL
+        value: do-strapi-portfolio-admin
+      # # confit/middleware
+      - key: SAVE_URLs
+        scope: RUN_TIME
+        type: GENERAL
+        value: "*.amazonaws.com"
+      # # database vars 
+      - key: DATABASE_CLIENT
+        scope: RUN_TIME
+        type: GENERAL
+        value: postgres
+      # the following keys should be provided by a script like `./deploy.js`
+      # # database vars 
+      # - key: DATABASE_URL
+      # # upload plugin
+      # - key: AWS_ACCESS_KEY_ID
+      # - key: AWS_ACCESS_SECRET
+      # # integration with next frontend
+      # - key: Strapi_Next_Webhook_Token
+      # # app setting
+      # - key: APP_KEYS
+      # - key: API_TOKEN_SALT
+      # - key: ADMIN_JWT_SECRET
+      # - key: TRANSFER_TOKEN_SALT
+      # - key: JWT_SECRET
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+databases:
+  - cluster_name: app-a799da80-a556-4b15-969c-495df33ccb23
+    db_name: db
+    db_user: db
+    engine: PG
+    name: app-a799da80-a556-4b15-969c-495d
+    production: true
+    version: "12"
+domains:
+  - domain: cms.kenn.page
+    type: PRIMARY
+envs:
+  - key: NODE_TLS_REJECT_UNAUTHORIZED
+    scope: RUN_AND_BUILD_TIME
+    value: "0"
+ingress:
+  rules:
+    - component:
+        name: strapi
+      match:
+        path:
+          prefix: /
+region: sfo

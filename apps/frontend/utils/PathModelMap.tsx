@@ -1,7 +1,7 @@
 type Path = {
   path: string
   models: string[]
-  exact?: (e: { get: (key: string) => string }) => string
+  exact?: (e: { id: string }) => string
 }
 
 export default class PathModelMap<m extends string> {
@@ -9,7 +9,7 @@ export default class PathModelMap<m extends string> {
     paths: {
       path: string
       models: m[]
-      exact?: (e: { get: (key: string) => string }) => string
+      exact?: (e: { id: string }) => string
     }[]
   ) {
     this.paths = paths
@@ -18,17 +18,15 @@ export default class PathModelMap<m extends string> {
   addPath(path: Path) {
     this.paths.push(path)
   }
-  getPaths(model: m, entry?: unknown): string[] {
+
+  getPaths(model: m, entry?: { id: string }): string[] {
     return this.paths
       .filter(path => path.models.includes(model))
       .map(path => {
         if (!path.exact) return path.path
 
-        return path.exact({
-          // I can have a better approach but need more work, see `hell` types down
-          // for now I use the getStrOrNull approach
-          get: (a: string) => getStrOrNull(entry, a) as string
-        })
+        // @ts-ignore
+        return path.exact(entry)
       })
       .filter(e => e !== null) as string[] // important step in the getStrOrNull approach
   }

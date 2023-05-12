@@ -3,7 +3,10 @@ import fetchQuery from '@/utils/fetchQuery'
 import { GlobalQuery } from '@ws/types/dist/graphql/query'
 
 export default async function Heading() {
-  const res: GlobalQuery = await fetchQuery({ query: globalQuery })
+  const res: GlobalQuery = await fetchQuery({
+    query: globalQuery,
+    models: ['global']
+  })
 
   if (!res.global?.data?.attributes) throw new Error('not enough data')
 

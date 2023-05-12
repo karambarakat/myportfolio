@@ -1,12 +1,7 @@
-export type StrapiEventBodyTest = { event: 'trigger-test'; createdAt: string }
-export type StrapiEventBodyMedia = {
-  event: string // starts with media.
+export type strapi_webhook_body = {
+  event: 'trigger-test' | `entry.${string}` | `media.${string}`
   createdAt: string
-  media: unknown
-}
-export type StrapiEventBodyEntry = {
-  event: string // starts with entry.
-  createdAt: string
-  model: string
-  entry: unknown
+  media?: unknown // only present if event starts with media.
+  model?: string // only present if event starts with entry.
+  entry: unknown // only present if event starts with entry. ,probably {id: string}
 }

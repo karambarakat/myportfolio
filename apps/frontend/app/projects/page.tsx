@@ -1,17 +1,20 @@
 import React from 'react'
 import Typo from '@ws/ui/components/Typo'
 import { ProjectsPageQuery } from '@ws/types/dist/graphql/query'
-import ProjectPage from '@ws/types/src/graphql/queries/app/projects/query-page.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import Link from 'next/link'
 import Button from '@ws/ui/components/Button'
 import ProjectSummary from '@/components/content/ProjectSummary'
 import _c from 'classnames'
 
+import ProjectPage from '@ws/types/src/graphql/queries/app/projects/query-page.graphql'
+
 export default async function Page() {
   const res: ProjectsPageQuery = await fetchQuery({
-    query: ProjectPage
+    query: ProjectPage,
+    models: ['project']
   })
+  console.log({ res })
 
   if (!res?.projects?.data || !res?.projects?.meta?.pagination)
     throw new Error(`
