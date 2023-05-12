@@ -185,7 +185,6 @@ importers:
       better-sqlite3: 8.0.1
       lodash: ^4.17.21
       pg: ^8.10.0
-      strapi-provider-upload-do: ^3.6.9
     dependencies:
       '@strapi/plugin-graphql': 4.10.4_y42rr5cz6w45gjbz6fzert44hi
       '@strapi/plugin-i18n': 4.10.2_rahhslxdqi6wefhczqbngwknhe
@@ -195,7 +194,6 @@ importers:
       '@strapi/typescript-utils': 4.10.2
       lodash: 4.17.21
       pg: 8.10.0
-      strapi-provider-upload-do: 3.6.9
     devDependencies:
       better-sqlite3: 8.0.1
 
@@ -8048,22 +8046,6 @@ packages:
   /available-typed-arrays/1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
-
-  /aws-sdk/2.1350.0:
-    resolution: {integrity: sha512-b0BHug2iCtIsKgstj3FEyZYZCv8RZnie5vUQzkw0rr581Z6DOcJof7gGn19E6mPQp1l4j0d274SjvdFQS4JCMw==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      buffer: 4.9.2
-      events: 1.1.1
-      ieee754: 1.1.13
-      jmespath: 0.16.0
-      querystring: 0.2.0
-      sax: 1.2.1
-      url: 0.10.3
-      util: 0.12.5
-      uuid: 8.0.0
-      xml2js: 0.4.19
-    dev: false
 
   /aws-sdk/2.1372.0:
     resolution: {integrity: sha512-SkpBohTXS7yJL6I/k+Dk5o2k8xgyVKs1n9zo08DvCaheSmvpMKQHqdj/wCbf1cjLRFr/Ckc1YGDj3SsikPsBgw==}
@@ -17337,14 +17319,6 @@ packages:
       - utf-8-validate
     dev: true
 
-  /strapi-provider-upload-do/3.6.9:
-    resolution: {integrity: sha512-Sd+I+CAolcKySSkK3sUDTTyB908I9C0HL9vbUuUUxjaQ1iaeDv7CyPiwbpRKpFUnAz28nYdwWhQHCY5OhETlrA==}
-    engines: {node: '>= 10.0.0', npm: '>= 6.0.0'}
-    dependencies:
-      aws-sdk: 2.1350.0
-      urijs: 1.19.6
-    dev: false
-
   /stream-chain/2.2.5:
     resolution: {integrity: sha512-1TJmBx6aSWqZ4tx7aTpBDXK0/e2hhcNSTV8+CbFJtDjbb+I1mZ8lHit0Grw9GRT+6JbIrrDd8esncgBi8aBXGA==}
     dev: false
@@ -18408,10 +18382,6 @@ packages:
     dependencies:
       punycode: 2.3.0
 
-  /urijs/1.19.6:
-    resolution: {integrity: sha512-eSXsXZ2jLvGWeLYlQA3Gh36BcjF+0amo92+wHPyN1mdR8Nxf75fuEuYTd9c0a+m/vhCjRK0ESlE9YNLW+E1VEw==}
-    dev: false
-
   /urix/0.1.0:
     resolution: {integrity: sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==}
     deprecated: Please see https://github.com/lydell/urix#deprecated
@@ -19093,13 +19063,6 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /xml2js/0.4.19:
-    resolution: {integrity: sha512-esZnJZJOiJR9wWKMyuvSE1y6Dq5LCuJanqhxslH2bxM6duahNZ+HMpCLhBQGZkbX6xRf8x1Y2eJlgt2q3qo49Q==}
-    dependencies:
-      sax: 1.2.1
-      xmlbuilder: 9.0.7
-    dev: false
-
   /xml2js/0.5.0:
     resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
     engines: {node: '>=4.0.0'}
@@ -19110,11 +19073,6 @@ packages:
 
   /xmlbuilder/11.0.1:
     resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
-    engines: {node: '>=4.0'}
-    dev: false
-
-  /xmlbuilder/9.0.7:
-    resolution: {integrity: sha512-7YXTQc3P2l9+0rjaUbLwMKRhtmwg1M1eDf6nag7urC7pIPYLD9W/jmzQ4ptRSUbodw5S0jfoGTflLemQibSpeQ==}
     engines: {node: '>=4.0'}
     dev: false
 

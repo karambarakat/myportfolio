@@ -14,7 +14,7 @@
     "dev": "turbo run dev",
     "test": "turbo run test",
     "lock": "npm install --package-lock-only --workspaces",
-    "tmp:deploy": "cat do_app_spec_prod.yaml | doctl app update $project --spec -"
+    "tmp:deploy": "cat do_app_spec_prod.yaml | doctl app update 34d6382e-12b8-4e64-89eb-da8b959ab537 --spec -"
   },
   "devDependencies": {
     "turbo": "latest"

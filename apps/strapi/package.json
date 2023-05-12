@@ -19,8 +19,7 @@
     "@strapi/strapi": "^4.10.2",
     "@strapi/typescript-utils": "^4.10.2",
     "lodash": "^4.17.21",
-    "pg": "^8.10.0",
-    "strapi-provider-upload-do": "^3.6.9"
+    "pg": "^8.10.0"
   },
   "devDependencies": {
     "better-sqlite3": "8.0.1"

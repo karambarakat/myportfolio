@@ -17,7 +17,7 @@ export default ({ env }) => {
               "data:",
               "blob:",
               "dl.airtable.com",
-              "*.digitaloceanspaces.com",
+              "*.amazonaws.com",
               ...saveUrlsArray,
             ],
             "media-src": [
@@ -25,7 +25,7 @@ export default ({ env }) => {
               "data:",
               "blob:",
               "dl.airtable.com",
-              "*.digitaloceanspaces.com",
+              "*.amazonaws.com",
               ...saveUrlsArray,
             ],
             upgradeInsecureRequests: null,
