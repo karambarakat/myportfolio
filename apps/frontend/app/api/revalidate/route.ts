@@ -45,7 +45,7 @@ const map = new PathModelMap([
   { path: '/about', models: ['about'] satisfies models[] }
 ])
 
-export default async function GET(req: NextApiRequest) {
+export async function GET(req: NextApiRequest) {
   // return NextResponse.json({ done: true })
 
   await getBearer(req).catch(e => {
