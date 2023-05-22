@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions'
 const meta: Meta<typeof Separator> = {
   title: 'Separator',
   component: Separator,
+  tags: ['autodocs'],
   args: {},
 }
 

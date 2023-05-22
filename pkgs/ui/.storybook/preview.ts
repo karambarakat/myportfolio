@@ -9,6 +9,11 @@ const preview: Preview = {
   },
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
+    parameter: {
+      docs: {
+        controls: { exclude: ['children'] },
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

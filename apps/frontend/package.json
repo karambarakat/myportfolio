@@ -44,7 +44,8 @@
     "node-fetch": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -53,6 +54,7 @@
     "@types/markdown-it": "^12.2.3",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
+    "@types/uuid": "^9.0.1",
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
     "env-cmd": "^10.1.0",

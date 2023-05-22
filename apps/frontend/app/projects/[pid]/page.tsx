@@ -110,7 +110,7 @@ export default async function Page({ params, searchParams }: any) {
             {project.github && (
               <span>
                 <Button
-                  external={true}
+                  target={'_blank'}
                   size="normal"
                   href={project.github.href || '#'}
                   //
@@ -128,7 +128,7 @@ export default async function Page({ params, searchParams }: any) {
             {project.live && (
               <span>
                 <Button
-                  external={true}
+                  target={'_blank'}
                   size="normal"
                   href={project.live.href || '#'}
                   //

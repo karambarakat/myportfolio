@@ -34,9 +34,9 @@ ProjectsDisplay.ViewAll = function ViewAll({
 }) {
   return pageCount > 1 ? (
     <div className="col-span-2 my-5 place-content-center grid">
-      <Button Elem={Link} href="/projects">
-        view more
-      </Button>
+      <Link href="/projects">
+        <Button>view more</Button>
+      </Link>
     </div>
   ) : (
     <></>

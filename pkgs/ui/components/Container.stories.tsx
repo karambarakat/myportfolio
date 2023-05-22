@@ -5,6 +5,7 @@ import Typo from './Typo.module.scss'
 const meta: Meta<typeof Container> = {
   title: 'Container',
   component: Container,
+  tags: ['autodocs'],
   args: {
     children: (
       <div className="child:text-3xl grid gap-10 pt-10">

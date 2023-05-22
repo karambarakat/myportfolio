@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions'
 const meta: Meta<typeof Typo> = {
   title: 'Typo',
   component: Typo,
+  tags: ['autodocs'],
   args: { children: 'hello world' },
 }
 

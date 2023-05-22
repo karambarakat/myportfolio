@@ -3,6 +3,7 @@ import globalQuery from '@ws/types/src/graphql/queries/app/query-layout.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import { GlobalQuery } from '@ws/types/dist/graphql/query'
 import toCustomMd from '@/utils/toCustomeMd'
+import { Provider } from '@ws/ui/utils/actionMap'
 
 interface Props {
   children: React.ReactNode

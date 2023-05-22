@@ -6,6 +6,7 @@ import bg from './assets/shades.png'
 const meta: Meta<typeof Illuminate> = {
   title: 'Background-effects',
   component: Illuminate,
+  tags: ['autodocs'],
   args: {
     bg: bg.src,
   },

@@ -7,9 +7,9 @@ import GetInContact from '@/components/sections/3GetInContact'
 import query from '@ws/types/src/graphql/queries/app/query-page.graphql'
 import fetchQuery from '@/utils/fetchQuery'
 import { IndexPageQuery } from '@ws/types/dist/graphql/query'
+import { notFound } from 'next/navigation'
 
 export default async function Page() {
-  throw new Error('oppppp')
   const res: IndexPageQuery = await fetchQuery({
     query,
     models: ['project', 'get-in-contact', 'mypocket-display', 'hero-section']

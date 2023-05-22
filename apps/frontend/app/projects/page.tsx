@@ -8,6 +8,7 @@ import ProjectSummary from '@/components/content/ProjectSummary'
 import _c from 'classnames'
 
 import ProjectPage from '@ws/types/src/graphql/queries/app/projects/query-page.graphql'
+import { notFound } from 'next/navigation'
 
 export default async function Page() {
   const res: ProjectsPageQuery = await fetchQuery({
@@ -50,9 +51,9 @@ export default async function Page() {
 
         {projectsPagination.pageCount > 1 && (
           <div className="col-span-2 my-5 place-content-center grid">
-            <Button Elem={Link} href="/projects">
-              view more
-            </Button>
+            <Link href={'/projects'}>
+              <Button>veiw more</Button>
+            </Link>
           </div>
         )}
       </div>

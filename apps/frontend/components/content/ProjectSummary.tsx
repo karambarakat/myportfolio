@@ -61,7 +61,7 @@ function ProjectSummary({ data, href }: Props) {
         {data.github && (
           <span>
             <Button
-              external={true}
+              target={'_blank'}
               size="normal"
               href={data.github.href || '#'}
               //
@@ -79,7 +79,7 @@ function ProjectSummary({ data, href }: Props) {
         {data.live && (
           <span>
             <Button
-              external={true}
+              target={'_blank'}
               size="normal"
               href={data.live.href || '#'}
               //
