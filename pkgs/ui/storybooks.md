@@ -1,3 +1,8 @@
+some code I might come back for to reuse 
+todo: delete this file afterward
+
+
+```typescript
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from './Button';
@@ -44,3 +49,19 @@ export const Small: Story = {
     label: 'Button',
   },
 };
+
+
+// More on interaction testing: https://storybook.js.org/docs/react/writing-tests/interaction-testing
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
+
+export const LoggedIn: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const loginButton = await canvas.getByRole('button', {
+      name: /Log in/i,
+    });
+    await userEvent.click(loginButton);
+  },
+};
+```

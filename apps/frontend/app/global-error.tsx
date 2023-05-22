@@ -14,11 +14,7 @@ export default function GlobalError({
       <body>
         <QuickMessage
           code="500"
-          action={
-            <button className="mt-6" onClick={() => reset()}>
-              reload
-            </button>
-          }
+          actions={[{ display: 'reload', fn: () => reset() }]}
         />
       </body>
     </html>

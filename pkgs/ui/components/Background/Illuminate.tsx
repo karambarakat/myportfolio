@@ -1,8 +1,10 @@
-'use client'
-import s from './HoverEffect.module.scss'
+import defaultSelector from './assets/selector.png'
+import __ from 'classnames'
+import s from './Background.module.scss'
 import { useEffect, useRef, useState } from 'react'
+import Container from '../Container'
 
-export default function Compt({
+function HoverEffect({
   inverted = false,
   bg,
   selector,
@@ -11,9 +13,10 @@ export default function Compt({
   bg: string
   selector: string
 }) {
-  // const { x, y, ref } = useMouse()
   const [{ x, y }, setCoor] = useState({ x: 0, y: 0 })
+
   const ref = useRef<HTMLImageElement | undefined>()
+
   useEffect(() => {
     // todo: improve at https://stackoverflow.com/questions/7790725/javascript-track-mouse-position
     // @ts-ignore
@@ -42,8 +45,42 @@ export default function Compt({
         ['--x']: `${x - 517}px`,
         ['--y']: `${y - 517}px`,
       }}
-      className={`${inverted ? 'mix-blend-overlay' : ''} ${s.base}`}
+      className={__(s['hover-effect'], inverted ? 'mix-blend-overlay' : '')}
       src={bg}
     />
+  )
+}
+
+export default function Illuminate({
+  inverted = false,
+  bg,
+  selector = defaultSelector.src,
+}: {
+  inverted?: boolean
+  bg: string
+  selector?: string
+}) {
+  return (
+    <div className={s.illuminate}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        className={__(
+          s['illuminate-layer-1'],
+          inverted && s['illuminate-layer-1-inverted']
+        )}
+        alt="background-pattern"
+        loading="lazy"
+        src={bg}
+      />
+      <div
+        className={__(
+          s['illuminate-layer-2'],
+          inverted && s['illuminate-layer-2-inverted']
+        )}
+      >
+        <HoverEffect inverted={inverted} bg={bg} selector={selector} />
+      </div>
+      <div className={s['illuminate-layer-3']}></div>
+    </div>
   )
 }

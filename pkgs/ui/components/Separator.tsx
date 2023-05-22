@@ -1,11 +1,7 @@
 import __ from 'classnames'
 import styles from './Separator.module.css'
 
-interface Props
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+interface Props {
   size?: 'auto' | { width?: string | number; height?: string | number }
 }
 

@@ -1,35 +1,20 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import s from './Container.module.scss'
 import _c from 'classnames'
 
-interface Props
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  > {
+interface Props {
   children: React.ReactNode
   className?: string
 }
 
-function Container({ children, className }: Props) {
-  return <div className={_c(s.base, className)}>{children}</div>
+function Container({ children }: Props) {
+  return <div className={s.base}>{children}</div>
 }
 
-Container.shift_lg = s['shift-200']
-Container.negative_margin = s['negative_margin']
-
-Container.shiftStyle = (shift: number) => {
-  return { marginLeft: -shift, width: 800 + -2 * shift }
+Container.shift = s['shift']
+Container.shift_style = (shift: number) => {
+  return { ['--shift']: shift + 'px' } as CSSProperties
 }
-
-Container.Shift = function Shift({
-  children,
-  shift
-}: {
-  children: React.ReactNode
-  shift: number
-}) {
-  return <div style={Container.shiftStyle(shift)}>{children}</div>
-}
+Container.negative_padding = s['negative_padding']
 
 export default Container

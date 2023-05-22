@@ -1,0 +1,39 @@
+.hover-effect {
+  max-width: initial; //important to ovveride in cases of mismatch between the two images (the light and the base layers)
+  mask: var(--src);
+  // mask-mode: alpha;
+  mask-position: var(--x) var(--y);
+  mask-repeat: no-repeat;
+}
+
+.illuminate {
+  isolation: isolate;
+  position: relative;
+}
+
+.illuminate-layer-1 {
+  z-index: 1;
+  position: relative;
+  max-width: initial;
+  &-inverted{
+    mix-blend-mode: difference;
+  }
+}
+
+.illuminate-layer-2 {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  mix-blend-mode: multiply;
+  &-inverted{
+    mix-blend-mode: overlay;
+  }
+}
+
+.illuminate-layer-3 {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

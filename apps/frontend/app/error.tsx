@@ -10,10 +10,11 @@ export default function Error({ error, reset }: Props) {
   return (
     <QuickMessage
       code="500"
-      action={
-        <button className="mt-6" onClick={() => reset()}>
-          reload
-        </button>
+      actions={
+        [{ fn: () => reset(), display: 'reload' }]
+        // <button className="mt-6" onClick={() => reset()}>
+        //   reload
+        // </button>
       }
     />
   )

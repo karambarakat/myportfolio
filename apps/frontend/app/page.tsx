@@ -9,6 +9,7 @@ import fetchQuery from '@/utils/fetchQuery'
 import { IndexPageQuery } from '@ws/types/dist/graphql/query'
 
 export default async function Page() {
+  throw new Error('oppppp')
   const res: IndexPageQuery = await fetchQuery({
     query,
     models: ['project', 'get-in-contact', 'mypocket-display', 'hero-section']
