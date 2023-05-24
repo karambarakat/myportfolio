@@ -6,5 +6,6 @@ import Image_, { ImageLoader, ImageLoaderProps, ImageProps } from 'next/image'
 // }
 
 export default function ImageCMS(props: ImageProps) {
-  return <img {...props} src={`${process.env.API}${props.src}`} />
+  const pre = process.env.NODE_ENV === 'production' ? '' : process.env.API
+  return <img {...props} src={`${pre}${props.src}`} />
 }
