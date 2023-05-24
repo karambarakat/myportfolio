@@ -18,7 +18,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'stapi-portfolio-bucket-only-owner.s3.us-west-1.amazonaws.com'
+        hostname: 'do-strapi-portfolio-admin.s3.us-west-1.amazonaws.com'
       },
       {
         protocol: 'https',

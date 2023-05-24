@@ -1,5 +1,5 @@
 import { IndexPageQuery } from '@ws/types/dist/graphql/query'
-import Image from 'next/image'
+import ImageCMS from '../Image-CMS'
 import React from 'react'
 import Button from '@ws/ui/components/Button'
 import personalImage from '@/public/personal/Perconal Image 248 rect.jpg'
@@ -27,12 +27,10 @@ function Hero({ data }: { data: Data }) {
       <Typo.H1 className="text-center">{data.h1}</Typo.H1>
       <Typo.H2 className="text-center mb-8">{data.h2}</Typo.H2>
       <div className="flex gap-8 items-start">
-        <Image
+        <ImageCMS
           className="sm-mx:hidden rounded-md shadow-2xl"
           alt="photo of me"
-          src={
-            (process.env.API as string) + data.picture?.data?.attributes?.url
-          }
+          src={data.picture?.data?.attributes?.url}
           width={data.picture?.data?.attributes?.width}
           height={data.picture?.data?.attributes?.height}
         />
