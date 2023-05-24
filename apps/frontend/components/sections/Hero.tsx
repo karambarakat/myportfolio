@@ -15,7 +15,6 @@ type Data = NonNullable<
 >
 
 function Hero({ data }: { data: Data }) {
-  console.log('depug', 'hero section', data.picture.data?.attributes?.url)
   return (
     <main className="pt-[200px] sm-height:pt-[25px]">
       <Typo.H1 className="text-center">{data.h1}</Typo.H1>
@@ -25,13 +24,10 @@ function Hero({ data }: { data: Data }) {
           className="sm-mx:hidden rounded-md shadow-2xl"
           alt="photo of me"
           src={
-            (process.env.API as string) + data.picture?.data?.attributes?.url ||
-            personalImage
+            (process.env.API as string) + data.picture?.data?.attributes?.url
           }
-          width={data.picture?.data?.attributes?.width || personalImage.width}
-          height={
-            data.picture?.data?.attributes?.height || personalImage.height
-          }
+          width={data.picture?.data?.attributes?.width}
+          height={data.picture?.data?.attributes?.height}
         />
         <div className="sm-mx:text-center flex-1">
           <Markdown>{data.aboutMe}</Markdown>
