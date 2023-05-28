@@ -1,0 +1,21 @@
+# write a github action's workflow to run e2e test on every push
+name: e2e test
+
+on: [push]
+
+jobs:
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+      - run: pnpm install -g concurrently wait-on
+      - run: pnpm install
+      - run: concurrently -n "strapi,frontend,e2e" |
+          -c "green,yellow,bgBlue.bold" |
+          -s "last" --kill-others
+          "pnpm --filter strapi run dev:ephemeral" |
+          "pnpm --filter frontend run dev" |
+          "pnpm --filter e2e run test"

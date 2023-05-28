@@ -7,11 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "strapi:production": "npm run production --prefix strapi",
-    "strapi": "npm run develop --prefix strapi",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "lint": "next lint"
   },
   "prettier": {
     "arrowParens": "avoid",
