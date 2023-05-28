@@ -13,9 +13,10 @@ jobs:
           version: 6.0.2
       - run: pnpm install -g concurrently wait-on
       - run: pnpm install
-      - run: concurrently -n "strapi,frontend,e2e" |
-          -c "green,yellow,bgBlue.bold" |
+      - run: >
+          concurrently -n "strapi,frontend,e2e" \
+          -c "green,yellow,bgBlue.bold" \
           -s "last" --kill-others
-          "pnpm --filter strapi run dev:ephemeral" |
-          "pnpm --filter frontend run dev" |
+          "pnpm --filter strapi run dev:ephemeral" \
+          "pnpm --filter frontend run dev" \
           "pnpm --filter e2e run test"
