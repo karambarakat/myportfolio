@@ -20,3 +20,4 @@ jobs:
           "pnpm --filter strapi run dev:ephemeral"
           "pnpm --filter frontend run dev"
           "pnpm --filter e2e run test"
+          "echo todo load vars"

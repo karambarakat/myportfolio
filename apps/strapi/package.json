@@ -7,7 +7,7 @@
     "db": "docker compose -f docker-compose-postgres.yaml up -d",
     "compose": "docker compose -f docker-compose-strapi.yaml up -d",
     "dev": "strapi develop",
-    "dev:ephemeral": "touch .tmp/dev.db && rm -f .tmp/dev.db && cross-env DATABASE_FILENAME=.tmp/dev.db strapi develop",
+    "dev:ephemeral": "mkdir -p .tmp && touch .tmp/dev.db && rm -f .tmp/dev.db && cross-env DATABASE_FILENAME=.tmp/dev.db strapi develop",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "strapi start",
     "build": "strapi build"
