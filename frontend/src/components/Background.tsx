@@ -66,11 +66,11 @@ const Illuminate = component$(function () {
 
   useStylesScoped$(`
     #background-mouse-effect {
-        mask-image: url(/public/hov/selector.png);
+        mask-image: url(/hov/selector.png);
         mask-position: var(--x) var(--y);
         mask-repeat: no-repeat;
 
-        -webkit-mask-image: url(/public/hov/selector.png);
+        -webkit-mask-image: url(/hov/selector.png);
         -webkit-mask-position: var(--x) var(--y);
         -webkit-mask-repeat: no-repeat;
     }
@@ -80,7 +80,7 @@ const Illuminate = component$(function () {
     <div class="relative isolate min-h-800px min-h-800px mix-blend-exclusion">
       <img
         id="background-pattern"
-        src="/public/hov/shades.png"
+        src="/hov/shades.png"
         height={800}
         width={1200}
         class={[
@@ -94,7 +94,7 @@ const Illuminate = component$(function () {
         <img
           ref={ref}
           id="background-mouse-effect"
-          src="/public/hov/shades.png"
+          src="/hov/shades.png"
           style={{
             "--x": loc.value.x - 517 + "px",
             "--y": loc.value.y - 517 + "px",

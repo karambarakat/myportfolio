@@ -4,6 +4,9 @@ import presetMini from "@unocss/preset-mini";
 import { variantParentMatcher } from "@unocss/preset-mini/utils";
 
 export default defineConfig({
+  content: {
+    filesystem: ["src/**/*.{ts,tsx}"],
+  },
   shortcuts: {
     typo: "dark:text-white",
     "fill-as-text": "fill-black dark:fill-white",
