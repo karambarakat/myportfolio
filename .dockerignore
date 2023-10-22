@@ -1,0 +1,11 @@
+node_modules
+
+# turbo
+./turbo
+out
+
+# docker
+**/Dockerfile
+**/compose.yaml
+Dockerfile
+compose.yaml
