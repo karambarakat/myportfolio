@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "qwik build",
+    "build-storybook": "storybook build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.types": "tsc --incremental --noEmit",
@@ -21,11 +22,18 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
+    "storybook": "storybook dev -p 6006",
     "qwik": "qwik"
   },
   "devDependencies": {
     "@builder.io/qwik": "^1.2.14",
     "@builder.io/qwik-city": "^1.2.14",
+    "@storybook/addon-essentials": "^7.4.6",
+    "@storybook/addon-links": "^7.4.6",
+    "@storybook/blocks": "^7.4.6",
+    "@storybook/builder-vite": "^7.4.6",
+    "@storybook/html": "^7.4.6",
+    "@storybook/html-vite": "^7.4.6",
     "@types/eslint": "^8.44.4",
     "@types/node": "^20.8.4",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
@@ -35,11 +43,16 @@
     "eslint": "^8.51.0",
     "eslint-plugin-qwik": "^1.2.14",
     "prettier": "^3.0.3",
+    "storybook": "^7.4.6",
+    "storybook-framework-qwik": "^0.2.4",
     "tailwindcss-preflight": "^1.0.1",
     "typescript": "^5.2.2",
     "undici": "^5.26.0",
     "unocss": "^0.56.5",
     "vite": "^4.4.11",
     "vite-tsconfig-paths": "^4.2.1"
+  },
+  "dependencies": {
+    "@qwikest/icons": "^0.0.13"
   }
 }

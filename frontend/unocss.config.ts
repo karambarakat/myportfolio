@@ -5,14 +5,17 @@ import { variantParentMatcher } from "@unocss/preset-mini/utils";
 
 export default defineConfig({
   shortcuts: {
+    typo: "dark:text-white",
+    "fill-as-text": "fill-black dark:fill-white",
     "typo-h1": "text-5xl pb-3",
     "typo-h2": "font-light text-3xl pb-3",
+    "typo-lg": "text-2xl font-300",
 
     separator: "min-w-1px min-h-1px self-stretch bg-black/80 dark:bg-white/80",
     "separator-inverted": "self-center flex-1",
 
     a: "cursor-pointer text-blue hover-text-blue-500 active:translate-y-1px",
-
+    "fill-as-a": "fill-blue hover-fill-blue-500 active:translate-y-1px",
     container: "w-800px mx-auto px-50px md:px-100px max-w-screen",
     "container-margins": "mx-25px md:mx-50px",
   },

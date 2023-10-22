@@ -1,6 +1,12 @@
 /* eslint-disable qwik/jsx-img */
 import type { JSX } from "@builder.io/qwik/jsx-runtime";
-import { component$ } from "@builder.io/qwik";
+import {
+  $,
+  component$,
+  useOnWindow,
+  useSignal,
+  useStylesScoped$,
+} from "@builder.io/qwik";
 
 const Background = function ({
   children: content,
@@ -17,9 +23,9 @@ const Background = function ({
         </div>
       </div>
 
-      {/* <div class="absolute inset-0 opacity-20 dark:op-5">
+      <div class="absolute inset-0 opacity-20 dark:op-5">
         <svg width="100%" height="100%">
-          <filter id="svg_noise_background">
+          <filter id="background_noise">
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.80"
@@ -33,7 +39,7 @@ const Background = function ({
             filter="url(#svg_noise_background)"
           />
         </svg>
-      </div> */}
+      </div>
 
       <div class="isolate">{content}</div>
     </div>
@@ -43,7 +49,32 @@ const Background = function ({
 export default Background;
 
 const Illuminate = component$(function () {
-  // const inverted = useSignal(false);
+  const ref = useSignal<HTMLDivElement>();
+  const loc = useSignal({ x: -250, y: -350 });
+
+  useOnWindow(
+    "mousemove",
+    $((e) => {
+      const event = e as MouseEvent;
+
+      if (!ref.value) return;
+
+      const svg = ref.value.getBoundingClientRect();
+      loc.value = { x: event.clientX - svg.x, y: event.clientY - svg.y };
+    })
+  );
+
+  useStylesScoped$(`
+    #background-mouse-effect {
+        mask-image: url(/public/hov/selector.png);
+        mask-position: var(--x) var(--y);
+        mask-repeat: no-repeat;
+
+        -webkit-mask-image: url(/public/hov/selector.png);
+        -webkit-mask-position: var(--x) var(--y);
+        -webkit-mask-repeat: no-repeat;
+    }
+  `);
 
   return (
     <div class="relative isolate min-h-800px min-h-800px mix-blend-exclusion">
@@ -57,27 +88,21 @@ const Illuminate = component$(function () {
           "dark:mix-blend-difference",
         ]}
         loading="lazy"
-        alt="background-pattern"
       />
 
       <div class="absolute inset-0 z-4 mix-blend-multiply dark:mix-blend-overlay">
         <img
-          id="background-pattern"
+          ref={ref}
+          id="background-mouse-effect"
           src="/public/hov/shades.png"
           style={{
-            "mask-image": `url(/public/hov/selector.png)`,
-            "-webkit-mask-image": `url(/public/hov/selector.png)`,
-            "-webkit-mask-position-x": "-250px",
-            "-webkit-mask-position-y": "-350px",
-            "mask-position": "0px 0px",
-            "mask-repeat": "no-repeat",
-            "-webkit-mask-repeat": "no-repeat",
+            "--x": loc.value.x - 517 + "px",
+            "--y": loc.value.y - 517 + "px",
           }}
           height={800}
           width={1200}
           class={["max-w-initial"]}
           loading="lazy"
-          alt="background-pattern"
         />
       </div>
 

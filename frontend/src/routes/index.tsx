@@ -2,10 +2,23 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import PersonalImage from "/Personal_Image.jpg";
 
+import Github from "/public/github.svg?jsx";
+import Live from "/public/live.svg?jsx";
+
+import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
+import { SiFreelancer } from "@qwikest/icons/simpleicons";
+import { TbMailFilled } from "@qwikest/icons/tablericons";
+
 export default component$(() => {
   return (
     <>
       <Hero />
+      <div class="separator my-8" />
+      <FeaturedProject />
+      <div class="separator my-8" />
+      {/* <MoreProject />
+      <div class="separator my-8" /> */}
+      <GetInContact />
     </>
   );
 });
@@ -25,75 +38,156 @@ function Hero() {
           height={330}
           width={248}
         />
-        <div class="text-center sm:text-start">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet sint
-          aliquam excepturi assumenda recusandae modi consequatur. Enim eius
-          voluptatibus cum ducimus illum magnam ex, non nesciunt, aspernatur
-          exercitationem unde quia?
+        <div class="text-center sm:text-start children:mb-2">
+          <p>
+            Hi I’m Karam, I’m a self-taught web developer and I love building
+            elegant products and websites using code and state-of-art
+            technologies…
+          </p>
+          <p>
+            I’m new to the US, I have experience working freelancing, now I
+            can’t wait to have my first job in the Silicon Valley!
+          </p>
+          <p>
+            I’m geared toward hard-work and growth, I enjoy learning and
+            improving my work further and further.
+          </p>
+          <div class="flex gap-4">
+            <a
+              href="https://docs.google.com/document/d/183Y16BAD9LEBbe_eKvB0JbRpgaxE9xZ0VXy5f31Wews/"
+              class="a"
+            >
+              View my Resume
+            </a>{" "}
+            <a href="https://github.com/karambarakat" class="a">
+              View my Github
+            </a>
+          </div>
         </div>
       </div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero commodi ad
-      qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam illum?
-      Magnam culpa a earum recusandae non vero vel rerum. Lorem ipsum dolor sit
-      amet consectetur adip isicing elit. Libero commodi ad qui, modi omnis a!
-      Facere, laborum. Repudiandae accusamus quam illum? Magnam culpa a earum
-      recusandae non vero vel rerum. Lorem ipsum dolor sit amet consectetur
-      adipisicing elit . Libero commodi ad qui, modi omnis a! Facere, laborum.
-      Repudiandae accusamus quam illum? Magnam culpa a earum recusandae non vero
-      vel rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
-      commodi ad qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam
-      illum? Magnam culpa a earum recusandae non vero vel rerum. Lorem ipsum
-      dolor sit amet consectetur adiparum recusandae non vero vel rerum. Lorem
-      ipsum dolor sit amet consectetur adip isicing elit. Libero commodi ad qui,
-      modi omnis a! Facere, laborum. Repudiandae accusamus quam illum? Magnam
-      culpa a earum recusandae non vero vel rerum. Lorem ipsum dolor sit amet
-      consectetur adipisicing elit . Libero commodi ad qui, modi omnis a!
-      Facere, laborum. Repudiandae accusamus quam illum? Magnam culpa a earum
-      recusandae non vero vel rerum. Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Libero commodi ad qui, modi omnis a! Facere, laborum.
-      Repudiandae accusamus quam illum? Magnam culpa a earum recusandae non vero
-      vel rerum. Lorem ipsum dolor sit amet consectetur adiparum recusandae non
-      vero vel rerum. Lorem ipsum dolor sit amet consectetur adip isicing elit.
-      Libero commodi ad qui, modi omnis a! Facere, laborum. Repudiandae
-      accusamus quam illum? Magnam culpa a earum recusandae non vero vel rerum.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit . Libero commodi
-      ad qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam illum?
-      Magnam culpa a earum recusandae non vero vel rerum. Lorem ipsum dolor sit
-      amet consectetur adipisicing elit. Libero commodi ad qui, modi omnis a!
-      Facere, laborum. Repudiandae accusamus quam illum? Magnam culpa a earum
-      recusandae non vero vel rerum. Lorem ipsum dolor sit amet consectetur
-      adipisicing elit. Libero commodi ad qui, modi omnis a! Facere, laborum.
-      Repudiandae accusamus quam illum? Magnam culpa a earum recusandae non vero
-      vel rerum. Lorem ipsum dolor sit amet consectetur adi pisicing elit.
-      Libero commodi ad qui, modi omnis a! Facere, laborum. Repudiandae
-      accusamus quam illum? Magnam culpa a earum recusandae non vero vel rerum.
-      <br />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero commodi ad
-      qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam illum?
-      Magnam culpa a earum recusandae non vero vel rerum.
-      <br />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero commodi ad
-      qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam illum?
-      Magnam culpa a earum recusandae non vero vel rerum.
-      <br />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero commodi ad
-      qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam illum?
-      Magnam culpa a earum recusandae non vero vel rerum.
-      <br />
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero commodi ad
-      qui, modi omnis a! Facere, laborum. Repudiandae accusamus quam illum?
-      Magnam culpa a earum recusandae non vero vel rerum.
-      <br />
+    </div>
+  );
+}
+
+function FeaturedProject() {
+  return (
+    <div>
+      <h2 class="typo-h2 text-center">Featured Project</h2>
+      <div class="children:mb-5">
+        <p class="typo-lg">
+          I made this project to learn more about web development and learn
+          about maintaining a large project with many moving parts.
+        </p>
+        <div class="flex gap-4">
+          <div class="a">
+            <Github
+              //@ts-ignore
+              height="24"
+              width="24"
+              class="fill-as-a inline"
+            />{" "}
+            View Code
+          </div>
+          <div class="a">
+            <Live //@ts-ignore
+              height="24"
+              width="24"
+              class="fill-as-a inline"
+            />{" "}
+            Live Demo
+          </div>
+        </div>
+        <div>
+          {[
+            "React and Vite frontend ",
+            "Rust backend ",
+            "Postgres database",
+            "Storybook isolated components",
+            "Chromatic visual testing ",
+            "Unit testing with Jest",
+            "Playwright Integration test ",
+            "Monorepo with Turbo",
+            "CI/CD with Github Actions ",
+            "Automatic deployment ",
+            "JWT Authentication",
+            "GraphQL API",
+          ].map((item) => {
+            return (
+              <div class="typo-lg" key={item}>
+                {item}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// function MoreProject() {
+//   return (
+//     <div>
+//       <h2 class="typo-h2 text-center">More Projects</h2>
+//     </div>
+//   );
+// }
+
+function GetInContact() {
+  return (
+    <div>
+      <h2 class="typo-h2 text-center">Get in Contact</h2>
+      <p class="text-center">
+        I'm currently looking for jobs, you can say hi any time
+      </p>
+      <div class="flex gap-4 justify-center mt-8">
+        {[
+          {
+            text: "Email",
+            href: "mailto:hi@karam.page",
+            Img: TbMailFilled,
+          },
+          {
+            text: "Github",
+            href: "https://github.com/karambarakat/myportfolio",
+            Img: BsGithub,
+          },
+          {
+            text: "Freelancer",
+            href: "https://www.freelancer.com/u/KennethBarakat",
+            Img: SiFreelancer,
+          },
+          {
+            text: "LinkedIn",
+            href: "https://www.linkedin.com/in/kenn-barakat-775931262/",
+            Img: BsLinkedin,
+          },
+        ].map((item) => {
+          return (
+            <a
+              href={item.href}
+              class="cursor-pointer "
+              target="_blank"
+              key={item.text}
+            >
+              <div>
+                <item.Img class="text-4xl fill-as-a a" alt={item.text} />
+              </div>
+            </a>
+          );
+        })}
+      </div>
     </div>
   );
 }
 
 export const head: DocumentHead = {
-  title: "Welcome to Qwik",
+  title: "Welcome to my Portfolio",
+
+  links: [{ href: "https://github.com/karambarakat", rel: "me" }],
   meta: [
     {
       name: "description",
-      content: "Qwik site description",
+      content: "Built with Typescript, Qwik, UnoCss and Strapi",
     },
   ],
 };
