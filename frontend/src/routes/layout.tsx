@@ -1,6 +1,7 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { useLocation, type RequestHandler } from "@builder.io/qwik-city";
+import { type RequestHandler } from "@builder.io/qwik-city";
 import Background from "~/components/Background";
+import Loading from "~/components/Loading";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -24,25 +25,13 @@ export default component$(() => {
 
         <span class="separator mt-8" />
 
-        <div class="text-center py-4">
+        <footer class="text-center py-4">
           Built with Typescript, Qwik, UnoCss and Strapi | checkout the code on{" "}
           <a class="a" href="https://github.com/karambarakat/myportfolio">
             Github
           </a>
-        </div>
+        </footer>
       </div>
     </Background>
-  );
-});
-
-const Loading = component$(function () {
-  const location = useLocation();
-
-  return (
-    <div class="">
-      <div class="text-3xl font-bold">
-        {location.isNavigating && "Loading..."}
-      </div>
-    </div>
   );
 });

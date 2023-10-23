@@ -8,6 +8,9 @@ import {
   useStylesScoped$,
 } from "@builder.io/qwik";
 
+import BgSelector from "../../public/hov/selector.png";
+import BgShades from "../../public/hov/shades.png";
+
 const Background = function ({
   children: content,
 }: {
@@ -15,7 +18,7 @@ const Background = function ({
 }) {
   return (
     <div class="relative overflow-hidden">
-      <div class={["pointer-events-none absolute inset-0"]}>
+      <div class="pointer-events-none absolute inset-0">
         <div class="container p-0! mx-auto">
           <div class="container-shift-200px">
             <Illuminate />
@@ -23,9 +26,9 @@ const Background = function ({
         </div>
       </div>
 
-      <div class="absolute inset-0 opacity-20 dark:op-5">
+      <div class="absolute inset-0 opacity-5">
         <svg width="100%" height="100%">
-          <filter id="background_noise">
+          <filter id="svg_noise_background">
             <feTurbulence
               type="fractalNoise"
               baseFrequency="0.80"
@@ -66,11 +69,11 @@ const Illuminate = component$(function () {
 
   useStylesScoped$(`
     #background-mouse-effect {
-        mask-image: url(/hov/selector.png);
+        mask-image: url(${BgSelector});
         mask-position: var(--x) var(--y);
         mask-repeat: no-repeat;
 
-        -webkit-mask-image: url(/hov/selector.png);
+        -webkit-mask-image: url(${BgSelector});
         -webkit-mask-position: var(--x) var(--y);
         -webkit-mask-repeat: no-repeat;
     }
@@ -80,7 +83,7 @@ const Illuminate = component$(function () {
     <div class="relative isolate min-h-800px min-h-800px mix-blend-exclusion">
       <img
         id="background-pattern"
-        src="/hov/shades.png"
+        src={BgShades}
         height={800}
         width={1200}
         class={[
@@ -94,7 +97,7 @@ const Illuminate = component$(function () {
         <img
           ref={ref}
           id="background-mouse-effect"
-          src="/hov/shades.png"
+          src={BgShades}
           style={{
             "--x": loc.value.x - 517 + "px",
             "--y": loc.value.y - 517 + "px",

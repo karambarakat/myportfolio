@@ -13,12 +13,18 @@ export default defineConfig({
     "typo-h1": "text-5xl pb-3",
     "typo-h2": "font-light text-3xl pb-3",
     "typo-lg": "text-2xl font-300",
+    "typo-dim": " text-slate-700/80 dark:text-slate-200/80",
 
     separator: "min-w-1px min-h-1px self-stretch bg-black/80 dark:bg-white/80",
     "separator-inverted": "self-center flex-1",
 
-    a: "cursor-pointer text-blue hover-text-blue-500 active:translate-y-1px",
-    "fill-as-a": "fill-blue hover-fill-blue-500 active:translate-y-1px",
+    a: `cursor-pointer active:translate-y-1px
+      text-blue-500 hover:text-blue-600 
+      dark:text-blue dark:hover:text-blue-500`,
+    "fill-as-a": `active:translate-y-1px
+    fill-blue-500 hover:fill-blue-600 
+    dark:fill-blue dark:hover:fill-blue-500 
+    `,
     container: "w-800px mx-auto px-50px md:px-100px max-w-screen",
     "container-margins": "mx-25px md:mx-50px",
   },
@@ -34,6 +40,21 @@ export default defineConfig({
     ["mix-blend-hue", { "mix-blend-mode": "hue" }],
     ["mix-blend-lighten", { "mix-blend-mode": "lighten" }],
     ["mix-blend-multiply", { "mix-blend-mode": "multiply" }],
+
+    ["w-fit", { width: "fit-content" }],
+    ["h-fit", { height: "fit-content" }],
+    ["w-min", { width: "min-content" }],
+    ["h-min", { height: "min-content" }],
+    ["w-max", { width: "max-content" }],
+    ["h-max", { height: "max-content" }],
+
+    [
+      /^container-(.+)$/,
+      ([, d]) => ({
+        width: `calc(800px + 2 * ${d})`,
+        "margin-left": `calc(-${d})`,
+      }),
+    ],
 
     [
       /^container-shift-(.+)$/,

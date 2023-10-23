@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import PersonalImage from "../../public/Personal_Image.jpg";
 
 import Github from "../../public/github.svg?jsx";
@@ -8,6 +8,12 @@ import Live from "../../public/live.svg?jsx";
 import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
+import ProjectSummary from "~/components/ProjectSummary";
+import { projectsApi } from "~/api";
+
+export const useProjects = routeLoader$(() => {
+  return projectsApi().filter((pro) => pro.id !== "2");
+});
 
 export default component$(() => {
   return (
@@ -16,8 +22,8 @@ export default component$(() => {
       <div class="separator my-8" />
       <FeaturedProject />
       <div class="separator my-8" />
-      {/* <MoreProject />
-      <div class="separator my-8" /> */}
+      <MoreProjects />
+      <div class="separator my-8" />
       <GetInContact />
     </>
   );
@@ -124,13 +130,21 @@ function FeaturedProject() {
   );
 }
 
-// function MoreProject() {
-//   return (
-//     <div>
-//       <h2 class="typo-h2 text-center">More Projects</h2>
-//     </div>
-//   );
-// }
+const MoreProjects = component$(() => {
+  const projects = useProjects();
+
+  return (
+    <div>
+      <h2 class="typo-h2 text-center">More Projects</h2>
+
+      <div class="grid grid-cols-2 gap-4 my-5">
+        {projects.value.map((pro) => {
+          return <ProjectSummary key={pro.id} data={pro} />;
+        })}
+      </div>
+    </div>
+  );
+});
 
 function GetInContact() {
   return (

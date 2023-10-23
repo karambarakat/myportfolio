@@ -13,7 +13,7 @@
     "build-storybook": "storybook build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
-    "build.server": "vite build -c adapters/vercel-edge/vite.config.ts",
+    "build.server": "vite build -c adapters/static/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "deploy": "vercel deploy",
     "dev": "vite --mode ssr",
@@ -36,6 +36,7 @@
     "@storybook/html": "^7.4.6",
     "@storybook/html-vite": "^7.4.6",
     "@types/eslint": "^8.44.4",
+    "@types/luxon": "^3.3.3",
     "@types/node": "^20.8.4",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
@@ -44,6 +45,10 @@
     "eslint": "^8.51.0",
     "eslint-plugin-qwik": "^1.2.14",
     "prettier": "^3.0.3",
+    "rehype-stringify": "^10.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.0.0",
     "storybook": "^7.4.6",
     "storybook-framework-qwik": "^0.2.4",
     "tailwindcss-preflight": "^1.0.1",
@@ -55,6 +60,8 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
-    "@qwikest/icons": "^0.0.13"
+    "@qwikest/icons": "^0.0.13",
+    "luxon": "^3.4.3",
+    "unified": "^11.0.3"
   }
 }
