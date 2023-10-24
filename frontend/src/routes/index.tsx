@@ -85,7 +85,7 @@ function FeaturedProject() {
           about maintaining a large project with many moving parts.
         </p>
         <div class="flex gap-4">
-          <div class="a">
+          <a class="a" href="https://github.com/karambarakat/MoneyTracker">
             <Github
               //@ts-ignore
               height="24"
@@ -93,15 +93,15 @@ function FeaturedProject() {
               class="fill-as-a inline"
             />{" "}
             View Code
-          </div>
-          <div class="a">
+          </a>
+          <a class="a" href="https://tracker.karam.page">
             <Live //@ts-ignore
               height="24"
               width="24"
               class="fill-as-a inline"
             />{" "}
             Live Demo
-          </div>
+          </a>
         </div>
         <div>
           {[
