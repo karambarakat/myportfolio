@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { Link, routeLoader$, useDocumentHead } from "@builder.io/qwik-city";
+import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import { projectsApi } from "~/api";
 import ProjectSummary from "~/components/ProjectSummary";
@@ -11,10 +11,6 @@ export const useProjects = routeLoader$(() => {
 
 export default component$(function () {
   const projects = useProjects();
-
-  // useDocumentHead({
-  //   title
-  // })
 
   return (
     <div class="my-2">
