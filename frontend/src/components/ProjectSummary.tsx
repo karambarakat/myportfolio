@@ -14,12 +14,12 @@ export default component$(function ({ data }: { data: Project }) {
     <div key={data.id}>
       <div
         role="link"
-        onClick$={() => nav("/projects/" + data.slog)}
+        onClick$={() => nav("/projects/" + data.slug)}
         class="cursor-pointer rounded-lg shadow-md overflow-hidden mb-2"
       >
         <DisplayImage src={data.displayPicture?.src} ratio={66} />
       </div>
-      <Link href={"/projects/" + data.slog} class="typo-lg cursor-pointer">
+      <Link href={"/projects/" + data.slug} class="typo-lg cursor-pointer">
         {data.title}
       </Link>
       <p class="typo-dim ">{data.summary}</p>

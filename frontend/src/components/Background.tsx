@@ -64,7 +64,7 @@ const Illuminate = component$(function () {
 
       const svg = ref.value.getBoundingClientRect();
       loc.value = { x: event.clientX - svg.x, y: event.clientY - svg.y };
-    })
+    }),
   );
 
   useStylesScoped$(`
@@ -79,8 +79,13 @@ const Illuminate = component$(function () {
     }
   `);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   return (
-    <div class="relative isolate min-h-800px min-h-800px mix-blend-exclusion">
+    <div
+      class={["relative isolate min-h-800px min-h-800px mix-blend-exclusion"]}
+    >
+      {/* <div class=" h-800px"> */}
       <img
         id="background-pattern"
         src={BgShades}
@@ -88,7 +93,7 @@ const Illuminate = component$(function () {
         width={1200}
         class={[
           "max-w-initial absolute inset-0 z-3",
-          "dark:mix-blend-difference",
+          "dark:mix-blend-difference dark:invert",
         ]}
         loading="lazy"
       />
@@ -109,7 +114,7 @@ const Illuminate = component$(function () {
         />
       </div>
 
-      <div class="bg-white absolute w-full h-full inset-0" />
+      <div class="bg-white dark:bg-black absolute w-full h-full inset-0" />
     </div>
   );
 });

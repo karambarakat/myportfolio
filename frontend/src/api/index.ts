@@ -4,7 +4,7 @@ import GulpImage from "../../public/portfolio_item_2.webp";
 export interface Project {
   id: string;
   title: string;
-  slog: string;
+  slug: string;
   updatedAt: string;
   publishedAt: string;
   content: string;
@@ -23,7 +23,7 @@ export const projectsApi = () =>
     {
       id: "1",
       title: "GSAP Landing Page",
-      slog: "GSAP_Landing_Page",
+      slug: "GSAP_Landing_Page",
       updatedAt: "2023-10-23T12:00:00+00:00",
       publishedAt: "2023-10-23T12:00:00+00:00",
       content: ` 
@@ -37,45 +37,14 @@ In essence, the "GSAP Landing Page" project is a creative showcase of how GSAP c
 `,
       summary: "modern landing page animated with GSAP",
       skills: ["GSAP", "React", "TypeScript"],
-      github: "https://github.com/karambarakat/gsap-",
-      live: "https://gsap-web.vercel.com/",
+      github: "https://github.com/karambarakat/gsap-web",
+      live: "https://gsap-web.vercel.app/",
       displayPicture: { src: GsapImage, type: "image/png" },
-    },
-    {
-      id: "2",
-      title: "Tracker Web App",
-      slog: "Tracker_Web_App",
-      updatedAt: "2023-10-23T12:00:00+00:00",
-      publishedAt: "2023-10-23T12:00:00+00:00",
-      content: `
-I made this project to learn more about web development and learn about maintaining a large project with many moving parts.
-
-here is a brief list of all the features:
-- React and Vite frontend
-- Rust backend
-- Postgres database
-- Storybook isolated components
-- Chromatic visual testing
-- Unit testing with Jest
-- Playwright Integration test
-- Monorepo with Turbo
-- CI/CD with Github Actions
-- Automatic deployment
-- JWT Authentication
-- GraphQL API
-
-
-      `,
-      summary: "full stack web app made with React, Rust and Postgress",
-      skills: ["React", "Rust", "Postgress"],
-      github: "https://github.com/karambarakat/MoneyTracker",
-      live: "https://tracker.karam.page",
-      displayPicture: undefined,
     },
     {
       id: "3",
       title: "Gulp-Handlebars-Express",
-      slog: "Gulp_Handlebars_Express",
+      slug: "Gulp_Handlebars_Express",
       updatedAt: "2023-10-23T12:00:00+00:00",
       publishedAt: "2023-10-23T12:00:00+00:00",
       content: `
@@ -95,3 +64,10 @@ Overall, "Gulp-Handlebars-Express" is a basic web application that illustrates t
       displayPicture: { src: GulpImage, type: "image/webp" },
     },
   ] as Project[];
+
+// this may seems silly but
+// it is important to call this function from the frontend (not just using GulpImage and GsapImage from the RouterLoader$)
+// so the qwik ship these pictures to the frontend
+export const FE = (src: string) => {
+  return { [GulpImage]: GulpImage, [GsapImage]: GsapImage }[src];
+};

@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import AspectRatio from "./AspectRatio";
 
 import NoPreview from "~/../public/noPreview.svg?raw";
+import { FE } from "~/api";
 
 const DisplayImage = component$(function ({
   src,
@@ -21,7 +22,11 @@ const DisplayImage = component$(function ({
             />
           </AspectRatio.Svg>
         ) : (
-          <AspectRatio.Img class="rounded-xl" src={src} alt="Display Image" />
+          <AspectRatio.Img
+            class="rounded-xl"
+            src={FE(src)}
+            alt="Display Image"
+          />
         )}
       </AspectRatio.Root>
     </div>

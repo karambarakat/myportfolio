@@ -18,12 +18,14 @@ export default defineConfig({
     separator: "min-w-1px min-h-1px self-stretch bg-black/80 dark:bg-white/80",
     "separator-inverted": "self-center flex-1",
 
-    a: `cursor-pointer active:translate-y-1px
-      text-blue-500 hover:text-blue-600 
-      dark:text-blue dark:hover:text-blue-500`,
-    "fill-as-a": `active:translate-y-1px
-    fill-blue-500 hover:fill-blue-600 
-    dark:fill-blue dark:hover:fill-blue-500 
+    a: `
+          cursor-pointer active:translate-y-1px
+        text-blue-500 hover:text-blue-600 
+        dark:text-blue dark:hover:text-blue-500`,
+    "fill-as-a": `
+          active:translate-y-1px
+          fill-blue-500 hover:fill-blue-600 
+          dark:fill-blue dark:hover:fill-blue-500 
     `,
     container: "w-800px mx-auto px-50px md:px-100px max-w-screen",
     "container-margins": "mx-25px md:mx-50px",
@@ -47,6 +49,8 @@ export default defineConfig({
     ["h-min", { height: "min-content" }],
     ["w-max", { width: "max-content" }],
     ["h-max", { height: "max-content" }],
+
+    ["invert", { filter: "invert(1)" }],
 
     [
       /^container-(.+)$/,
