@@ -17,7 +17,7 @@ import { DateTime } from "luxon";
 import NotFound from "~/components/NotFound";
 import markdown from "~/utils/markdown";
 
-import styles from "./styles.module.css";
+import styles from "~/components/markdown.module.css";
 
 export const useProject = routeLoader$(async (ctx) => {
   const api = projectsApi().find((project) => project.slog === ctx.params.slog);
