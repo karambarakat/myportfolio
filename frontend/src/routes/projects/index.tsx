@@ -4,10 +4,60 @@ import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import { projectsApi } from "~/api";
 import ProjectSummary from "~/components/ProjectSummary";
-import data from "./(page)/data";
+import { Client, cacheExchange, fetchExchange, gql } from "@urql/core";
+// import { frag } from "~/gql";
 
-export const useProjects = routeLoader$(() => {
-  return [...projectsApi(), ...data];
+const client = new Client({
+  url: "http://localhost:1337/graphql",
+  exchanges: [cacheExchange, fetchExchange],
+});
+
+export const useProjects = routeLoader$(async () => {
+  const fragment = gql`
+    fragment Project on ProjectEntity {
+      id
+      attributes {
+        title
+        content
+        summary
+        github
+        live
+        displayPicture {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        skills {
+          data {
+            attributes {
+              title
+            }
+          }
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  `;
+
+  const query = gql`
+    # Write your query or mutation here
+    query GetAllProjects {
+      projects {
+        data {
+          ...Project
+        }
+      }
+    }
+
+    ${fragment}
+  `;
+
+  const res = await client.query(query, {}).toPromise();
+
+  return [...projectsApi(), ...res.data];
 });
 
 export default component$(function () {
