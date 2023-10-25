@@ -42,35 +42,6 @@ In essence, the "GSAP Landing Page" project is a creative showcase of how GSAP c
       displayPicture: { src: GsapImage, type: "image/png" },
     },
     {
-      id: "2",
-      title: "Tracker Web App",
-      slug: "Tracker_Web_App",
-      updatedAt: "2023-10-23T12:00:00+00:00",
-      publishedAt: "2023-10-23T12:00:00+00:00",
-      content: `
-I made this project to learn more about web development and learn about maintaining a large project with many moving parts.
-
-here is a brief list of all the features:
-- React and Vite frontend
-- Rust backend
-- Postgres database
-- Storybook isolated components
-- Chromatic visual testing
-- Unit testing with Jest
-- Playwright Integration test
-- Monorepo with Turbo
-- CI/CD with Github Actions
-- Automatic deployment
-- JWT Authentication
-- GraphQL API
-      `,
-      summary: "full stack web app made with React, Rust and Postgress",
-      skills: ["React", "Rust", "Postgress"],
-      github: "https://github.com/karambarakat/MoneyTracker",
-      live: "https://tracker.karam.page",
-      displayPicture: undefined,
-    },
-    {
       id: "3",
       title: "Gulp-Handlebars-Express",
       slug: "Gulp_Handlebars_Express",

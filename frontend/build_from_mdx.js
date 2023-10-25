@@ -29,10 +29,6 @@ const schema = yup.object().shape({
   skills: yup.array().of(yup.string()).required(),
   github: yup.string(),
   live: yup.string(),
-  displayPicture: yup.object().shape({
-    src: yup.string().required(),
-    type: yup.string().required(),
-  }),
   slug: yup.string().required(),
 });
 

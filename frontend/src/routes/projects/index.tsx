@@ -4,9 +4,10 @@ import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import { projectsApi } from "~/api";
 import ProjectSummary from "~/components/ProjectSummary";
+import data from "./(page)/data";
 
 export const useProjects = routeLoader$(() => {
-  return projectsApi();
+  return [...projectsApi(), ...data];
 });
 
 export default component$(function () {
