@@ -4,19 +4,47 @@ import {
   routeLoader$,
   type StaticGenerateHandler,
 } from "@builder.io/qwik-city";
-// import { useProjects } from "~/routes/projects";
-import { projectsApi } from "~/api";
 import NotFound from "~/components/NotFound";
 import markdown from "~/utils/markdown";
 
 import styles from "~/components/markdown.module.css";
 import { CommonLayout } from "~/components/layout/page";
+import type { ProjectFragment } from "~/gql/graphql";
+import { Project } from "~/fragments";
 
 export const useProject = routeLoader$(async (ctx) => {
-  const api = projectsApi().find((project) => project.slug === ctx.params.slug);
-  if (!api) return ctx.fail(404, { notFound: "Project not found" });
-  api.content = await markdown(api.content);
-  return api;
+  const query: ProjectFragment = await fetch("http://localhost:1337/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      variables: {
+        id: ctx.params.slug,
+      },
+      query: `
+        query GetOneProject($id: ID!) {
+          project(id: $id){
+            data{
+              ...Project
+            }
+          }
+        }
+        
+        ${Project}
+      `,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => res.data.projects.data);
+
+  console.log("need reconciliation", { query });
+
+  if (!query.attributes) throw new Error("sdf");
+
+  query.attributes.content = await markdown(query.attributes.content);
+
+  return query;
 });
 
 export default component$(() => {
@@ -43,9 +71,29 @@ export default component$(() => {
 });
 
 export const onStaticGenerate: StaticGenerateHandler = async () => {
+  const query: string[] = await fetch("http://localhost:1337/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: /* GraphQL */ `
+        query {
+          projects {
+            data {
+              id
+            }
+          }
+        }
+      `,
+    }),
+  })
+    .then((res) => res.json())
+    .then((res) => res.data.projects.data.id);
+
   return {
-    params: projectsApi().map(({ slug }) => {
-      return { slug };
+    params: query.map((id) => {
+      return { slug: id };
     }),
   };
 };

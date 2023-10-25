@@ -13,8 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n    fragment Project on ProjectEntity {\n      id\n      attributes {\n        title\n        content\n        summary\n        github\n        live\n        displayPicture {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n        skills {\n          data {\n            attributes {\n              title\n            }\n          }\n        }\n        createdAt\n        updatedAt\n      }\n    }\n  ": types.ProjectFragmentDoc,
-    "\n    # Write your query or mutation here\n    query GetAllProjects {\n      projects {\n        data {\n          ...Project\n        }\n      }\n    }\n\n    \n  ": types.GetAllProjectsDocument,
+    "\n  fragment Project on ProjectEntity {\n    id\n    attributes {\n      title\n      content\n      summary\n      github\n      live\n      displayPicture {\n        data {\n          attributes {\n            url\n          }\n        }\n      }\n      skills {\n        data {\n          attributes {\n            title\n          }\n        }\n      }\n      createdAt\n      updatedAt\n    }\n  }\n": types.ProjectFragmentDoc,
 };
 
 /**
@@ -34,11 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    fragment Project on ProjectEntity {\n      id\n      attributes {\n        title\n        content\n        summary\n        github\n        live\n        displayPicture {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n        skills {\n          data {\n            attributes {\n              title\n            }\n          }\n        }\n        createdAt\n        updatedAt\n      }\n    }\n  "): (typeof documents)["\n    fragment Project on ProjectEntity {\n      id\n      attributes {\n        title\n        content\n        summary\n        github\n        live\n        displayPicture {\n          data {\n            attributes {\n              url\n            }\n          }\n        }\n        skills {\n          data {\n            attributes {\n              title\n            }\n          }\n        }\n        createdAt\n        updatedAt\n      }\n    }\n  "];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n    # Write your query or mutation here\n    query GetAllProjects {\n      projects {\n        data {\n          ...Project\n        }\n      }\n    }\n\n    \n  "): (typeof documents)["\n    # Write your query or mutation here\n    query GetAllProjects {\n      projects {\n        data {\n          ...Project\n        }\n      }\n    }\n\n    \n  "];
+export function graphql(source: "\n  fragment Project on ProjectEntity {\n    id\n    attributes {\n      title\n      content\n      summary\n      github\n      live\n      displayPicture {\n        data {\n          attributes {\n            url\n          }\n        }\n      }\n      skills {\n        data {\n          attributes {\n            title\n          }\n        }\n      }\n      createdAt\n      updatedAt\n    }\n  }\n"): (typeof documents)["\n  fragment Project on ProjectEntity {\n    id\n    attributes {\n      title\n      content\n      summary\n      github\n      live\n      displayPicture {\n        data {\n          attributes {\n            url\n          }\n        }\n      }\n      skills {\n        data {\n          attributes {\n            title\n          }\n        }\n      }\n      createdAt\n      updatedAt\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

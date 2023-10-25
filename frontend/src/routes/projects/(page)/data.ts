@@ -1,3 +1,5 @@
+import type { ProjectFragment } from "~/gql/graphql";
+
 // this is auto generated file
 export default [
   {
@@ -11,4 +13,4 @@ export default [
     slug: "_tracker__web__app",
     id: "Tracker_Web_App",
   },
-] as never;
+] as ProjectFragment[];

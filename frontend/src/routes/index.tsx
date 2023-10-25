@@ -9,11 +9,11 @@ import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
-import { projectsApi } from "~/api";
 import data from "./projects/(page)/data";
+import type { ProjectFragment } from "~/gql/graphql";
 
 export const useProjects = routeLoader$(() => {
-  return [...projectsApi(), ...data].filter((pro) => pro.id !== "2");
+  return data.filter((pro) => pro.id !== "2") satisfies ProjectFragment[];
 });
 
 export default component$(() => {

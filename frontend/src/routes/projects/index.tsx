@@ -2,62 +2,38 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
-import { projectsApi } from "~/api";
 import ProjectSummary from "~/components/ProjectSummary";
-import { Client, cacheExchange, fetchExchange, gql } from "@urql/core";
-// import { frag } from "~/gql";
-
-const client = new Client({
-  url: "http://localhost:1337/graphql",
-  exchanges: [cacheExchange, fetchExchange],
-});
+import { Project } from "~/fragments";
+import type { ProjectFragment } from "~/gql/graphql";
 
 export const useProjects = routeLoader$(async () => {
-  const fragment = gql`
-    fragment Project on ProjectEntity {
-      id
-      attributes {
-        title
-        content
-        summary
-        github
-        live
-        displayPicture {
-          data {
-            attributes {
-              url
+  const query: ProjectFragment[] = await fetch(
+    "http://localhost:1337/graphql",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
+        query GetAllProjects {
+          projects {
+            data {
+              ...Project
             }
           }
         }
-        skills {
-          data {
-            attributes {
-              title
-            }
-          }
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  `;
+        ${Project}
+      `,
+      }),
+    },
+  )
+    .then((res) => res.json())
+    .then((res) => res.data.projects.data);
 
-  const query = gql`
-    # Write your query or mutation here
-    query GetAllProjects {
-      projects {
-        data {
-          ...Project
-        }
-      }
-    }
+  console.log("need reconciliation", { query });
 
-    ${fragment}
-  `;
-
-  const res = await client.query(query, {}).toPromise();
-
-  return [...projectsApi(), ...res.data];
+  return [...query];
 });
 
 export default component$(function () {
@@ -71,14 +47,6 @@ export default component$(function () {
           <span>Go Home</span>
         </Link>
       </div>
-      {/* <Link
-        href="../"
-        class="a my-2 typo-lg flex gap-2 items-center cursor-pointer w-fit"
-      >
-        <MoArrowLeft />
-        <span>Go Home</span>
-      </Link> */}
-      {/* <div class="separator" /> */}
       <div class="grid grid-cols-2 gap-4 mt-5">
         {projects.value.map((pro) => {
           return <ProjectSummary key={pro.id} data={pro} />;

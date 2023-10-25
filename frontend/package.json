@@ -59,7 +59,6 @@
     "typescript": "^5.2.2",
     "undici": "^5.26.0",
     "unocss": "^0.56.5",
-    "urql": "^4.0.5",
     "vercel": "^29.1.1",
     "vite": "^4.4.11",
     "vite-tsconfig-paths": "^4.2.1",
@@ -67,7 +66,6 @@
   },
   "dependencies": {
     "@qwikest/icons": "^0.0.13",
-    "@urql/core": "^4.1.4",
     "graphql": "^16.8.1",
     "luxon": "^3.4.3",
     "unified": "^11.0.3"
