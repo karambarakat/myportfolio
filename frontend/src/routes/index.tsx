@@ -138,7 +138,7 @@ const MoreProjects = component$(() => {
     <div>
       <h2 class="typo-h2 text-center">More Projects</h2>
 
-      <div class="grid grid-cols-2 gap-4 my-5">
+      <div class="main-grid my-5">
         {projects.value.map((pro) => {
           return <ProjectSummary key={pro.id} data={pro} />;
         })}

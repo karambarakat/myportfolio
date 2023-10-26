@@ -8,6 +8,7 @@ export default defineConfig({
     filesystem: ["src/**/*.{ts,tsx}"],
   },
   shortcuts: {
+    "main-grid": "grid grid-cols-1 md:grid-cols-2 gap-4",
     typo: "dark:text-white",
     "fill-as-text": "fill-black dark:fill-white",
     "typo-h1": "text-5xl pb-3",

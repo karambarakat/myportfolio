@@ -29,7 +29,7 @@ export default component$(function () {
         <span>Go Home</span>
       </Link> */}
       {/* <div class="separator" /> */}
-      <div class="grid grid-cols-2 gap-4 mt-5">
+      <div class="main-grid mt-5">
         {projects.value.map((pro) => {
           return <ProjectSummary key={pro.id} data={pro} />;
         })}
