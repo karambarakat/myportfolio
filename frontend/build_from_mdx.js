@@ -24,13 +24,28 @@ const yup = require("yup");
 const schema = yup.object().shape({
   title: yup.string().required(),
   updatedAt: yup.date().required(),
-  publishedAt: yup.date().required(),
+  createdAt: yup.date().required(),
   summary: yup.string().required(),
-  skills: yup.array().of(yup.string()).required(),
+  skills: yup.array().of(yup.string()),
   github: yup.string(),
+  displayPicture: yup.string(),
   live: yup.string(),
   slug: yup.string().required(),
 });
+
+const type = `
+export type FrontMatter = {
+  title: string
+  updatedAt: string
+  createdAt: string
+  summary: string
+  skills?: string[]
+  displayPicture?: string
+  github?: string
+  live?: string
+  slug: string
+}
+`;
 
 const caseToSnake = (str) => {
   return str.replace(/([A-Z])/g, (match) => `_${match.toLowerCase()}`);
@@ -44,7 +59,6 @@ function ValidateData(data, location) {
   // add slug
   const slug = location.split("/").slice(-2)[0];
   data.project.slug = caseToSnake(slug);
-  data.project.id = slug;
 
   // validate data
   try {
@@ -72,7 +86,8 @@ async function main() {
 
   // convert to typescript file with `as never` and "// this is auto generated file"
   const dataFile = `// this is auto generated file
-export default ${projectsIndex} as never;
+  ${type}
+export default ${projectsIndex} as FrontMatter[];
 `;
 
   const projectIndexFormate = prettier.format(dataFile, {

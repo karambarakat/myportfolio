@@ -4,22 +4,31 @@ import { Link, useNavigate } from "@builder.io/qwik-city";
 import Github from "~/../public/github.svg?jsx";
 import Live from "~/../public/live.svg?jsx";
 
-import type { Project } from "~/api";
 import DisplayImage from "./DisplayImage";
+import type { ProjectFragment } from "~/gql/graphql";
 
-export default component$(function ({ data }: { data: Project }) {
+export default component$(function ({
+  data,
+  slug,
+}: {
+  data: ProjectFragment;
+  slug: string;
+}) {
   const nav = useNavigate();
 
   return (
-    <div key={data.id}>
+    <div>
       <div
         role="link"
-        onClick$={() => nav("/projects/" + data.slug)}
+        onClick$={() => nav("/projects/" + slug)}
         class="cursor-pointer rounded-lg shadow-md overflow-hidden mb-2"
       >
-        <DisplayImage src={data.displayPicture?.src} ratio={66} />
+        <DisplayImage
+          src={data.displayPicture?.data?.attributes?.url}
+          ratio={66}
+        />
       </div>
-      <Link href={"/projects/" + data.slug} class="typo-lg cursor-pointer">
+      <Link href={"/projects/" + slug} class="typo-lg cursor-pointer">
         {data.title}
       </Link>
       <p class="typo-dim ">{data.summary}</p>

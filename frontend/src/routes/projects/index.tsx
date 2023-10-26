@@ -5,31 +5,21 @@ import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import ProjectSummary from "~/components/ProjectSummary";
 import { Project } from "~/fragments";
 import type { ProjectFragment } from "~/gql/graphql";
+import fetchGraphql from "~/utils/fetchGraphql";
 
 export const useProjects = routeLoader$(async () => {
-  const query: ProjectFragment[] = await fetch(
-    "http://localhost:1337/graphql",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
-        query GetAllProjects {
-          projects {
-            data {
-              ...Project
-            }
+  const query: ProjectFragment[] = await fetchGraphql({
+    query: /* GraphQL */ `
+      query GetAllProjects {
+        projects {
+          data {
+            ...ProjectEntity
           }
         }
-        ${Project}
-      `,
-      }),
-    },
-  )
-    .then((res) => res.json())
-    .then((res) => res.data.projects.data);
+      }
+      ${Project}
+    `,
+  }).then((res) => res.data.projects.data);
 
   console.log("need reconciliation", { query });
 

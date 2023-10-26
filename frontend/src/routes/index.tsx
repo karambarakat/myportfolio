@@ -9,11 +9,39 @@ import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
+import type { FrontMatter } from "./projects/(page)/data";
 import data from "./projects/(page)/data";
-import type { ProjectFragment } from "~/gql/graphql";
+import type { ProjectMetaFragment } from "~/gql/graphql";
+
+function castType(input: FrontMatter) {
+  if (input.skills) {
+    input.skills = {
+      // @ts-ignore
+      data: input.skills.map((e) => {
+        return {
+          attributes: {
+            title: e,
+          },
+        };
+      }),
+    };
+  }
+
+  if (input.displayPicture) {
+    // @ts-ignore
+    input.displayPicture = {
+      data: {
+        attributes: {
+          url: input.displayPicture,
+        },
+      },
+    };
+  }
+  return input as ProjectMetaFragment;
+}
 
 export const useProjects = routeLoader$(() => {
-  return data.filter((pro) => pro.id !== "2") satisfies ProjectFragment[];
+  return data.map((e) => castType(e));
 });
 
 export default component$(() => {
