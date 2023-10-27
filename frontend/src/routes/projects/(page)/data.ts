@@ -8,7 +8,7 @@ export default [
     skills: ["React", "Rust", "Postgress"],
     github: "https://github.com/karambarakat/MoneyTracker",
     live: "https://tracker.karam.page",
-    slug: "_tracker__web__app",
+    slug: "Tracker_Web_App",
     id: "Tracker_Web_App",
   },
 ] as never;

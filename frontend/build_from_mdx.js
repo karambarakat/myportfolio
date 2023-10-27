@@ -32,10 +32,6 @@ const schema = yup.object().shape({
   slug: yup.string().required(),
 });
 
-const caseToSnake = (str) => {
-  return str.replace(/([A-Z])/g, (match) => `_${match.toLowerCase()}`);
-};
-
 function ValidateData(data, location) {
   if (!data.project) {
     throw new Error("Project data is missing in " + location);
@@ -43,7 +39,7 @@ function ValidateData(data, location) {
 
   // add slug
   const slug = location.split("/").slice(-2)[0];
-  data.project.slug = caseToSnake(slug);
+  data.project.slug = slug;
   data.project.id = slug;
 
   // validate data

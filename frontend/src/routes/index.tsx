@@ -10,10 +10,10 @@ import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
 import { projectsApi } from "~/api";
-import data from "./projects/(page)/data";
+// import data from "./projects/(page)/data";
 
 export const useProjects = routeLoader$(() => {
-  return [...projectsApi(), ...data].filter((pro) => pro.id !== "2");
+  return [...projectsApi()].filter((pro) => pro.id !== "2");
 });
 
 export default component$(() => {
