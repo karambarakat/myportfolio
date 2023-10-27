@@ -9,39 +9,18 @@ import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
-import type { FrontMatter } from "./projects/(page)/data";
 import data from "./projects/(page)/data";
+import { projectCast } from "~/utils/frontMatter";
+import { projectSummary } from "./projects";
 import type { ProjectMetaFragment } from "~/gql/graphql";
 
-function castType(input: FrontMatter) {
-  if (input.skills) {
-    input.skills = {
-      // @ts-ignore
-      data: input.skills.map((e) => {
-        return {
-          attributes: {
-            title: e,
-          },
-        };
-      }),
-    };
-  }
+export const useProjects = routeLoader$(async () => {
+  const query = await projectSummary();
 
-  if (input.displayPicture) {
-    // @ts-ignore
-    input.displayPicture = {
-      data: {
-        attributes: {
-          url: input.displayPicture,
-        },
-      },
-    };
-  }
-  return input as ProjectMetaFragment;
-}
-
-export const useProjects = routeLoader$(() => {
-  return data.map((e) => castType(e));
+  return [
+    ...query,
+    ...data.map((e) => projectCast(e)),
+  ] as ProjectMetaFragment[];
 });
 
 export default component$(() => {
@@ -168,7 +147,7 @@ const MoreProjects = component$(() => {
 
       <div class="grid grid-cols-2 gap-4 my-5">
         {projects.value.map((pro) => {
-          return <ProjectSummary key={pro.id} data={pro} />;
+          return <ProjectSummary key={pro.slug} data={pro} />;
         })}
       </div>
     </div>

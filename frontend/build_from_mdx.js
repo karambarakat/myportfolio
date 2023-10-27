@@ -58,7 +58,7 @@ function ValidateData(data, location) {
 
   // add slug
   const slug = location.split("/").slice(-2)[0];
-  data.project.slug = caseToSnake(slug);
+  data.project.slug = slug;
 
   // validate data
   try {

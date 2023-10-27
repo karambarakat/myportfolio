@@ -3,12 +3,14 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import ProjectSummary from "~/components/ProjectSummary";
-import { Project } from "~/fragments";
-import type { ProjectFragment } from "~/gql/graphql";
-import fetchGraphql from "~/utils/fetchGraphql";
+import { ProjectEntity } from "~/fragments";
+import type { ProjectEntityFragment, ProjectMetaFragment } from "~/gql/graphql";
+import fetchGraphql, { StrapiPicture } from "~/utils/fetchGraphql";
+import data from "./(page)/data";
+import { projectCast } from "~/utils/frontMatter";
 
-export const useProjects = routeLoader$(async () => {
-  const query: ProjectFragment[] = await fetchGraphql({
+export const projectSummary = async () => {
+  const query: ProjectEntityFragment[] = await fetchGraphql({
     query: /* GraphQL */ `
       query GetAllProjects {
         projects {
@@ -17,13 +19,25 @@ export const useProjects = routeLoader$(async () => {
           }
         }
       }
-      ${Project}
+      ${ProjectEntity}
     `,
-  }).then((res) => res.data.projects.data);
+  }).then((res) => {
+    return res.data.projects.data;
+  });
 
-  console.log("need reconciliation", { query });
+  return query.map((e) => {
+    StrapiPicture(e.attributes?.displayPicture);
+    return e.attributes;
+  });
+};
 
-  return [...query];
+export const useProjects = routeLoader$(async () => {
+  const query = await projectSummary();
+
+  return [
+    ...query,
+    ...data.map((e) => projectCast(e)),
+  ] as ProjectMetaFragment[];
 });
 
 export default component$(function () {
@@ -39,7 +53,7 @@ export default component$(function () {
       </div>
       <div class="grid grid-cols-2 gap-4 mt-5">
         {projects.value.map((pro) => {
-          return <ProjectSummary key={pro.id} data={pro} />;
+          return <ProjectSummary key={pro.slug} data={pro} />;
         })}
       </div>
     </div>

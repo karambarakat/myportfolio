@@ -4,10 +4,9 @@ export const ProjectEntity = /* GraphQL */ `
     attributes {
       content
       title summary github live 
-      displayPicture { data { attributes { url } } } 
+      displayPicture { data { attributes { url width height } } } 
       skills { data { attributes { title } } } 
-      createdAt updatedAt
-
+      createdAt updatedAt slug
     }
   }
 `;
@@ -16,18 +15,28 @@ export const Project = /* GraphQL */ `
   fragment Project on Project {
     content
     title summary github live 
-    displayPicture { data { attributes { url } } } 
+    displayPicture { data { attributes { url width height } } } 
     skills { data { attributes { title } } } 
-    createdAt updatedAt
+    createdAt updatedAt slug
   }
 `;
 
 export const ProjectMeta = /* GraphQL */ `
   fragment ProjectMeta on Project {
     title summary github live 
-    displayPicture { data { attributes { url } } } 
+    displayPicture { data { attributes { url width height } } } 
     skills { data { attributes { title } } } 
-    createdAt updatedAt
+    createdAt updatedAt slug
+  }
+`;
+
+export const Picture = /* GraphQL */ `
+  fragment picture on UploadFileEntityResponse{
+    data{
+      attributes {
+        url width height
+      }
+    }
   }
 `;
 

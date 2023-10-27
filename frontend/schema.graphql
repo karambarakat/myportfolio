@@ -206,6 +206,7 @@ input ProjectFiltersInput {
   github: StringFilterInput
   live: StringFilterInput
   skills: SkillFiltersInput
+  slug: StringFilterInput
   createdAt: DateTimeFilterInput
   updatedAt: DateTimeFilterInput
   publishedAt: DateTimeFilterInput
@@ -222,6 +223,7 @@ input ProjectInput {
   live: String
   displayPicture: ID
   skills: [ID]
+  slug: String
   publishedAt: DateTime
 }
 
@@ -238,6 +240,7 @@ type Project {
     sort: [String] = []
     publicationState: PublicationState = LIVE
   ): SkillRelationResponseCollection
+  slug: String!
   createdAt: DateTime
   updatedAt: DateTime
   publishedAt: DateTime

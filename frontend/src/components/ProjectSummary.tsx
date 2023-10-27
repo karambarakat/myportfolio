@@ -5,22 +5,18 @@ import Github from "~/../public/github.svg?jsx";
 import Live from "~/../public/live.svg?jsx";
 
 import DisplayImage from "./DisplayImage";
-import type { ProjectFragment } from "~/gql/graphql";
+import type { ProjectMetaFragment } from "~/gql/graphql";
 
-export default component$(function ({
-  data,
-  slug,
-}: {
-  data: ProjectFragment;
-  slug: string;
-}) {
+export default component$(function ({ data }: { data: ProjectMetaFragment }) {
   const nav = useNavigate();
+
+  console.log({ first: data.displayPicture?.data?.attributes?.url });
 
   return (
     <div>
       <div
         role="link"
-        onClick$={() => nav("/projects/" + slug)}
+        onClick$={() => nav("/projects/" + data.slug)}
         class="cursor-pointer rounded-lg shadow-md overflow-hidden mb-2"
       >
         <DisplayImage
@@ -28,7 +24,7 @@ export default component$(function ({
           ratio={66}
         />
       </div>
-      <Link href={"/projects/" + slug} class="typo-lg cursor-pointer">
+      <Link href={"/projects/" + data.slug} class="typo-lg cursor-pointer">
         {data.title}
       </Link>
       <p class="typo-dim ">{data.summary}</p>
