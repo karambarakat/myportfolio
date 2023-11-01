@@ -386,6 +386,7 @@ export interface ApiProjectProject extends Schema.CollectionType {
       "oneToMany",
       "api::skill.skill"
     >;
+    slug: Attribute.UID & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

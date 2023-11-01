@@ -24,13 +24,54 @@ const yup = require("yup");
 const schema = yup.object().shape({
   title: yup.string().required(),
   updatedAt: yup.date().required(),
-  publishedAt: yup.date().required(),
+  createdAt: yup.date().required(),
   summary: yup.string().required(),
-  skills: yup.array().of(yup.string()).required(),
+  skills: yup.array().of(yup.string()),
   github: yup.string(),
+  displayPicture: yup.string(),
   live: yup.string(),
   slug: yup.string().required(),
 });
+
+const type = `
+export type FrontMatter = {
+  title: string
+  updatedAt: string
+  createdAt: string
+  summary: string
+  skills?: string[]
+  displayPicture?: string
+  github?: string
+  live?: string
+  slug: string
+}
+`;
+
+const projectCast = function (input) {
+  return {
+    ...input,
+    displayPicture:
+      typeof input.displayPicture === "undefined"
+        ? undefined
+        : {
+            data: {
+              attributes: {
+                url: input.displayPicture,
+              },
+            },
+          },
+    skills:
+      typeof input.skills === "undefined"
+        ? undefined
+        : {
+            data: input.skills.map((s) => ({ attributes: { title: s } })),
+          },
+  };
+};
+
+const caseToSnake = (str) => {
+  return str.replace(/([A-Z])/g, (match) => `_${match.toLowerCase()}`);
+};
 
 function ValidateData(data, location) {
   if (!data.project) {
@@ -40,7 +81,6 @@ function ValidateData(data, location) {
   // add slug
   const slug = location.split("/").slice(-2)[0];
   data.project.slug = slug;
-  data.project.id = slug;
 
   // validate data
   try {
@@ -59,7 +99,9 @@ async function main() {
     const mdxSource = await readFile(file, "utf8");
     const { data } = matter(mdxSource);
 
-    const project = ValidateData(data, file);
+    var project = ValidateData(data, file);
+
+    project = projectCast(project);
 
     projects.push(project);
   }
@@ -68,7 +110,9 @@ async function main() {
 
   // convert to typescript file with `as never` and "// this is auto generated file"
   const dataFile = `// this is auto generated file
-export default ${projectsIndex} as never;
+  ${type}
+  import type { ProjectMetaFragment } from "~/gql/graphql";
+  export default ${projectsIndex}  satisfies ProjectMetaFragment[] as ProjectMetaFragment[];
 `;
 
   const projectIndexFormate = prettier.format(dataFile, {

@@ -3,3 +3,7 @@ node_modules
 # turbo
 ./turbo
 out
+
+# env
+.env
+*.local

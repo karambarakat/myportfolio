@@ -2,12 +2,52 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link, routeLoader$ } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
-import { projectsApi } from "~/api";
 import ProjectSummary from "~/components/ProjectSummary";
+import { ProjectEntity } from "~/fragments";
+import type { ProjectEntityFragment, ProjectMetaFragment } from "~/gql/graphql";
+import fetchGraphql, { StrapiPicture } from "~/utils/fetchGraphql";
 import data from "./(page)/data";
+import { from_slug } from "./(page)/pictures";
 
-export const useProjects = routeLoader$(() => {
-  return [...projectsApi(), ...data];
+export const projectSummary = async () => {
+  const query: ProjectEntityFragment[] = await fetchGraphql({
+    query: /* GraphQL */ `
+      query GetAllProjects {
+        projects {
+          data {
+            ...ProjectEntity
+          }
+        }
+      }
+      ${ProjectEntity}
+    `,
+  }).then((res) => {
+    return res.data.projects.data;
+  });
+
+  return query.map((e) => {
+    StrapiPicture(e.attributes?.displayPicture);
+    return e.attributes;
+  });
+};
+
+export const useProjects = routeLoader$(async () => {
+  const query = await projectSummary();
+
+  data.forEach((e) => {
+    const img = from_slug(e.slug);
+    if (img) {
+      e.displayPicture = {
+        data: {
+          attributes: {
+            url: img,
+          },
+        },
+      };
+    }
+  });
+
+  return [...query, ...data] as ProjectMetaFragment[];
 });
 
 export default component$(function () {
@@ -21,17 +61,9 @@ export default component$(function () {
           <span>Go Home</span>
         </Link>
       </div>
-      {/* <Link
-        href="../"
-        class="a my-2 typo-lg flex gap-2 items-center cursor-pointer w-fit"
-      >
-        <MoArrowLeft />
-        <span>Go Home</span>
-      </Link> */}
-      {/* <div class="separator" /> */}
-      <div class="main-grid mt-5">
+      <div class="grid grid-cols-2 gap-4 mt-5">
         {projects.value.map((pro) => {
-          return <ProjectSummary key={pro.id} data={pro} />;
+          return <ProjectSummary key={pro.slug} data={pro} />;
         })}
       </div>
     </div>

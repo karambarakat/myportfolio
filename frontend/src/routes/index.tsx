@@ -9,11 +9,28 @@ import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
-import { projectsApi } from "~/api";
-// import data from "./projects/(page)/data";
+import data from "./projects/(page)/data";
+import { projectSummary } from "./projects";
+import type { ProjectMetaFragment } from "~/gql/graphql";
+import { from_slug } from "./projects/(page)/pictures";
 
-export const useProjects = routeLoader$(() => {
-  return [...projectsApi()].filter((pro) => pro.id !== "2");
+export const useProjects = routeLoader$(async () => {
+  const query = await projectSummary();
+
+  data.forEach((e) => {
+    const img = from_slug(e.slug);
+    if (img) {
+      e.displayPicture = {
+        data: {
+          attributes: {
+            url: img,
+          },
+        },
+      };
+    }
+  });
+
+  return [...query, ...data] as ProjectMetaFragment[];
 });
 
 export default component$(() => {
@@ -140,7 +157,7 @@ const MoreProjects = component$(() => {
 
       <div class="main-grid my-5">
         {projects.value.map((pro) => {
-          return <ProjectSummary key={pro.id} data={pro} />;
+          return <ProjectSummary key={pro.slug} data={pro} />;
         })}
       </div>
     </div>
