@@ -7,7 +7,7 @@ import { ProjectEntity } from "~/fragments";
 import type { ProjectEntityFragment, ProjectMetaFragment } from "~/gql/graphql";
 import fetchGraphql, { StrapiPicture } from "~/utils/fetchGraphql";
 import data from "./(page)/data";
-import { projectCast } from "~/utils/frontMatter";
+import { from_slug } from "./(page)/pictures";
 
 export const projectSummary = async () => {
   const query: ProjectEntityFragment[] = await fetchGraphql({
@@ -34,10 +34,20 @@ export const projectSummary = async () => {
 export const useProjects = routeLoader$(async () => {
   const query = await projectSummary();
 
-  return [
-    ...query,
-    ...data.map((e) => projectCast(e)),
-  ] as ProjectMetaFragment[];
+  data.forEach((e) => {
+    const img = from_slug(e.slug);
+    if (img) {
+      e.displayPicture = {
+        data: {
+          attributes: {
+            url: img,
+          },
+        },
+      };
+    }
+  });
+
+  return [...query, ...data] as ProjectMetaFragment[];
 });
 
 export default component$(function () {

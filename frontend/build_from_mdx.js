@@ -47,6 +47,28 @@ export type FrontMatter = {
 }
 `;
 
+const projectCast = function (input) {
+  return {
+    ...input,
+    displayPicture:
+      typeof input.displayPicture === "undefined"
+        ? undefined
+        : {
+            data: {
+              attributes: {
+                url: input.displayPicture,
+              },
+            },
+          },
+    skills:
+      typeof input.skills === "undefined"
+        ? undefined
+        : {
+            data: input.skills.map((s) => ({ attributes: { title: s } })),
+          },
+  };
+};
+
 const caseToSnake = (str) => {
   return str.replace(/([A-Z])/g, (match) => `_${match.toLowerCase()}`);
 };
@@ -77,7 +99,9 @@ async function main() {
     const mdxSource = await readFile(file, "utf8");
     const { data } = matter(mdxSource);
 
-    const project = ValidateData(data, file);
+    var project = ValidateData(data, file);
+
+    project = projectCast(project);
 
     projects.push(project);
   }
@@ -87,7 +111,8 @@ async function main() {
   // convert to typescript file with `as never` and "// this is auto generated file"
   const dataFile = `// this is auto generated file
   ${type}
-export default ${projectsIndex} as FrontMatter[];
+  import type { ProjectMetaFragment } from "~/gql/graphql";
+  export default ${projectsIndex}  satisfies ProjectMetaFragment[] as ProjectMetaFragment[];
 `;
 
   const projectIndexFormate = prettier.format(dataFile, {

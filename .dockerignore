@@ -9,3 +9,7 @@ out
 **/compose.yaml
 Dockerfile
 compose.yaml
+
+# env
+.env
+*.local

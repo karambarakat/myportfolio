@@ -10,17 +10,27 @@ import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
 import data from "./projects/(page)/data";
-import { projectCast } from "~/utils/frontMatter";
 import { projectSummary } from "./projects";
 import type { ProjectMetaFragment } from "~/gql/graphql";
+import { from_slug } from "./projects/(page)/pictures";
 
 export const useProjects = routeLoader$(async () => {
   const query = await projectSummary();
 
-  return [
-    ...query,
-    ...data.map((e) => projectCast(e)),
-  ] as ProjectMetaFragment[];
+  data.forEach((e) => {
+    const img = from_slug(e.slug);
+    if (img) {
+      e.displayPicture = {
+        data: {
+          attributes: {
+            url: img,
+          },
+        },
+      };
+    }
+  });
+
+  return [...query, ...data] as ProjectMetaFragment[];
 });
 
 export default component$(() => {

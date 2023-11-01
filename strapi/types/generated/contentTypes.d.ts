@@ -362,6 +362,84 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiProjectProject extends Schema.CollectionType {
+  collectionName: "projects";
+  info: {
+    singularName: "project";
+    pluralName: "projects";
+    displayName: "project";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    content: Attribute.RichText & Attribute.Required;
+    summary: Attribute.Text;
+    user: Attribute.Relation<"api::project.project", "oneToOne", "admin::user">;
+    github: Attribute.String;
+    live: Attribute.String;
+    displayPicture: Attribute.Media;
+    skills: Attribute.Relation<
+      "api::project.project",
+      "oneToMany",
+      "api::skill.skill"
+    >;
+    slug: Attribute.UID & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      "api::project.project",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      "api::project.project",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSkillSkill extends Schema.CollectionType {
+  collectionName: "skills";
+  info: {
+    singularName: "skill";
+    pluralName: "skills";
+    displayName: "skill";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    project: Attribute.Relation<
+      "api::skill.skill",
+      "manyToOne",
+      "api::project.project"
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      "api::skill.skill",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      "api::skill.skill",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: "files";
   info: {
@@ -677,84 +755,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiProjectProject extends Schema.CollectionType {
-  collectionName: "projects";
-  info: {
-    singularName: "project";
-    pluralName: "projects";
-    displayName: "project";
-    description: "";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    content: Attribute.RichText & Attribute.Required;
-    summary: Attribute.Text;
-    user: Attribute.Relation<"api::project.project", "oneToOne", "admin::user">;
-    github: Attribute.String;
-    live: Attribute.String;
-    displayPicture: Attribute.Media;
-    skills: Attribute.Relation<
-      "api::project.project",
-      "oneToMany",
-      "api::skill.skill"
-    >;
-    slug: Attribute.UID & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      "api::project.project",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      "api::project.project",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSkillSkill extends Schema.CollectionType {
-  collectionName: "skills";
-  info: {
-    singularName: "skill";
-    pluralName: "skills";
-    displayName: "skill";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    project: Attribute.Relation<
-      "api::skill.skill",
-      "manyToOne",
-      "api::project.project"
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      "api::skill.skill",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      "api::skill.skill",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module "@strapi/types" {
   export module Shared {
     export interface ContentTypes {
@@ -765,14 +765,14 @@ declare module "@strapi/types" {
       "admin::api-token-permission": AdminApiTokenPermission;
       "admin::transfer-token": AdminTransferToken;
       "admin::transfer-token-permission": AdminTransferTokenPermission;
+      "api::project.project": ApiProjectProject;
+      "api::skill.skill": ApiSkillSkill;
       "plugin::upload.file": PluginUploadFile;
       "plugin::upload.folder": PluginUploadFolder;
       "plugin::i18n.locale": PluginI18NLocale;
       "plugin::users-permissions.permission": PluginUsersPermissionsPermission;
       "plugin::users-permissions.role": PluginUsersPermissionsRole;
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
-      "api::project.project": ApiProjectProject;
-      "api::skill.skill": ApiSkillSkill;
     }
   }
 }

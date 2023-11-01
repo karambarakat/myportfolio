@@ -11,10 +11,10 @@ import styles from "~/components/markdown.module.css";
 import { CommonLayout } from "~/components/layout/page";
 import type { ProjectFragment, ProjectMetaFragment } from "~/gql/graphql";
 import { Project } from "~/fragments";
-import fetchGraphql from "~/utils/fetchGraphql";
+import fetchGraphql, { StrapiPicture } from "~/utils/fetchGraphql";
 
 export const useProject = routeLoader$(async (ctx) => {
-  const query: ProjectFragment = await fetchGraphql({
+  const query: ProjectFragment | undefined = await fetchGraphql({
     variables: {
       id: ctx.params.slug,
     },
@@ -31,12 +31,16 @@ export const useProject = routeLoader$(async (ctx) => {
 
       ${Project}
     `,
-  }).then((res) => res?.data?.projects?.data[0]?.attributes);
+  }).then((res) => res?.data?.projects?.data?.[0]?.attributes);
 
-  if (!query)
+  if (!query) {
     ctx.fail(404, { message: `project with ${ctx.params.slug} not found` });
+    return;
+  }
 
   query.content = await markdown(query.content);
+
+  StrapiPicture(query.displayPicture);
 
   return query;
 });
@@ -47,7 +51,7 @@ export default component$(() => {
   // console.log(project.value);
 
   // unknown error
-  if (!project.value.createdAt)
+  if (!project.value?.createdAt)
     return (
       <NotFound>
         <span>Project not found</span>
@@ -87,6 +91,12 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
 
 export const head: DocumentHead = ({ resolveValue, params }) => {
   const project = resolveValue(useProject);
+
+  if (!project)
+    return {
+      title: "Project not found",
+    };
+
   return {
     title: `Project "${project.title}"`,
     meta: [

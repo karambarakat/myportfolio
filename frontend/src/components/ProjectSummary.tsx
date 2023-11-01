@@ -7,10 +7,12 @@ import Live from "~/../public/live.svg?jsx";
 import DisplayImage from "./DisplayImage";
 import type { ProjectMetaFragment } from "~/gql/graphql";
 
-export default component$(function ({ data }: { data: ProjectMetaFragment }) {
+const ProjectSummary = component$(function ({
+  data,
+}: {
+  data: ProjectMetaFragment;
+}) {
   const nav = useNavigate();
-
-  console.log({ first: data.displayPicture?.data?.attributes?.url });
 
   return (
     <div>
@@ -54,3 +56,5 @@ export default component$(function ({ data }: { data: ProjectMetaFragment }) {
     </div>
   );
 });
+
+export default ProjectSummary;

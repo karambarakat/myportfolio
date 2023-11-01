@@ -11,8 +11,6 @@ const DisplayImage = component$(function ({
   src?: string;
   ratio?: number;
 }) {
-  console.log({ src });
-
   return (
     <div class="rounded-xl ">
       <AspectRatio.Root ratio={ratio || 66}>
