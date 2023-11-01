@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 1337
 
-CMD npx hello-world-server --port 1337
+CMD ["npm", "run", "start"]

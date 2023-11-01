@@ -15,6 +15,7 @@
     "build.preview": "vite build --ssr src/entry.preview.tsx",
     "build.server": "vite build -c adapters/static/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
+    "graphql": "graphql-codegen",
     "deploy": "vercel deploy",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.2.14",
     "@builder.io/qwik-city": "^1.2.14",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
     "@storybook/addon-essentials": "^7.4.6",
     "@storybook/addon-links": "^7.4.6",
     "@storybook/blocks": "^7.4.6",
@@ -63,6 +66,7 @@
   },
   "dependencies": {
     "@qwikest/icons": "^0.0.13",
+    "graphql": "^16.8.1",
     "luxon": "^3.4.3",
     "unified": "^11.0.3"
   }
