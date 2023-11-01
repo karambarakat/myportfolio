@@ -2,8 +2,16 @@
   "name": "portfolio",
   "version": "1.0.0",
   "description": "hi, this is my portfolio, see live at https://karam.page",
-  "scripts": {},
+  "scripts": {
+    "lighthouse": "./lighthouse.sh"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv-cli": "^7.3.0",
+    "lighthouse": "^11.2.0",
+    "wait-on": "^7.0.1"
+  }
 }

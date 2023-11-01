@@ -33,7 +33,12 @@ const ProjectSummary = component$(function ({
       <div>
         <div class="flex gap-2">
           {data.github && (
-            <a target="_blank" href={data.github} class="a">
+            <a
+              target="_blank"
+              href={data.github}
+              class="a"
+              aria-label="view code on GitHub"
+            >
               <Github
                 //@ts-ignore
                 height="24"
@@ -43,7 +48,12 @@ const ProjectSummary = component$(function ({
             </a>
           )}
           {data.live && (
-            <a target="_blank" href={data.live} class="a">
+            <a
+              target="_blank"
+              href={data.live}
+              class="a"
+              aria-label="view live demo"
+            >
               <Live //@ts-ignore
                 height="24"
                 width="24"

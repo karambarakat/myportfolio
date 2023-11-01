@@ -61,4 +61,18 @@ export default [
     live: "https://tracker.karam.page",
     slug: "Tracker_Web_App",
   },
+  {
+    title: "Google Lighthouse Performance",
+    updatedAt: "2023-10-23T12:00:00.000Z",
+    createdAt: "2023-10-23T12:00:00.000Z",
+    summary: "google lighthouse report of my portfolio",
+    skills: {
+      data: [
+        { attributes: { title: "Google Lighthouse" } },
+        { attributes: { title: "Perfomance" } },
+        { attributes: { title: "SEO" } },
+      ],
+    },
+    slug: "Web_Metric_And_Vital",
+  },
 ] satisfies ProjectMetaFragment[] as ProjectMetaFragment[];

@@ -8,8 +8,8 @@ import {
   useStylesScoped$,
 } from "@builder.io/qwik";
 
-import BgSelector from "../../public/hov/selector.png";
-import BgShades from "../../public/hov/shades.png";
+import BgSelector from "../../public/hov/selector.webp";
+import BgShades from "../../public/hov/shades.webp";
 
 const Background = function ({
   children: content,
@@ -79,14 +79,19 @@ const Illuminate = component$(function () {
     }
   `);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
   return (
     <div
-      class={["relative isolate min-h-800px min-h-800px mix-blend-exclusion"]}
+      // @ts-ignore
+      style={{ speak: "none" }}
+      role="presentation"
+      tabIndex={-1}
+      class={[
+        "print:hidden relative isolate min-h-800px min-h-800px mix-blend-exclusion",
+      ]}
     >
-      {/* <div class=" h-800px"> */}
       <img
+        alt=""
+        aria-hidden="true"
         id="background-pattern"
         src={BgShades}
         height={800}
@@ -100,6 +105,8 @@ const Illuminate = component$(function () {
 
       <div class="absolute inset-0 z-4 mix-blend-multiply dark:mix-blend-overlay">
         <img
+          alt=""
+          aria-hidden="true"
           ref={ref}
           id="background-mouse-effect"
           src={BgShades}
