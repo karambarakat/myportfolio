@@ -1,5 +1,5 @@
 # doctl apps update 6305e040-3754-4fbf-af22-b73f672df74d --spec do_app.yaml
-# doctl apps spec get 6305e040-3754-4fbf-af22-b73f672df74d > do_app.yaml
+# doctl apps spec get 6305e040-3754-4fbf-af22-b73f672df74d > do_app.yaml.local
 alerts:
 - rule: DEPLOYMENT_FAILED
 - rule: DOMAIN_FAILED
@@ -20,34 +20,38 @@ services:
 - dockerfile_path: strapi/Dockerfile
   envs:
   - key: DATABASE_URL
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     value: ${db.DATABASE_URL}
   - key: HOST
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     value: 0.0.0.0
   - key: PORT
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     value: "1337"
   - key: APP_KEYS
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     type: SECRET
     value: EV[1:PHojBM9ZAmTvd5JUmUDwGvDuS/DcnU8K:iCmIwNMU3dqaOUbJcqZ+w4/IozcqHIKSm4fOvvk7gLo0rQTzQr4ERPNP8pE+VO2pSdrYQZesL+iCXoySNWmd++WZdk05WOiyzhnH4m684nHV49LJsAauxJXTNBHEkvykv3sLqLDMC1O+AdvEcEJezm9zpUJolLGNRFXhDny0UKdQGt5FgqJmZ3n3vHxhsy4X]
   - key: API_TOKEN_SALT
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     type: SECRET
     value: EV[1:JWBYaOkBUV4nEr/I4UGLacA8ECEsfVW4:Hisz7OjKU6pcqXBLF668Sy/2quZhykx+Ilnk1k5hDF2BPCBhi2gyFCWLrqVO/fdnOI8KEHabafs2ZZEdIj84+MH3o4kO2GmPT+uQipzdbSTTFlmsmbrPgoLN9N3yr16KnHXKO2GWZUsX4TrYc7JsP+Wxx/9bIROIyE0LX7GeMbwQOYJ4uowMWT5ivIoTJg1X]
   - key: ADMIN_JWT_SECRET
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     type: SECRET
     value: EV[1:IuG3YU717vGshsYO2987p04I3B23OJXE:is9g0RB9OFQA2OOALaZ5V9QNIbA39OdrdrkV+JPX7dZDHUZpaOzA7JPnZmHPaRpWru/IU9Y+0rNOD/J7zR1/1XkjXtvcOJz3v1rs0UTqPiS6Fx9a2H4pNj1PiGBfxNQAkuu1mO41hGexOJs7Im9PnSj0asBm4xP3OiPYEKSd7eVHsQCGeSCy2K0o1Hp1MxFJ]
   - key: TRANSFER_TOKEN_SALT
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     type: SECRET
     value: EV[1:Xx9NyEGUXapC5+lJOs6Ul35QMf3VPyG5:E3IRF0lUcs5sAxJihAeQ8Ngfz6zS1hgB048asdgwMpFlYv+1iQmjY25q/OkvitaIwKIozyBTh5c7CcfAQrAFzS6Ujayd70YlFXkJAJUOviUfX/MKVagdEIB/6UCV9kZTVIw9DPnUPl7+FMrwsJ7adWaRSj6fi3cTtrXFr7ASU3YHFIujD9AkRlc5hSEzc09R]
   - key: JWT_SECRET
-    scope: RUN_AND_BUILD_TIME
+    scope: RUN_TIME
     type: SECRET
     value: EV[1:YnaA22DClNd872bqubbP6cVs58AWHBei:OAaL7qWI/UIGXOJpYFKAO3n96i+un27x0apQ90vOp8r+NdrMfjDN53T5pOgfcUxP15wfpFDaPHAziTSqYXn1kYY1+Wgj1ZuQXImymPeNs79BFisLjapHWqLg37OCUGUVDw7Tjphj5U5THw2nUN2qhHH77xS70+zyqRNmJZxSHen1wNCefMBQqOTy/g+mv/af]
+  - key: DATABASE_CLIENT
+    scope: RUN_TIME
+    value: postgres
+
 
   github:
     branch: main

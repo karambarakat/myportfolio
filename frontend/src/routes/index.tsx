@@ -30,7 +30,10 @@ export const useProjects = routeLoader$(async () => {
     }
   });
 
-  return [...query, ...data] as ProjectMetaFragment[];
+  return [...query, ...data].filter(
+    // filter featured project
+    (e) => e?.slug !== "Tracker_Web_App",
+  ) as ProjectMetaFragment[];
 });
 
 export default component$(() => {

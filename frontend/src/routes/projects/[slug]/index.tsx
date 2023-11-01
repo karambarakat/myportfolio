@@ -70,17 +70,18 @@ export default component$(() => {
 });
 
 export const onStaticGenerate: StaticGenerateHandler = async () => {
-  const query: string[] = await fetchGraphql({
-    query: /* GraphQL */ `
-      query {
-        projects {
-          data {
-            id
+  const query: string[] =
+    (await fetchGraphql({
+      query: /* GraphQL */ `
+        query {
+          projects {
+            data {
+              id
+            }
           }
         }
-      }
-    `,
-  }).then((res) => res.data.projects.data.id);
+      `,
+    }).then((res) => res?.data?.projects?.data?.id)) || [];
 
   return {
     params: query.map((id) => {

@@ -4,7 +4,7 @@ export default function fetchGraphql(body: {
   query: string;
   variables?: object;
 }) {
-  return fetch(import.meta.env.BACKEND + "/graphql", {
+  return fetch(import.meta.env.PUBLIC_BACKEND + "/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -27,6 +27,7 @@ export default function fetchGraphql(body: {
 
 export const StrapiPicture = (url: PictureFragment | undefined | null) => {
   if (url?.data?.attributes?.url) {
-    url.data.attributes.url = import.meta.env.BACKEND + url.data.attributes.url;
+    url.data.attributes.url =
+      import.meta.env.PUBLIC_BACKEND + url.data.attributes.url;
   }
 };

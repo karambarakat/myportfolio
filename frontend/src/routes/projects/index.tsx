@@ -10,20 +10,21 @@ import data from "./(page)/data";
 import { from_slug } from "./(page)/pictures";
 
 export const projectSummary = async () => {
-  const query: ProjectEntityFragment[] = await fetchGraphql({
-    query: /* GraphQL */ `
-      query GetAllProjects {
-        projects {
-          data {
-            ...ProjectEntity
+  const query: ProjectEntityFragment[] =
+    (await fetchGraphql({
+      query: /* GraphQL */ `
+        query GetAllProjects {
+          projects {
+            data {
+              ...ProjectEntity
+            }
           }
         }
-      }
-      ${ProjectEntity}
-    `,
-  }).then((res) => {
-    return res.data.projects.data;
-  });
+        ${ProjectEntity}
+      `,
+    }).then((res) => {
+      return res?.data?.projects?.data;
+    })) || [];
 
   return query.map((e) => {
     StrapiPicture(e.attributes?.displayPicture);

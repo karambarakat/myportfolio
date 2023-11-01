@@ -15,6 +15,37 @@ export type FrontMatter = {
 import type { ProjectMetaFragment } from "~/gql/graphql";
 export default [
   {
+    title: "GSAP Landing Page",
+    updatedAt: "2023-10-23T12:00:00.000Z",
+    createdAt: "2023-10-23T12:00:00.000Z",
+    summary: "modern landing page animated with GSAP",
+    skills: {
+      data: [
+        { attributes: { title: "GSAP" } },
+        { attributes: { title: "React" } },
+        { attributes: { title: "TypeScript" } },
+      ],
+    },
+    github: "https://github.com/karambarakat/gsap-web",
+    live: "https://gsap-web.vercel.app/",
+    slug: "GSAP_Landing_Page",
+  },
+  {
+    title: "Gulp Handlebars Express",
+    updatedAt: "2023-10-23T12:00:00.000Z",
+    createdAt: "2023-10-23T12:00:00.000Z",
+    summary: "toy app made with basic web technologies",
+    skills: {
+      data: [
+        { attributes: { title: "Gulp" } },
+        { attributes: { title: "Handlebars" } },
+        { attributes: { title: "Express" } },
+      ],
+    },
+    github: "https://github.com/karambarakat/Gulp-Handlebars-Express-Stack",
+    slug: "Gulp_Handlebars_Express",
+  },
+  {
     title: "Full Stack Web App Made With React, Rust And Postgress",
     updatedAt: "2023-10-23T12:00:00.000Z",
     createdAt: "2023-10-23T12:00:00.000Z",

@@ -27,6 +27,7 @@ export default component$(() => {
 
   return (
     <div>
+      <div class="hidden">{from_slug(location.url.pathname.split("/")[2])}</div>
       <CommonLayout project={frontmatter.project as ProjectMetaFragment} />
       <div class={markdown.markdown}>
         <Slot />

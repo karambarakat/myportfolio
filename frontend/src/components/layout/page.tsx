@@ -10,8 +10,7 @@ import type { ProjectMetaFragment } from "~/gql/graphql";
 
 export const CommonLayout = component$(
   ({ project }: { project: ProjectMetaFragment }) => {
-    console.log({ project });
-
+    console.log(project.displayPicture?.data?.attributes?.url);
     return (
       <div>
         <div class="flex items-center gap-4 my-5 children:typo-lg">
