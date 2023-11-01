@@ -9,18 +9,11 @@ import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";
 import { TbMailFilled } from "@qwikest/icons/tablericons";
 import ProjectSummary from "~/components/ProjectSummary";
-import data from "./projects/(page)/data";
-import { projectCast } from "~/utils/frontMatter";
-import { projectSummary } from "./projects";
-import type { ProjectMetaFragment } from "~/gql/graphql";
+import { projectsApi } from "~/api";
+// import data from "./projects/(page)/data";
 
-export const useProjects = routeLoader$(async () => {
-  const query = await projectSummary();
-
-  return [
-    ...query,
-    ...data.map((e) => projectCast(e)),
-  ] as ProjectMetaFragment[];
+export const useProjects = routeLoader$(() => {
+  return [...projectsApi()].filter((pro) => pro.id !== "2");
 });
 
 export default component$(() => {
@@ -145,9 +138,9 @@ const MoreProjects = component$(() => {
     <div>
       <h2 class="typo-h2 text-center">More Projects</h2>
 
-      <div class="grid grid-cols-2 gap-4 my-5">
+      <div class="main-grid my-5">
         {projects.value.map((pro) => {
-          return <ProjectSummary key={pro.slug} data={pro} />;
+          return <ProjectSummary key={pro.id} data={pro} />;
         })}
       </div>
     </div>

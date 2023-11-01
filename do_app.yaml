@@ -1,0 +1,32 @@
+# doctl apps update 6305e040-3754-4fbf-af22-b73f672df74d --spec do_app_spec.yaml
+# doctl apps spec get 6305e040-3754-4fbf-af22-b73f672df74d > do_app_spec.yaml
+alerts:
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+databases:
+- engine: PG
+  name: db
+  version: "12"
+features:
+- buildpack-stack=ubuntu-22
+ingress:
+  rules:
+  - component:
+      name: strapi
+    match:
+      path:
+        prefix: /
+name: shark-app
+region: sfo
+services:
+- dockerfile_path: strapi/Dockerfile
+
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: karambarakat/myportfolio
+  http_port: 1337
+  instance_count: 1
+  instance_size_slug: basic-xs
+  name: strapi
+  source_dir: /

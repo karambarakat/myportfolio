@@ -4,25 +4,20 @@ import { Link, useNavigate } from "@builder.io/qwik-city";
 import Github from "~/../public/github.svg?jsx";
 import Live from "~/../public/live.svg?jsx";
 
+import type { Project } from "~/api";
 import DisplayImage from "./DisplayImage";
-import type { ProjectMetaFragment } from "~/gql/graphql";
 
-export default component$(function ({ data }: { data: ProjectMetaFragment }) {
+export default component$(function ({ data }: { data: Project }) {
   const nav = useNavigate();
 
-  console.log({ first: data.displayPicture?.data?.attributes?.url });
-
   return (
-    <div>
+    <div key={data.id}>
       <div
         role="link"
         onClick$={() => nav("/projects/" + data.slug)}
         class="cursor-pointer rounded-lg shadow-md overflow-hidden mb-2"
       >
-        <DisplayImage
-          src={data.displayPicture?.data?.attributes?.url}
-          ratio={66}
-        />
+        <DisplayImage src={data.displayPicture?.src} ratio={66} />
       </div>
       <Link href={"/projects/" + data.slug} class="typo-lg cursor-pointer">
         {data.title}

@@ -69,5 +69,5 @@ Overall, "Gulp-Handlebars-Express" is a basic web application that illustrates t
 // it is important to call this function from the frontend (not just using GulpImage and GsapImage from the RouterLoader$)
 // so the qwik ship these pictures to the frontend
 export const FE = (src: string) => {
-  return { [GulpImage]: GulpImage, [GsapImage]: GsapImage }[src] || src;
+  return { [GulpImage]: GulpImage, [GsapImage]: GsapImage }[src];
 };

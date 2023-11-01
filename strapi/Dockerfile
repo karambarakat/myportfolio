@@ -2,12 +2,14 @@ FROM node
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY strapi/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY strapi .
+
+RUN npm run build
 
 EXPOSE 1337
 
-CMD ["npm", "start"]
+CMD npx hello-world-server --port 1337
