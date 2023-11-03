@@ -1,7 +1,7 @@
 /* eslint-disable qwik/jsx-img */
-import type { JSX } from "@builder.io/qwik/jsx-runtime";
 import {
   $,
+  Slot,
   component$,
   useOnWindow,
   useSignal,
@@ -9,13 +9,9 @@ import {
 } from "@builder.io/qwik";
 
 import BgSelector from "../../public/hov/selector.webp";
-import BgShades from "../../public/hov/shades.webp";
+import BgShades from "../../public/hov/shades.png";
 
-const Background = function ({
-  children: content,
-}: {
-  children?: JSX.Element;
-}) {
+const Background = component$(function () {
   return (
     <div class="relative overflow-hidden">
       <div class="pointer-events-none absolute inset-0">
@@ -26,32 +22,34 @@ const Background = function ({
         </div>
       </div>
 
-      <div class="absolute inset-0 opacity-5">
-        <svg width="100%" height="100%">
-          <filter id="svg_noise_background">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.80"
-              numOctaves="4"
-              stitchTiles="stitch"
-            />
-          </filter>
-          <rect
-            width="100%"
-            height="100%"
-            filter="url(#svg_noise_background)"
-          />
-        </svg>
+      <div class="isolate">
+        <Slot />
       </div>
-
-      <div class="isolate">{content}</div>
     </div>
   );
-};
+});
 
 export default Background;
 
-const Illuminate = component$(function () {
+export const Noise = component$(function () {
+  return (
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%">
+        <filter id="svg_noise_background">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.80"
+            numOctaves="4"
+            stitchTiles="stitch"
+          />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#svg_noise_background)" />
+      </svg>
+    </div>
+  );
+});
+
+export const Illuminate = component$(function () {
   const ref = useSignal<HTMLDivElement>();
   const loc = useSignal({ x: -250, y: -350 });
 

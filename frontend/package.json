@@ -45,6 +45,8 @@
     "@typescript-eslint/parser": "^6.7.5",
     "@unocss/preset-mini": "^0.56.5",
     "@unocss/reset": "^0.56.5",
+    "@unocss/transformer-variant-group": "^0.57.1",
+    "animated-unocss": "^0.0.6",
     "eslint": "^8.51.0",
     "eslint-plugin-qwik": "^1.2.14",
     "gray-matter": "^4.0.3",
@@ -67,6 +69,7 @@
   "dependencies": {
     "@qwikest/icons": "^0.0.13",
     "graphql": "^16.8.1",
+    "gsap": "^3.12.2",
     "luxon": "^3.4.3",
     "unified": "^11.0.3"
   }

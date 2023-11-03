@@ -1,180 +1,261 @@
-import { component$ } from "@builder.io/qwik";
-import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
-import PersonalImage from "../../public/Personal_Image.jpg";
+import {
+  $,
+  Slot,
+  component$,
+  useId,
+  useOn,
+  useOnWindow,
+  useSignal,
+  useStylesScoped$,
+  useVisibleTask$,
+} from "@builder.io/qwik";
+import { type DocumentHead } from "@builder.io/qwik-city";
+import Scroll from "./landing_page_components/Scroll";
+import FollowLine, { Line } from "./landing_page_components/FollowLine";
+import { Illuminate } from "~/components/Background";
+import Footer from "./Footer";
 
 import Github from "../../public/github.svg?jsx";
 import Live from "../../public/live.svg?jsx";
 
-import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
-import { SiFreelancer } from "@qwikest/icons/simpleicons";
-import { TbMailFilled } from "@qwikest/icons/tablericons";
-import ProjectSummary from "~/components/ProjectSummary";
-import data from "./projects/(page)/data";
-import { projectSummary } from "./projects";
-import type { ProjectMetaFragment } from "~/gql/graphql";
-import { from_slug } from "./projects/(page)/pictures";
-
-export const useProjects = routeLoader$(async () => {
-  const query = await projectSummary();
-
-  data.forEach((e) => {
-    const img = from_slug(e.slug);
-    if (img) {
-      e.displayPicture = {
-        data: {
-          attributes: {
-            url: img,
-          },
-        },
-      };
-    }
-  });
-
-  return [...query, ...data].filter(
-    // filter featured project
-    (e) => e?.slug !== "Tracker_Web_App",
-  ) as ProjectMetaFragment[];
-});
-
 export default component$(() => {
   return (
-    <>
+    <div>
       <Hero />
-      <div class="separator my-8" />
-      <FeaturedProject />
-      <div class="separator my-8" />
-      <MoreProjects />
-      <div class="separator my-8" />
-      <GetInContact />
-    </>
+      {/* 
+        <div class="separator my-8" />
+        <FeaturedProject />
+        <div class="separator my-8" />
+        <MoreProjects />
+        <div class="separator my-8" />
+        <GetInContact /> 
+      */}
+    </div>
   );
 });
 
-function Hero() {
+const Hero = component$(() => {
+  useStylesScoped$(`
+  .svg :global(svg) {
+    position: absolute;
+    top: calc(50vh + 50px);
+    height: calc(50vh - 190px);
+  }
+  `);
   return (
-    <div class="pt-200px height:pt-25px">
-      <div class="text-center">
-        <h1 class="typo-h1">Hi 👋, My Name is Karam</h1>
-        <h2 class="typo-h2 mb-8">I'm web developer based in the bay area</h2>
-      </div>
-      <div class="flex gap-8 items-start">
-        <img
-          class="hidden sm:block rounded-3"
-          alt="image of me"
-          src={PersonalImage}
-          height={330}
-          width={248}
-        />
-        <div class="text-center sm:text-start children:mb-2">
-          <p>
-            Hi I’m Karam, I’m a self-taught web developer and I love building
-            elegant products and websites using code and state-of-art
-            technologies…
-          </p>
-          <p>
-            I’m new to the US, I have experience working freelancing, now I
-            can’t wait to have my first job in the Silicon Valley!
-          </p>
-          <p>
-            I’m geared toward hard-work and growth, I enjoy learning and
-            improving my work further and further.
-          </p>
-          <div class="flex gap-4">
-            <a
-              href="https://docs.google.com/document/d/183Y16BAD9LEBbe_eKvB0JbRpgaxE9xZ0VXy5f31Wews/"
-              class="a"
-            >
-              View my Resume
-            </a>{" "}
-            <a href="https://github.com/karambarakat" class="a">
-              View my Github
-            </a>
+    <div class="relative">
+      <div class="absolute w-full overflow-x-hidden">
+        <div class="grid place-content-center w-screen h-screen overflow-hidden">
+          <div class="min-w-1200px min-h-800px mt--20vh">
+            {/* <Illuminate /> */}
           </div>
         </div>
       </div>
-    </div>
-  );
-}
+      <ScrollUp>
+        <div class="h-screen p-2 text-center grid place-items-center place-content-center relative">
+          <h1 class="typo-h1">Hi 👋, My Name is Karam</h1>
+          <h2 class="typo-h2 mb-8">I'm web developer based in the bay area</h2>
+        </div>
+      </ScrollUp>
 
-function FeaturedProject() {
-  return (
-    <div>
-      <h2 class="typo-h2 text-center">Featured Project</h2>
-      <div class="children:mb-5">
-        <p class="typo-lg">
-          I made this project to learn more about web development and learn
-          about maintaining a large project with many moving parts.
-        </p>
-        <div class="flex gap-4">
-          <a class="a" href="https://github.com/karambarakat/MoneyTracker">
-            <Github
-              //@ts-ignore
-              height="24"
-              width="24"
-              class="fill-as-a inline"
-            />{" "}
-            View Code
-          </a>
-          <a class="a" href="https://tracker.karam.page">
-            <Live //@ts-ignore
-              height="24"
-              width="24"
-              class="fill-as-a inline"
-            />{" "}
-            Live Demo
-          </a>
-        </div>
-        <div>
-          {[
-            "React and Vite frontend ",
-            "Rust backend ",
-            "Postgres database",
-            "Storybook isolated components",
-            "Chromatic visual testing ",
-            "Unit testing with Jest",
-            "Playwright Integration test ",
-            "Monorepo with Turbo",
-            "CI/CD with Github Actions ",
-            "Automatic deployment ",
-            "JWT Authentication",
-            "GraphQL API",
-          ].map((item) => {
-            return (
-              <div class="typo-lg" key={item}>
-                {item}
-              </div>
-            );
-          })}
-        </div>
+      <div class="svg">
+        <Line />
       </div>
+      <FollowLine>
+        <div
+          class="
+          max-w-95vw
+          lt-xl:(m-auto grid justify-items-center text-center)
+          "
+        >
+          <div
+            class="
+          base rounded p-5
+            children:mb-2 text-6
+            "
+          >
+            <div class="children:mb-2 w-500px text-6 max-w-screen">
+              <p>
+                Hi I’m Karam, I’m a self-taught web developer and I love
+                building elegant websites using state-of-art technologies.
+              </p>
+              <p>
+                I'm looking for job opportunities in the bay area, if you're
+                interested in hiring hit me up.
+              </p>
+              <div class="flex flex-col gap-x-2">
+                <a
+                  href="https://docs.google.com/document/d/183Y16BAD9LEBbe_eKvB0JbRpgaxE9xZ0VXy5f31Wews/"
+                  class="a"
+                >
+                  View my Resume
+                </a>{" "}
+                <a href="https://github.com/karambarakat" class="a">
+                  View my Github
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </FollowLine>
+      <Scroll />
+
+      <CenterTitle>
+        <div class="text-center grid place-items-center">
+          <h2 class="text-16">Featured Project</h2>
+          <p class="max-w-600px text-8 font-1 mb-2">
+            I made this project to learn more about web development and learn
+            about maintaining a large project with many moving parts.
+          </p>
+          <div class="flex gap-6 text-6 font-3">
+            <a class="a" href="https://github.com/karambarakat/MoneyTracker">
+              <Github
+                //@ts-ignore
+                height="38"
+                width="38"
+                class="fill-as-a inline"
+              />{" "}
+              View Code
+            </a>
+            <a class="a" href="https://tracker.karam.page">
+              <Live //@ts-ignore
+                height="38"
+                width="38"
+                class="fill-as-a inline"
+              />{" "}
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </CenterTitle>
+      <MoreProjects />
+      <GetInContact />
+      <Footer />
     </div>
   );
-}
+});
 
-const MoreProjects = component$(() => {
-  const projects = useProjects();
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const CenterTitle = component$(() => {
+  const id = useId();
+
+  useVisibleTask$(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          scrub: true,
+          start: "top 77%",
+          trigger: `#${id}`,
+          end: "+=100%",
+        },
+      });
+      tl.fromTo(
+        `#${id} .svg-container svg`,
+        {
+          height: "0vh",
+          ease: "power4.out",
+        },
+        {
+          top: "-33vh",
+          height: "133vh",
+        },
+      );
+      gsap.timeline({
+        scrollTrigger: {
+          scrub: true,
+          pin: true,
+          start: "top 30%",
+          trigger: `#${id}`,
+          end: "+=100%",
+        },
+      });
+    },
+    { strategy: "document-ready" },
+  );
+
+  useStylesScoped$(`
+    .root {
+      margin-top: -150px;
+    }
+    h2 {
+      margin-top: 150px;
+    }
+    .svg-container :global(svg) {
+      position: absolute;
+      
+      z-index: -1;
+    }
+  `);
 
   return (
-    <div>
-      <h2 class="typo-h2 text-center">More Projects</h2>
-
-      <div class="main-grid my-5">
-        {projects.value.map((pro) => {
-          return <ProjectSummary key={pro.slug} data={pro} />;
-        })}
+    <div id={id} class="root h-screen relative">
+      <div class="bg">
+        <div class="svg-container">
+          <Line />
+        </div>
+        <div class="grid justify-center base p-5 rounded-xl">
+          <span>
+            <Slot />
+          </span>
+        </div>
       </div>
     </div>
   );
 });
 
-function GetInContact() {
+const ScrollUp = component$(() => {
+  // for the sake of simplicity, this components works only for
+  // elements that are at the top of the page
+  useStylesScoped$(`
+    .slide-up-on-scroll {
+      transition: transform 0.2s ease-out;
+      transform: translateY(calc(var(--scroll) * -100%));
+    }
+    `);
+
   return (
-    <div>
-      <h2 class="typo-h2 text-center">Get in Contact</h2>
-      <p class="text-center">
+    <div
+      class="slide-up-on-scroll"
+      window:onScroll$={(_, target) => {
+        const val =
+          window.document.documentElement.scrollTop / window.innerHeight;
+        if (val > 0.5) return;
+        target.style.setProperty("--scroll", `${val}`);
+      }}
+    >
+      <Slot />
+    </div>
+  );
+});
+
+export const head: DocumentHead = {
+  title: "Welcome to my Portfolio",
+
+  links: [{ href: "https://github.com/karambarakat", rel: "me" }],
+  meta: [
+    {
+      name: "description",
+      content: "Built with Typescript, Qwik, UnoCss and Strapi",
+    },
+  ],
+};
+
+import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
+import { SiFreelancer } from "@qwikest/icons/simpleicons";
+import { TbMailFilled } from "@qwikest/icons/tablericons";
+
+const GetInContact = component$(() => {
+  return (
+    <div class="h-[calc(100vh-90px)] grid place-content-center">
+      <h2 class="text-center text-16">Get in Contact</h2>
+      <p class="text-center text-8 font-1">
         I'm currently looking for jobs, you can say hi any time
       </p>
-      <div class="flex gap-4 justify-center mt-8">
+      <div class="flex gap-4 justify-center mt-4">
         {[
           {
             text: "Email",
@@ -213,16 +294,45 @@ function GetInContact() {
       </div>
     </div>
   );
-}
+});
 
-export const head: DocumentHead = {
-  title: "Welcome to my Portfolio",
+import { routeLoader$ } from "@builder.io/qwik-city";
+import data from "./projects/(page)/data";
+import { projectSummary } from "./projects";
+import type { ProjectMetaFragment } from "~/gql/graphql";
+import { from_slug } from "./projects/(page)/pictures";
+import ProjectSummary from "~/components/ProjectSummary";
+export const useProjects = routeLoader$(async () => {
+  const query = await projectSummary();
+  data.forEach((e) => {
+    const img = from_slug(e.slug);
+    if (img) {
+      e.displayPicture = {
+        data: {
+          attributes: {
+            url: img,
+          },
+        },
+      };
+    }
+  });
+  return [...query, ...data].filter(
+    // filter featured project
+    (e) => e?.slug !== "Tracker_Web_App",
+  ) as ProjectMetaFragment[];
+});
+export const MoreProjects = component$(() => {
+  const projects = useProjects();
 
-  links: [{ href: "https://github.com/karambarakat", rel: "me" }],
-  meta: [
-    {
-      name: "description",
-      content: "Built with Typescript, Qwik, UnoCss and Strapi",
-    },
-  ],
-};
+  return (
+    <div>
+      <h2 class="text-center text-16">More Projects</h2>
+
+      <div class="main-grid my-5 w-1200px m-auto max-w-90vw py-10">
+        {projects.value.map((pro) => {
+          return <ProjectSummary key={pro.slug} data={pro} />;
+        })}
+      </div>
+    </div>
+  );
+});

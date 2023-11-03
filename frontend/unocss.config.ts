@@ -1,16 +1,21 @@
 // uno.config.ts
 import { defineConfig } from "unocss";
+import transformerVariantGroup from "@unocss/transformer-variant-group";
 import presetMini from "@unocss/preset-mini";
 import { variantParentMatcher } from "@unocss/preset-mini/utils";
+import { animatedUno } from "animated-unocss";
 
 export default defineConfig({
   content: {
     filesystem: ["src/**/*.{ts,tsx}"],
   },
   shortcuts: {
+    base: "dark:bg-slate-8 dark:text-white",
+    "base-invert": "dark:bg-white dark:text-black",
     "main-grid": "grid grid-cols-1 md:grid-cols-2 gap-4",
     typo: "dark:text-white",
     "fill-as-text": "fill-black dark:fill-white",
+    "stroke-as-text": "stroke-black dark:stroke-white",
     "typo-h1": "text-5xl pb-3",
     "typo-h2": "font-light text-3xl pb-3",
     "typo-lg": "text-2xl font-300",
@@ -32,6 +37,9 @@ export default defineConfig({
     "container-margins": "mx-25px md:mx-50px",
   },
   rules: [
+    ["animated-paused", { "animation-play-state": "paused" }],
+    ["animated-running", { "animation-play-state": "running" }],
+
     ["isolate", { isolation: "isolate" }],
     ["mix-blend-color", { "mix-blend-mode": "color" }],
     ["mix-blend-exclusion", { "mix-blend-mode": "exclusion" }],
@@ -77,10 +85,19 @@ export default defineConfig({
       xl: "1280px",
     },
   },
-  variants: [variantParentMatcher("height", "@media (max-height: 700px)")],
+  variants: [
+    variantParentMatcher("height", "@media (max-height: 700px)"),
+    variantParentMatcher("motion", "#main-page.motion"),
+    variantParentMatcher("no-motion", "#main-page.no-motion"),
+  ],
+  transformers: [
+    // @ts-expect-error Type 'RegExp' is not assignable to type 'string'.ts(2322)
+    transformerVariantGroup(),
+  ],
   presets: [
     presetMini({
       dark: "media",
     }),
+    animatedUno(),
   ],
 });
