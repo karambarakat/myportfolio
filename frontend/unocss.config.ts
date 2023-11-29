@@ -1,4 +1,3 @@
-// uno.config.ts
 import { defineConfig } from "unocss";
 import transformerVariantGroup from "@unocss/transformer-variant-group";
 import presetMini from "@unocss/preset-mini";

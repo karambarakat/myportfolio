@@ -5,7 +5,7 @@ export default component$(() => {
   return (
     <iframe
       onLoad$={(ev, elem) => {
-        const element = elem.contentWindow as Window;
+        const element = elem.contentWindow as Window | undefined;
         if (!element) return;
 
         const styles = document.createElement("Style");

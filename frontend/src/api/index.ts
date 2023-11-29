@@ -1,5 +1,5 @@
-import GsapImage from "../../public/portfolio_item_1.png";
-import GulpImage from "../../public/portfolio_item_2.webp";
+import GsapImage from "~/../public/portfolio_item_1.png";
+import GulpImage from "~/../public/portfolio_item_2.webp";
 
 export interface Project {
   id: string;

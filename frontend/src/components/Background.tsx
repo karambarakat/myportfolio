@@ -8,8 +8,8 @@ import {
   useStylesScoped$,
 } from "@builder.io/qwik";
 
-import BgSelector from "../../public/hov/selector.webp";
-import BgShades from "../../public/hov/shades.png";
+import BgSelector from "~/../public/hov/selector.webp";
+import BgShades from "~/../public/hov/shades.png";
 
 const Background = component$(function () {
   return (

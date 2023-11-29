@@ -1,11 +1,7 @@
 import {
-  $,
   Slot,
   component$,
   useId,
-  useOn,
-  useOnWindow,
-  useSignal,
   useStylesScoped$,
   useVisibleTask$,
 } from "@builder.io/qwik";
@@ -15,39 +11,24 @@ import FollowLine, { Line } from "./landing_page_components/FollowLine";
 import { Illuminate } from "~/components/Background";
 import Footer from "./Footer";
 
-import Github from "../../public/github.svg?jsx";
-import Live from "../../public/live.svg?jsx";
+import Github from "~/../public/github.svg?jsx";
+import Live from "~/../public/live.svg?jsx";
 
 export default component$(() => {
   return (
     <div>
       <Hero />
-      {/* 
-        <div class="separator my-8" />
-        <FeaturedProject />
-        <div class="separator my-8" />
-        <MoreProjects />
-        <div class="separator my-8" />
-        <GetInContact /> 
-      */}
     </div>
   );
 });
 
 const Hero = component$(() => {
-  useStylesScoped$(`
-  .svg :global(svg) {
-    position: absolute;
-    top: calc(50vh + 50px);
-    height: calc(50vh - 190px);
-  }
-  `);
   return (
     <div class="relative">
       <div class="absolute w-full overflow-x-hidden">
         <div class="grid place-content-center w-screen h-screen overflow-hidden">
           <div class="min-w-1200px min-h-800px mt--20vh">
-            {/* <Illuminate /> */}
+            <Illuminate />
           </div>
         </div>
       </div>
@@ -58,48 +39,14 @@ const Hero = component$(() => {
         </div>
       </ScrollUp>
 
-      <div class="svg">
+      {/* <div class="svg">
         <Line />
-      </div>
+      </div> */}
       <FollowLine>
-        <div
-          class="
-          max-w-95vw
-          lt-xl:(m-auto grid justify-items-center text-center)
-          "
-        >
-          <div
-            class="
-          base rounded p-5
-            children:mb-2 text-6
-            "
-          >
-            <div class="children:mb-2 w-500px text-6 max-w-screen">
-              <p>
-                Hi I’m Karam, I’m a self-taught web developer and I love
-                building elegant websites using state-of-art technologies.
-              </p>
-              <p>
-                I'm looking for job opportunities in the bay area, if you're
-                interested in hiring hit me up.
-              </p>
-              <div class="flex flex-col gap-x-2">
-                <a
-                  href="https://docs.google.com/document/d/183Y16BAD9LEBbe_eKvB0JbRpgaxE9xZ0VXy5f31Wews/"
-                  class="a"
-                >
-                  View my Resume
-                </a>{" "}
-                <a href="https://github.com/karambarakat" class="a">
-                  View my Github
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MidMessage />
       </FollowLine>
-      <Scroll />
 
+      <Scroll />
       <CenterTitle>
         <div class="text-center grid place-items-center">
           <h2 class="text-16">Featured Project</h2>
@@ -122,15 +69,56 @@ const Hero = component$(() => {
                 height="38"
                 width="38"
                 class="fill-as-a inline"
-              />{" "}
+              />
               Live Demo
             </a>
           </div>
         </div>
       </CenterTitle>
+
       <MoreProjects />
       <GetInContact />
       <Footer />
+    </div>
+  );
+});
+
+const MidMessage = component$(() => {
+  return (
+    <div
+      class="
+  max-w-95vw
+  lt-xl:(m-auto grid justify-items-center text-center)
+  "
+    >
+      <div
+        class="
+  base rounded p-5
+    children:mb-2 text-6
+    "
+      >
+        <div class="children:mb-2 w-500px text-6 max-w-screen">
+          <p>
+            Hi I’m Karam, I’m a self-taught web developer and I love building
+            elegant websites using state-of-art technologies.
+          </p>
+          <p>
+            I'm looking for job opportunities in the bay area, if you're
+            interested in hiring hit me up.
+          </p>
+          <div class="flex flex-col gap-x-2">
+            <a
+              href="https://docs.google.com/document/d/183Y16BAD9LEBbe_eKvB0JbRpgaxE9xZ0VXy5f31Wews/"
+              class="a"
+            >
+              View my Resume
+            </a>{" "}
+            <a href="https://github.com/karambarakat" class="a">
+              View my Github
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 });
@@ -164,15 +152,15 @@ const CenterTitle = component$(() => {
           height: "133vh",
         },
       );
-      gsap.timeline({
-        scrollTrigger: {
-          scrub: true,
-          pin: true,
-          start: "top 30%",
-          trigger: `#${id}`,
-          end: "+=100%",
-        },
-      });
+      // gsap.timeline({
+      //   scrollTrigger: {
+      //     scrub: true,
+      //     pin: true,
+      //     start: "top 30%",
+      //     trigger: `#${id}`,
+      //     end: "+=100%",
+      //   },
+      // });
     },
     { strategy: "document-ready" },
   );
@@ -194,9 +182,9 @@ const CenterTitle = component$(() => {
   return (
     <div id={id} class="root h-screen relative">
       <div class="bg">
-        <div class="svg-container">
+        {/* <div class="svg-container">
           <Line />
-        </div>
+        </div> */}
         <div class="grid justify-center base p-5 rounded-xl">
           <span>
             <Slot />

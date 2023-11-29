@@ -1,6 +1,6 @@
 import { $, component$, useOnWindow, useSignal } from "@builder.io/qwik";
 
-import ScrollIcon from "../../../public/scroll.svg?jsx";
+import ScrollIcon from "~/../public/scroll.svg?jsx";
 
 const Scroll = component$(() => {
   const hide = useSignal(false);

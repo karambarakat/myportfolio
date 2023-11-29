@@ -1,8 +1,8 @@
 import { component$ } from "@builder.io/qwik";
-import PersonalImage from "../../public/Personal_Image.jpg";
+import PersonalImage from "~/../public/Personal_Image.jpg";
 
-import Github from "../../public/github.svg?jsx";
-import Live from "../../public/live.svg?jsx";
+import Github from "~/../public/github.svg?jsx";
+import Live from "~/../public/live.svg?jsx";
 
 import { BsLinkedin, BsGithub } from "@qwikest/icons/bootstrap";
 import { SiFreelancer } from "@qwikest/icons/simpleicons";

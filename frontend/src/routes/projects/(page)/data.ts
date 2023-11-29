@@ -65,7 +65,8 @@ export default [
     title: "Google Lighthouse Performance",
     updatedAt: "2023-10-23T12:00:00.000Z",
     createdAt: "2023-10-23T12:00:00.000Z",
-    summary: "google lighthouse report of my portfolio",
+    summary:
+      "I used Google Lighthouse to perform analytics on my website, giving me insights into my site's performance, accessibility, SEO, and adherence to best practices.",
     skills: {
       data: [
         { attributes: { title: "Google Lighthouse" } },
