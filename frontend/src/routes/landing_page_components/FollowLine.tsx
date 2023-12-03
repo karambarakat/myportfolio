@@ -1,16 +1,6 @@
 import { Slot, component$, useStylesScoped$ } from "@builder.io/qwik";
 
-const FollowLine = component$(() => {
-  // const length = useSignal<string>("3222.52");
-  // const path = useSignal<SVGPathElement>();
-
-  // useVisibleTask$(
-  //   () => {
-  //     length.value = path.value?.getTotalLength().toFixed(2) ?? "0";
-  //   },
-  //   { strategy: "document-ready" },
-  // );
-
+const AnimatedLine = component$(() => {
   useStylesScoped$(`
   path {
     stroke-dasharray: 3223px;
@@ -33,12 +23,23 @@ const FollowLine = component$(() => {
   `);
 
   useStylesScoped$(`
+
   @media (max-width: 1280px) {
     .content-spec {
       width: 95vw;
       margin: 2.5vw;
       left: 0;
       place-content:center;
+    }
+  }
+  .content-spec > :global(*) {
+    isolation: isolate;
+    background: white;
+    z-index: 10;
+  }
+  @media (prefers-color-scheme: dark) {
+    .content-spec > :global(*) {
+      background: black;
     }
   }
   `);
@@ -49,14 +50,22 @@ const FollowLine = component$(() => {
         <div class="">
           <svg
             window:onScroll$={(_, target) => {
+              const y_t = target.getBoundingClientRect().y;
+              const y_w =
+                window.document.documentElement.getBoundingClientRect().y;
+              const y = y_t - y_w;
+
+              const top = window.document.documentElement.scrollTop;
+
               const prog =
-                (window.document.documentElement.scrollTop -
-                  window.innerHeight * 0.2) /
-                (target.clientHeight - 100);
-              if (prog > 1.1) return;
+                (top - y + target.clientHeight * 0.5) / target.clientHeight;
+
+              console.log({ y, top, prog, h: target.clientHeight });
+
+              if (prog > 2.1) return;
               (target as SVGElement).style.setProperty(
                 "--scroll",
-                String(prog),
+                String(prog - 0.3),
               );
             }}
             version="1.2"
@@ -83,15 +92,15 @@ const FollowLine = component$(() => {
 });
 
 export const Line = component$(() => {
-  useStylesScoped$(`
-    svg {
-      position: absolute;
-      width: 100%;
-    }
-  `);
+  // useStylesScoped$(`
+  //   svg {
+  //     position: absolute;
+  //     width: 100%;
+  //   }
+  // `);
 
   return (
-    <div class="flex justify-center ">
+    <div class="flex justify-center overflow-hidden">
       <svg
         viewBox="0 0 1200 100"
         width="1200"
@@ -109,4 +118,4 @@ export const Line = component$(() => {
   );
 });
 
-export default FollowLine;
+export default AnimatedLine;

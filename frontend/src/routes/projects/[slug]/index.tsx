@@ -31,7 +31,9 @@ export const useProject = routeLoader$(async (ctx) => {
 
       ${Project}
     `,
-  }).then((res) => res?.data?.projects?.data?.[0]?.attributes);
+  })
+    .then((res) => res?.data?.projects?.data?.[0]?.attributes)
+    .catch(() => undefined);
 
   if (!query) {
     ctx.fail(404, { message: `project with ${ctx.params.slug} not found` });
@@ -81,7 +83,11 @@ export const onStaticGenerate: StaticGenerateHandler = async () => {
           }
         }
       `,
-    }).then((res) => res?.data?.projects?.data?.id)) || [];
+    })
+      .then((res) => res?.data?.projects?.data?.id)
+      .catch(() => {
+        return undefined;
+      })) || [];
 
   return {
     params: query.map((id) => {

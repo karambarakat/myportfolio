@@ -22,9 +22,13 @@ export const projectSummary = async () => {
         }
         ${ProjectEntity}
       `,
-    }).then((res) => {
-      return res?.data?.projects?.data;
-    })) || [];
+    })
+      .then((res) => {
+        return res?.data?.projects?.data;
+      })
+      .catch(() => {
+        return undefined;
+      })) || [];
 
   return query.map((e) => {
     StrapiPicture(e.attributes?.displayPicture);
