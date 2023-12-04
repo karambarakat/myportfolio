@@ -1,4 +1,15 @@
 // this is auto generated file
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * do not edit directly
+ */
 
 export type FrontMatter = {
   title: string;
@@ -44,6 +55,24 @@ export default [
     },
     github: "https://github.com/karambarakat/Gulp-Handlebars-Express-Stack",
     slug: "Gulp_Handlebars_Express",
+  },
+  {
+    title: "private local-first progressive web app",
+    updatedAt: "2023-12-04T12:22:00.000Z",
+    createdAt: "2023-12-04T12:22:00.000Z",
+    summary: "private local-first progressive web app",
+    skills: {
+      data: [
+        { attributes: { title: "Qwik" } },
+        { attributes: { title: "PWA" } },
+        { attributes: { title: "SQL" } },
+        { attributes: { title: "Web Worker" } },
+        { attributes: { title: "Offline App" } },
+      ],
+    },
+    github: "https://github.com/karambarakat/doiter",
+    live: "https://doiter.karam.page",
+    slug: "Local_First_Todo_App",
   },
   {
     title: "Full Stack Web App Made With React, Rust And Postgress",

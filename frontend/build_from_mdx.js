@@ -110,6 +110,19 @@ async function main() {
 
   // convert to typescript file with `as never` and "// this is auto generated file"
   const dataFile = `// this is auto generated file
+  /*
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  * do not edit directly
+  */
+
+
   ${type}
   import type { ProjectMetaFragment } from "~/gql/graphql";
   export default ${projectsIndex}  satisfies ProjectMetaFragment[] as ProjectMetaFragment[];
