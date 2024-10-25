@@ -1,12 +1,13 @@
-use std::{ops::Not, sync::Arc};
-
+use axum::middleware::Next;
+use axum::response::{IntoResponse, Response};
 use axum::{body::Body, Router};
+use axum::{middleware, Json};
 use cms_for_rust::axum_router::AxumRouter;
 use cms_for_rust::schema_prelude::*;
-use hyper::Request;
+use hyper::{Request, StatusCode};
+use serde_json::json;
 use sqlx::{Pool, Postgres};
-use tower::Layer;
-use tower::Service;
+use std::ops::Not;
 
 schema! {
     db = "sqlx::Postgres",
@@ -24,96 +25,94 @@ pub struct Topic {
     pub title: String,
 }
 
-relations!( many_to_many Project Topic );
+relations!(many_to_many Project Topic);
 
 #[tokio::main]
 async fn main() {
-    let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    let pool = Pool::<Postgres>::connect(&database_url).await.unwrap();
+    #[cfg(debug_assertions)]
+    dotenv::dotenv().expect("dotenv failed to load");
+
+    let database_url = std::env::var("DATABASE_URL")
+        .expect("DATABASE_URL must be set");
+    let pool = Pool::<Postgres>::connect(&database_url)
+        .await
+        .unwrap();
 
     let router: Router<()> = Router::new()
-        .layer(SimpleBearerAuth::default())
-        .nest("projects", Project::router())
+        // .route("
+        .nest(
+            "/project",
+            Project::router().layer(middleware::from_fn(
+                basic_auth_impl,
+            )),
+        )
+        .route(
+            "/",
+            axum::routing::any(|| async { "API works" }),
+        )
         .with_state(pool);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:1337").await.unwrap();
+    let listener =
+        tokio::net::TcpListener::bind("0.0.0.0:1337")
+            .await
+            .unwrap();
 
     axum::serve(listener, router).await.unwrap();
 }
 
-#[derive(Debug, Clone)]
-struct SimpleBearerAuth(Arc<String>);
-
-impl Default for SimpleBearerAuth {
-    fn default() -> Self {
+lazy_static::lazy_static! {
+    static ref TOKEN: String = {
         std::env::var("BEARER_TOKEN")
-            .map(Arc::new)
-            .map(SimpleBearerAuth)
             .expect("BEARER_TOKEN must be set")
-    }
+    };
 }
 
-impl<Route> Layer<Route> for SimpleBearerAuth {
-    type Service = SimpleBearerAuthMiddleware<Route>;
-    fn layer(&self, inner: Route) -> Self::Service {
-        SimpleBearerAuthMiddleware {
-            token: self.0.clone(),
-            route: inner,
+async fn basic_auth_impl(
+    req: Request<Body>,
+    next: Next,
+) -> Response {
+    let auth = req
+        .headers()
+        .get("Cookie")
+        .ok_or("authorization header is not set");
+
+    let auth = match auth {
+        Ok(ok) => ok.to_str().map_err(|_| "invalid UTF-8"),
+        Err(err) => Err(err),
+    };
+
+    let auth = match auth {
+        Ok(auth) => {
+            if auth.starts_with("token=Bearer ").not() {
+                Err("start with Bearer")
+            } else {
+                Ok(auth)
+            }
         }
-    }
-}
+        Err(err) => Err(err),
+    };
+    let auth = match auth {
+        Ok(auth) => {
+            let bearer = auth[13..].to_owned();
 
-#[derive(Debug, Clone)]
-struct SimpleBearerAuthMiddleware<S> {
-    token: Arc<String>,
-    route: S,
-}
-
-impl<Route> Service<Request<Body>> for SimpleBearerAuthMiddleware<Route>
-where
-    Route: Service<Request<Body>>,
-    Route::Future: Send + 'static,
-{
-    type Response = Route::Response;
-    type Error = Route::Error;
-    type Future = Route::Future;
-
-    fn poll_ready(
-        &mut self,
-        cx: &mut std::task::Context<'_>,
-    ) -> std::task::Poll<Result<(), Self::Error>> {
-        self.route.poll_ready(cx)
-    }
-
-    fn call(&mut self, req: Request<Body>) -> Self::Future {
-        let auth = req
-            .headers()
-            .get("Authorization")
-            .expect("authorization has to be set")
-            .to_str()
-            .expect("authorization has to be valid UTF-8");
-
-        if auth.starts_with("Bearer ").not() {
-            panic!("only Bearer tokens are accepted")
+            if bearer.eq(&TOKEN.as_ref()).not() {
+                Err("invalid token")
+            } else {
+                Ok(())
+            }
         }
+        Err(err) => Err(err),
+    };
 
-        let bearer = auth[7..].to_owned();
-
-        if bearer != self.token.as_ref().as_ref() {
-            panic!("auth failed")
-        }
-
-        self.route.call(req)
+    #[cfg(debug_assertions)]
+    if let Err(err) = auth {
+        return (StatusCode::UNAUTHORIZED, err)
+            .into_response();
     }
-}
+    #[cfg(not(debug_assertions))]
+    if auth.is_err() {
+        return StatusCode::UNAUTHORIZED.into_response();
+    }
 
-#[cfg(test)]
-#[tokio::test]
-async fn test_basic_bearer() {
-    use axum::routing::get;
-    use axum::Router;
-
-    let axum = Router::<()>::new()
-        .route("/", get(|| async { "Hello, World!" }))
-        .layer(SimpleBearerAuth::default());
+    next.run(req).await
 }
