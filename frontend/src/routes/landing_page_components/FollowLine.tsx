@@ -1,7 +1,7 @@
 import { Slot, component$, useStylesScoped$ } from "@builder.io/qwik";
 
 const AnimatedLine = component$(() => {
-  useStylesScoped$(`
+    useStylesScoped$(`
   path {
     stroke-dasharray: 3223px;
 
@@ -22,7 +22,7 @@ const AnimatedLine = component$(() => {
   }
   `);
 
-  useStylesScoped$(`
+    useStylesScoped$(`
 
   @media (max-width: 1280px) {
     .content-spec {
@@ -44,78 +44,76 @@ const AnimatedLine = component$(() => {
   }
   `);
 
-  return (
-    <>
-      <div class="flex justify-center translate-y--144px overflow-hidden">
-        <div class="">
-          <svg
-            window:onScroll$={(_, target) => {
-              const y_t = target.getBoundingClientRect().y;
-              const y_w =
-                window.document.documentElement.getBoundingClientRect().y;
-              const y = y_t - y_w;
+    return (
+        <>
+            <div class="flex justify-center translate-y--144px overflow-hidden">
+                <div class="">
+                    <svg
+                        window:onScroll$={(_, target) => {
+                            const y_t = target.getBoundingClientRect().y;
+                            const y_w =
+                                window.document.documentElement.getBoundingClientRect().y;
+                            const y = y_t - y_w;
 
-              const top = window.document.documentElement.scrollTop;
+                            const top = window.document.documentElement.scrollTop;
 
-              const prog =
-                (top - y + target.clientHeight * 0.5) / target.clientHeight;
+                            const prog =
+                                (top - y + target.clientHeight * 0.5) / target.clientHeight;
 
-              console.log({ y, top, prog, h: target.clientHeight });
-
-              if (prog > 2.1) return;
-              (target as SVGElement).style.setProperty(
-                "--scroll",
-                String(prog - 0.3),
-              );
-            }}
-            version="1.2"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 2200"
-            preserveAspectRatio="xMidYMin meet"
-            width="1200"
-            height="2200"
-          >
-            <path
-              fill-opacity="0"
-              class="stroke-black dark:stroke-white stroke-as-text"
-              stroke-width="2"
-              d="m600 0c0 0 0 42 0 96 0 54-14.2 180.6-237.8 272-233.4 95.5-264.4 304.5-259.1 469.8 5.3 162.6 79.3 355.6 239 472.3 97.7 71.4 257.7 147.4 375.5 93.7 55.6-25.3 61.4-100.7 24.5-125.8-36.1-24.6-91.9-21.3-131.7 18-78 77.2-8.5 201.5-10.5 599.2-0.2 54.3 0.1 244.7 0.1 304.8"
-            />
-          </svg>
-          <div class="content-spec absolute w-1200px grid h-0 content-center items-center top-38%">
-            <Slot />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+                            if (prog > 2.1) return;
+                            (target as SVGElement).style.setProperty(
+                                "--scroll",
+                                String(prog - 0.3),
+                            );
+                        }}
+                        version="1.2"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 1200 2200"
+                        preserveAspectRatio="xMidYMin meet"
+                        width="1200"
+                        height="2200"
+                    >
+                        <path
+                            fill-opacity="0"
+                            class="stroke-black dark:stroke-white stroke-as-text"
+                            stroke-width="2"
+                            d="m600 0c0 0 0 42 0 96 0 54-14.2 180.6-237.8 272-233.4 95.5-264.4 304.5-259.1 469.8 5.3 162.6 79.3 355.6 239 472.3 97.7 71.4 257.7 147.4 375.5 93.7 55.6-25.3 61.4-100.7 24.5-125.8-36.1-24.6-91.9-21.3-131.7 18-78 77.2-8.5 201.5-10.5 599.2-0.2 54.3 0.1 244.7 0.1 304.8"
+                        />
+                    </svg>
+                    <div class="content-spec absolute w-1200px grid h-0 content-center items-center top-38%">
+                        <Slot />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 });
 
 export const Line = component$(() => {
-  // useStylesScoped$(`
-  //   svg {
-  //     position: absolute;
-  //     width: 100%;
-  //   }
-  // `);
+    // useStylesScoped$(`
+    //   svg {
+    //     position: absolute;
+    //     width: 100%;
+    //   }
+    // `);
 
-  return (
-    <div class="flex justify-center overflow-hidden">
-      <svg
-        viewBox="0 0 1200 100"
-        width="1200"
-        class={["min-w-1200px max-w-1200px h-310px"]}
-        preserveAspectRatio="none"
-      >
-        <path
-          d="m600 -15,v130"
-          fill-opacity="0"
-          class="stroke-black dark:stroke-white stroke-as-text"
-          stroke-width="2"
-        />
-      </svg>
-    </div>
-  );
+    return (
+        <div class="flex justify-center overflow-hidden">
+            <svg
+                viewBox="0 0 1200 100"
+                width="1200"
+                class={["min-w-1200px max-w-1200px h-310px"]}
+                preserveAspectRatio="none"
+            >
+                <path
+                    d="m600 -15,v130"
+                    fill-opacity="0"
+                    class="stroke-black dark:stroke-white stroke-as-text"
+                    stroke-width="2"
+                />
+            </svg>
+        </div>
+    );
 });
 
 export default AnimatedLine;

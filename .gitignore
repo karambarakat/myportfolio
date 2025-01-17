@@ -10,3 +10,7 @@ out
 *.local
 
 .vercel
+
+# pocketbase
+pocketbase
+!pocketbase/pb_hooks
