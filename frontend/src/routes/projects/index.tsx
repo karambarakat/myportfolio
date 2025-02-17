@@ -1,4 +1,4 @@
-import { component$, useComputed$, useTask$ } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import sanitize from "sanitize-html";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link, routeLoader$, useNavigate } from "@builder.io/qwik-city";
@@ -6,12 +6,8 @@ import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import NoPreview from "~/../public/noPreview.svg?raw";
 import Github from "~/../public/github.svg?jsx";
 import Live from "~/../public/live.svg?jsx";
-import { ProjectEntity } from "~/fragments";
-import type { ProjectEntityFragment, ProjectMetaFragment } from "~/gql/graphql";
-import fetchGraphql, { StrapiPicture } from "~/utils/fetchGraphql";
 import AspectRatio from "~/components/AspectRatio";
-import { fetchProjects, Project } from "~/root";
-import { projectCast } from "~/utils/frontMatter";
+import { fetchProjects, Project } from "~/utils/pocketbase";
 
 export const useProjectsOutputb__ = routeLoader$(async function() {
 });
@@ -33,7 +29,7 @@ export default component$(function() {
                 </Link>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-5">
-                {projects.value.map((pro) => {
+                {projects.value?.map((pro) => {
                     return <ProjectSummary key={pro.slug} data={pro} />;
                 })}
             </div>
@@ -46,28 +42,34 @@ type CollectionMeta = {
     id: string,
 };
 
-export const DisplayImage = component$(function({ data }: { data: CollectionMeta & { display_picture?: string } }) {
-    let SafeNoPreview = sanitize(NoPreview);
-    return (
-        <div class="rounded-xl ">
-            <AspectRatio.Root ratio={66}>
-                {!data.display_picture ? (
-                    <AspectRatio.Svg>
-                        <div
-                            class="rounded-xl w-full h-full p-5 bg-white"
-                            dangerouslySetInnerHTML={SafeNoPreview}
+export const DisplayImage = component$(
+    (
+        { data }: { data: CollectionMeta & { display_picture?: string } }
+    ) => {
+        let SafeNoPreview = sanitize(NoPreview);
+        if (!import.meta.env.PUBLIC_IMG_URL) {
+            console.error("PUBLIC_IMG_URL is not set in the environment variables.");
+        }
+        return (
+            <div class="rounded-xl ">
+                <AspectRatio.Root ratio={66}>
+                    {!data.display_picture ? (
+                        <AspectRatio.Svg>
+                            <div
+                                class="rounded-xl w-full h-full p-5 bg-white"
+                                dangerouslySetInnerHTML={SafeNoPreview}
+                            />
+                        </AspectRatio.Svg>
+                    ) : (
+                        <AspectRatio.Img class="rounded-xl"
+                            src={`${import.meta.env.PUBLIC_IMG_URL}/${data.collectionId}/${data.id}/${data.display_picture}`}
+                            alt="Display Image"
                         />
-                    </AspectRatio.Svg>
-                ) : (
-                    <AspectRatio.Img class="rounded-xl"
-                        src={`${import.meta.env.PUBLIC_IMG_URL}/${data.collectionId}/${data.id}/${data.display_picture}`}
-                        alt="Display Image"
-                    />
-                )}
-            </AspectRatio.Root>
-        </div>
-    );
-});
+                    )}
+                </AspectRatio.Root>
+            </div>
+        );
+    });
 
 export const ProjectSummary = component$(function({
     data,
@@ -83,9 +85,7 @@ export const ProjectSummary = component$(function({
                 onClick$={() => nav("/projects/" + data.slug)}
                 class="cursor-pointer rounded-lg shadow-md overflow-hidden mb-2"
             >
-                <DisplayImage
-                    data={data}
-                />
+                <DisplayImage data={data} />
             </div>
             <Link href={"/projects/" + data.slug} class="typo-lg cursor-pointer">
                 {data.title}

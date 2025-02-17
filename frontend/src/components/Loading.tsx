@@ -74,24 +74,6 @@ export default component$(function () {
     }
     `);
 
-  // const loading = useSignal(false);
-
-  // useOnDocument(
-  //   "load",
-  //   $(() => {
-  //     let timeout;
-
-  //     if (location.isNavigating === false) {
-  //       loading.value = false;
-  //       clearTimeout(timeout);
-  //     } else {
-  //       setTimeout(() => {
-  //         loading.value = true;
-  //       }, 500);
-  //     }
-  //   }),
-  // );
-
   return (
     <div class="absolute top-0 w-full">
       {location.isNavigating && (

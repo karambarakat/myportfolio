@@ -26,6 +26,9 @@ importers:
       unified:
         specifier: ^11.0.3
         version: 11.0.5
+      valibot:
+        specifier: 1.0.0-rc.1
+        version: 1.0.0-rc.1(typescript@5.6.3)
     devDependencies:
       '@builder.io/qwik':
         specifier: ^1.2.14
@@ -7167,6 +7170,14 @@ packages:
 
   valibot@0.42.1:
     resolution: {integrity: sha512-3keXV29Ar5b//Hqi4MbSdV7lfVp6zuYLZuA9V1PvQUsXqogr+u5lvLPLk3A4f74VUXDnf/JfWMN6sB+koJ/FFw==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  valibot@1.0.0-rc.1:
+    resolution: {integrity: sha512-bTHNpeeQ403xS7qGHF/tw3EC/zkZOU5VdkfIsmRDu1Sp+BJNTNCm6m5HlwOgyW/03lofP+uQiq3R+Poo9wiCEg==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -16406,6 +16417,10 @@ snapshots:
   v8-compile-cache-lib@3.0.1: {}
 
   valibot@0.42.1(typescript@5.6.3):
+    optionalDependencies:
+      typescript: 5.6.3
+
+  valibot@1.0.0-rc.1(typescript@5.6.3):
     optionalDependencies:
       typescript: 5.6.3
 
