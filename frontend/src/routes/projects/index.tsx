@@ -1,21 +1,25 @@
 import { component$ } from "@builder.io/qwik";
 import sanitize from "sanitize-html";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import type { DocumentHead, RequestEvent } from "@builder.io/qwik-city";
 import { Link, routeLoader$, useNavigate } from "@builder.io/qwik-city";
 import { MoArrowLeft } from "@qwikest/icons/monoicons";
 import NoPreview from "~/../public/noPreview.svg?raw";
 import Github from "~/../public/github.svg?jsx";
 import Live from "~/../public/live.svg?jsx";
 import AspectRatio from "~/components/AspectRatio";
-import { fetchProjects, Project } from "~/utils/pocketbase";
-
-export const useProjectsOutputb__ = routeLoader$(async function() {
-});
+import { fetchProjects, Project, server_client } from "~/utils/pocketbase";
 
 export const useProjects = routeLoader$(async function() {
-    return await fetchProjects();
-});
+    // @ts-ignore
+    let req = this as any as RequestEvent;
+    let base_url = req?.env?.get("POCKETBASE_URL");
+    let token = req?.env?.get("POCKETBASE_TOKEN");
+    if (!base_url || !token) {
+        throw new Error("var POCKETBASE_URL and P... should set");
+    }
 
+    return await fetchProjects(server_client({ base_url, token }));
+});
 
 export default component$(function() {
     const projects = useProjects();

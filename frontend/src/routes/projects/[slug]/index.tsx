@@ -3,43 +3,36 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import {
     Link,
     routeLoader$,
-    server$,
     type StaticGenerateHandler,
 } from "@builder.io/qwik-city";
 import NotFound from "~/components/NotFound";
-import markdown from "~/utils/markdown";
 import Github from "~/../public/github.svg?jsx";
 import Live from "~/../public/live.svg?jsx";
 import styles from "~/components/markdown.module.css";
-import type { ProjectFragment, ProjectMetaFragment } from "~/gql/graphql";
-import fetchGraphql, { StrapiPicture } from "~/utils/fetchGraphql";
-import { type Project, server_client } from "~/root";
-import { ClientResponseError } from "pocketbase";
 import { MoChevronRight } from "@qwikest/icons/monoicons";
 import { DateTime } from "luxon";
-import sanitize from "sanitize-html";
 import { DisplayImage } from "..";
+import { fetchProject, fetchProjects, Project, server_client } from "~/utils/pocketbase";
+import * as v from "valibot";
 
-export const useProject = routeLoader$(async (ctx) => {
-    let client = await server_client();
-    let res = await client
-        .collection("Project")
-        .getFirstListItem(`slug="${ctx.params.slug}"`)
-        .catch((e: ClientResponseError) => {
-            // no way to catch notfound error?
-            return e
-        });
+const params = v.object({
+    slug: v.string(),
+});
 
-    if (res instanceof ClientResponseError) {
-        console.error("error fetch /projects/:id", res);
-        throw ctx.fail(404, { message: `Project with ${ctx.params.slug} not found` });
+
+export const useProject = routeLoader$(async function() {
+    // @ts-ignore
+    let req = this as any as RequestEvent;
+    let base_url = req?.env?.get("POCKETBASE_URL");
+    let token = req?.env?.get("POCKETBASE_TOKEN");
+    let id = v.parse(params, req?.params).slug;
+    if (!base_url || !token) {
+        throw new Error("var POCKETBASE_URL and P... should set");
     }
 
-    res.content = sanitize(res.content);
-    res.summary = sanitize(res.summary);
-
-    return res as any as Project
+    return await fetchProject(server_client({ base_url, token }), id);
 });
+
 const CommonLayout = component$(
     ({ project }: { project: Project }) => {
         return (
@@ -93,12 +86,11 @@ const CommonLayout = component$(
     },
 );
 
-
 export default component$(() => {
     const project = useProject();
 
     // unknown error
-    if (!project.value?.created)
+    if (!project.value)
         return (
             <NotFound>
                 <span>Project not found</span>
@@ -107,7 +99,7 @@ export default component$(() => {
 
     return (
         <div>
-            <CommonLayout project={project.value } />
+            <CommonLayout project={project.value} />
             <div
                 class={styles.markdown}
                 dangerouslySetInnerHTML={project.value.content}
@@ -116,27 +108,22 @@ export default component$(() => {
     );
 });
 
-export const onStaticGenerate: StaticGenerateHandler = async () => {
-    const query: string[] =
-        (await fetchGraphql({
-            query: /* GraphQL */ `
-        query {
-          projects {
-            data {
-              id
-            }
-          }
-        }
-      `,
-        })
-            .then((res) => res?.data?.projects?.data?.id)
-            .catch(() => {
-                return undefined;
-            })) || [];
+export const onStaticGenerate: StaticGenerateHandler = async function() {
+    // @ts-ignore
+    let req = this as any as RequestEvent;
+    let base_url = req?.env?.get("POCKETBASE_URL");
+    let token = req?.env?.get("POCKETBASE_TOKEN");
+    if (!base_url || !token) {
+        throw new Error("var POCKETBASE_URL and P... should set");
+    }
+
+    const query = await fetchProjects(server_client({ base_url, token }));
+
+    if (!query) return { params: [] };
 
     return {
         params: query.map((id) => {
-            return { slug: id };
+            return { slug: id.slug };
         }),
     };
 };

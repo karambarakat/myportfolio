@@ -1,6 +1,8 @@
-import { Slot, component$, useId, useOnWindow, useSignal, useStylesScoped$, useTask$ } from "@builder.io/qwik";
+import { Slot, component$, useId, useOnWindow, useSignal, useStylesScoped$, useTask$, useVisibleTask$ } from "@builder.io/qwik";
+import PocketBase from "pocketbase";
 import { $ } from "@builder.io/qwik";
-import { type DocumentHead } from "@builder.io/qwik-city";
+import { client } from "~/utils/pocketbase";
+import { RequestEvent, server$, type DocumentHead } from "@builder.io/qwik-city";
 import BgSelector from "~/../public/hov/selector.webp";
 import BgShades from "~/../public/hov/shades.png";
 import ScrollIcon from "~/../public/scroll.svg?jsx";
@@ -13,7 +15,7 @@ import { routeLoader$ } from "@builder.io/qwik-city";
 import { ProjectSummary } from "./projects";
 import { ResumeAsA } from "./links/resume";
 import { GithubAsA } from "./links/github";
-import { fetchProjects } from "~/utils/pocketbase";
+import { fetchProjects, server_client } from "~/utils/pocketbase";
 
 export default component$(() => {
     return (
@@ -136,8 +138,16 @@ const FeaturedProject = component$(() => {
     );
 });
 
-export const useProjects = routeLoader$(async () => {
-    return await fetchProjects();
+export const useProjects = routeLoader$(async function() {
+    // @ts-ignore
+    let req = this as any as RequestEvent;
+    let base_url = req?.env?.get("POCKETBASE_URL");
+    let token = req?.env?.get("POCKETBASE_TOKEN");
+    if (!base_url || !token) {
+        throw new Error("var POCKETBASE_URL and P... should set");
+    }
+
+    return await fetchProjects(server_client({ base_url, token }));
 })
 
 export const MoreProjects = component$(() => {
@@ -335,17 +345,17 @@ export const Illuminate = component$(function() {
     const ref = useSignal<HTMLDivElement>();
     const loc = useSignal({ x: -250, y: -350 });
 
-    useOnWindow(
-        "mousemove",
-        $((e) => {
-            const event = e as MouseEvent;
-
-            if (!ref.value) return;
-
-            const svg = ref.value.getBoundingClientRect();
-            loc.value = { x: event.clientX - svg.x, y: event.clientY - svg.y };
-        }),
-    );
+    // useOnWindow(
+    //     "mousemove",
+    //     $((e) => {
+    //         const event = e as MouseEvent;
+    //
+    //         if (!ref.value) return;
+    //
+    //         const svg = ref.value.getBoundingClientRect();
+    //         loc.value = { x: event.clientX - svg.x, y: event.clientY - svg.y };
+    //     }),
+    // );
 
     useStylesScoped$(`
     #background-mouse-effect {

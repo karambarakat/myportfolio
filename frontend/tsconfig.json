@@ -21,6 +21,6 @@
       "~/*": ["./src/*"]
     }
   },
-  "files": ["./.eslintrc.cjs"],
+  "files": ["./.eslintrc.cjs", "./src/routes/useProjects.tsx"],
   "include": ["src", "./*.d.ts", "./*.config.ts"]
 }
